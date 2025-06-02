@@ -9,7 +9,7 @@ import { Point } from 'ol/geom';
 import { Vector as VectorLayer } from 'ol/layer';
 import { Vector as VectorSource } from 'ol/source';
 import { Style, Circle, Fill, Stroke } from 'ol/style';
-import XYZ from 'ol/source/XYZ';
+import OSM from 'ol/source/OSM';
 
 // US bounds in [west, south, east, north] format
 const US_EXTENT = transformExtent([-125.0, 24.396308, -66.93457, 49.384358], 'EPSG:4326', 'EPSG:3857');
@@ -25,11 +25,10 @@ export default function MapComponent({ stories, onMarkerClick }) {
     const initialMap = new Map({
       target: mapRef.current,
       layers: [
-        // Base map layer with US-specific styling
+        // Base map layer using OpenStreetMap
         new TileLayer({
-          source: new XYZ({
-            url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png',
-            attributions: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+          source: new OSM({
+            attributions: ['© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors']
           })
         }),
       ],

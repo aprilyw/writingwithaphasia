@@ -6,14 +6,14 @@ date: "2024-03-20"
 location: "Orlando, Florida"
 images:
   - src: "/static/img/sherry/1000016765.jpg"
-    alt: "Sherry smiling at the camera"
-    caption: "Sherry at her home in Orlando"
+    alt: "alt here 1"
+    caption: "Caption here 1"
   - src: "/static/img/sherry/1000016765.jpg"
-    alt: "Sherry leading her book club"
-    caption: "Virtual book club session with fellow aphasia community members"
+    alt: "alt here 2"
+    caption: "Caption here 2"
 ---
 
-Once I get that done, I would like to get an RV and drive. Drive all my sewing machines and do a sewing show. 
+## Once I get that done, I would like to get an RV and drive. Drive all my sewing machines and do a sewing show. 
 
 
 I’ve always been more stubborn. Like if I want – If I think – I can get better, I will get better. But aphasia was hard. It was real hard. It was hard at first, from my stroke, with the animals (two dogs and a cat), because I had to learn how to walk them. I learned that I could walk them because another girl learned to walk from her stroke with her dogs. And if she could do this, then I could do this. But it was hard. 
@@ -22,7 +22,7 @@ I’ve always been more stubborn. Like if I want – If I think – I can get be
 With aphasia, I didn’t have anyone to look to because I didn’t even know there were other people with aphasia. I didn’t know anybody, only what I learned on my own. At first, I would say a couple little words, just very few words. So I learned everything since my stroke basically on my own. I learned I couldn't read, but I could do audiobooks. At first, the television really bothered me a lot. It made me fatigued a lot because of the noise. Then I could watch television, little bits at a time. 
 
 ![x](/static/img/sherry/1000016765.jpg)
-*My constant companions who helped me recover*
+*Caption here*
 
 
 It wasn’t until the pandemic that I got an email from Lingraphica telling me they were offering a couple little classes on Zoom. But I didn’t know how to use Zoom. My husband never used Zoom either, but he knew that I had to get online and figure it out. So I did. And I logged into Virtual Connections, one of the classes jointly organized by Lingraphica and ARC. This was in March 2020, about a week after they started Virtual Connections.The first Zoom call I had was a coffee chat with Dr. Katie Strong. Katie is a speech language pathologist (SLP) at Central Michigan University. 
