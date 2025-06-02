@@ -4,13 +4,7 @@ name: "Sherry"
 coordinates: [-81.5158, 28.3772] # Orlando, Florida coordinates
 date: "2024-03-20"
 location: "Orlando, Florida"
-images:
-  - src: "/static/img/sherry/1000016765.jpg"
-    alt: "alt here 1"
-    caption: "Caption here 1"
-  - src: "/static/img/sherry/1000016765.jpg"
-    alt: "alt here 2"
-    caption: "Caption here 2"
+
 ---
 
 ## Once I get that done, I would like to get an RV and drive. Drive all my sewing machines and do a sewing show. 

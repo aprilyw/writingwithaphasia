@@ -105,7 +105,6 @@ export default function Sidebar({ selectedStory, onClose }) {
           color: #2c3e50;
           font-size: 2rem;
           font-weight: 600;
-          border-bottom: 2px solid #3498db;
           padding-bottom: 10px;
           letter-spacing: -0.02em;
         }
@@ -186,6 +185,8 @@ export default function Sidebar({ selectedStory, onClose }) {
         }
         .story-content :global(img) {
           max-width: 70%;
+          max-height: 400px;
+          object-fit: contain;
           height: auto;
           border-radius: 12px;
           margin: 1.5rem auto;
