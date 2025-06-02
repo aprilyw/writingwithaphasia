@@ -185,16 +185,22 @@ export default function Sidebar({ selectedStory, onClose }) {
           padding: 0.5rem;
         }
         .story-content :global(img) {
-          max-width: 100%;
+          max-width: 70%;
           height: auto;
           border-radius: 12px;
-          margin: 1.5rem 0;
+          margin: 1.5rem auto;
+          display: block;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          transition: transform 0.2s ease;
+        }
+        .story-content :global(img:hover) {
+          transform: scale(1.02);
         }
         .story-content :global(em) {
           display: block;
           text-align: center;
           color: #666;
-          margin-top: -1rem;
+          margin-top: 0.5rem;
           margin-bottom: 1.5rem;
           font-size: 0.9rem;
         }
