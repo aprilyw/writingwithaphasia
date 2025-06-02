@@ -1,44 +1,107 @@
 // pages/stories/[id].js
+import { getAllStoryIds, getStoryData } from '../../utils/markdown';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { stories } from '../../data/stories';
 
-export default function StoryPage() {
-  const router = useRouter();
-  const { id } = router.query;
-  const story = stories.find(s => s.id === parseInt(id));
+export async function getStaticPaths() {
+  const paths = getAllStoryIds();
+  return {
+    paths,
+    fallback: false
+  };
+}
 
-  if (!story) {
-    return (
-      <div className="max-w-3xl mx-auto p-6">
-        <h1 className="text-2xl font-bold">Story not found</h1>
-        <Link
-          href="/"
-          className="inline-block mt-6 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
-        >
-          Back to Map
-        </Link>
-      </div>
-    );
-  }
+export async function getStaticProps({ params }) {
+  const storyData = await getStoryData(params.id);
+  return {
+    props: {
+      storyData
+    }
+  };
+}
 
+export default function Story({ storyData }) {
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <img
-        src={story.image}
-        alt={story.name}
-        className="w-full h-64 object-cover rounded-lg"
-      />
-      <h1 className="text-3xl font-bold mt-6">{story.name}</h1>
-      <div className="mt-4 prose">
-        <p>{story.story}</p>
-      </div>
-      <Link
-        href="/"
-        className="inline-block mt-6 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
-      >
-        Back to Map
-      </Link>
+    <div className="container">
+      <nav className="nav">
+        <Link href="/">
+          <a>← Back to Map</a>
+        </Link>
+      </nav>
+      
+      <article className="story">
+        <h1>{storyData.name || storyData.title}</h1>
+        
+        <div className="content">
+          <div dangerouslySetInnerHTML={{ __html: storyData.contentHtml }} />
+        </div>
+
+        <div className="images-grid">
+          {storyData.images && storyData.images.map((image, index) => (
+            <div key={index} className="image-wrapper">
+              <img src={image} alt={`Image ${index + 1} from ${storyData.name || storyData.title}`} />
+            </div>
+          ))}
+        </div>
+      </article>
+
+      <style jsx>{`
+        .container {
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 2rem;
+        }
+        .nav {
+          margin-bottom: 2rem;
+        }
+        .nav a {
+          color: #3498db;
+          text-decoration: none;
+          font-size: 1.1rem;
+        }
+        .nav a:hover {
+          text-decoration: underline;
+        }
+        .story h1 {
+          color: #2c3e50;
+          font-size: 2.5rem;
+          margin-bottom: 1.5rem;
+          border-bottom: 3px solid #3498db;
+          padding-bottom: 0.5rem;
+        }
+        .content {
+          font-size: 1.1rem;
+          line-height: 1.7;
+          color: #333;
+        }
+        .content :global(p) {
+          margin: 1.5em 0;
+        }
+        .images-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 1.5rem;
+          margin-top: 2rem;
+        }
+        .image-wrapper {
+          position: relative;
+          padding-top: 75%;
+          overflow: hidden;
+          border-radius: 12px;
+          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+          transition: transform 0.2s;
+        }
+        .image-wrapper:hover {
+          transform: scale(1.02);
+        }
+        .image-wrapper img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      `}</style>
     </div>
   );
 }
