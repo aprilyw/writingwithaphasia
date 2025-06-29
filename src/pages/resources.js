@@ -1,37 +1,96 @@
 import Head from 'next/head';
+import { useState } from 'react';
+import { getTrishTipsData } from '../utils/markdown';
 
-export default function Resources() {
+export async function getStaticProps() {
+  let trishTips = null;
+  try {
+    trishTips = await getTrishTipsData();
+  } catch (e) {
+    trishTips = null;
+  }
+  return { props: { trishTips } };
+}
+
+export default function Resources({ trishTips }) {
+  const [activeTab, setActiveTab] = useState('websites');
+  const [expanded, setExpanded] = useState(false);
+  let trishTipsContent = null;
+  if (trishTips) {
+    const paragraphs = trishTips.contentHtml.split(/<p>|<\/p>/).filter(Boolean);
+    const previewHtml = paragraphs.slice(0, 2).map(p => `<p>${p}</p>`).join('');
+    const restHtml = paragraphs.slice(2).map(p => `<p>${p}</p>`).join('');
+    trishTipsContent = (
+      <div>
+        <div className="trish-tips-preview" dangerouslySetInnerHTML={{ __html: previewHtml }} />
+        {restHtml && !expanded && (
+          <button className="expand-btn" onClick={() => setExpanded(true)}>
+            Show more ▼
+          </button>
+        )}
+        {expanded && (
+          <>
+            <div className="trish-tips-rest" dangerouslySetInnerHTML={{ __html: restHtml }} />
+            <button className="expand-btn" onClick={() => setExpanded(false)}>
+              Show less ▲
+            </button>
+          </>
+        )}
+      </div>
+    );
+  }
   return (
     <div className="resources-container">
       <Head>
         <title>Resources | Writing With Aphasia</title>
       </Head>
       <h1>Resources</h1>
-      <p>
-        Here are some helpful organizations, tools, and communities for people with aphasia and their loved ones:
-      </p>
-      <ul>
-        <li>
-          <a href="https://www.aphasia.org/" target="_blank" rel="noopener noreferrer"><strong>National Aphasia Association</strong></a><br />
-          Information, support, and resources for people with aphasia and their families.
-        </li>
-        <li>
-          <a href="https://virtualconnections.aphasia.com/" target="_blank" rel="noopener noreferrer"><strong>Virtual Connections</strong></a><br />
-          Free online groups and activities for people with aphasia, hosted by Lingraphica and partners.
-        </li>
-        <li>
-          <a href="https://www.aphasiarecoveryconnection.org/" target="_blank" rel="noopener noreferrer"><strong>Aphasia Recovery Connection</strong></a><br />
-          Peer support, education, and advocacy for the aphasia community.
-        </li>
-        <li>
-          <a href="https://www.stroke.org/en/about-stroke/effects-of-stroke/physical-impact-of-stroke/aphasia" target="_blank" rel="noopener noreferrer"><strong>American Stroke Association: Aphasia</strong></a><br />
-          Medical information and resources about aphasia after stroke.
-        </li>
-        <li>
-          <a href="https://www.lingraphica.com/" target="_blank" rel="noopener noreferrer"><strong>Lingraphica</strong></a><br />
-          Communication devices, therapy apps, and support for people with aphasia.
-        </li>
-      </ul>
+      <div className="tabs">
+        <button
+          className={activeTab === 'websites' ? 'tab active' : 'tab'}
+          onClick={() => setActiveTab('websites')}
+        >
+          Websites
+        </button>
+        <button
+          className={activeTab === 'trish' ? 'tab active' : 'tab'}
+          onClick={() => setActiveTab('trish')}
+        >
+          Trish's Tips and Tricks
+        </button>
+      </div>
+      {activeTab === 'websites' && (
+        <>
+          <p>
+            Here are some helpful organizations, tools, and communities for people with aphasia and their loved ones:
+          </p>
+          <ul>
+            <li>
+              <a href="https://www.aphasia.org/" target="_blank" rel="noopener noreferrer"><strong>National Aphasia Association</strong></a><br />
+              Information, support, and resources for people with aphasia and their families.
+            </li>
+            <li>
+              <a href="https://virtualconnections.aphasia.com/" target="_blank" rel="noopener noreferrer"><strong>Virtual Connections</strong></a><br />
+              Free online groups and activities for people with aphasia, hosted by Lingraphica and partners.
+            </li>
+            <li>
+              <a href="https://www.aphasiarecoveryconnection.org/" target="_blank" rel="noopener noreferrer"><strong>Aphasia Recovery Connection</strong></a><br />
+              Peer support, education, and advocacy for the aphasia community.
+            </li>
+            <li>
+              <a href="https://www.stroke.org/en/about-stroke/effects-of-stroke/physical-impact-of-stroke/aphasia" target="_blank" rel="noopener noreferrer"><strong>American Stroke Association: Aphasia</strong></a><br />
+              Medical information and resources about aphasia after stroke.
+            </li>
+            <li>
+              <a href="https://www.lingraphica.com/" target="_blank" rel="noopener noreferrer"><strong>Lingraphica</strong></a><br />
+              Communication devices, therapy apps, and support for people with aphasia.
+            </li>
+          </ul>
+        </>
+      )}
+      {activeTab === 'trish' && (
+        trishTipsContent || <p>Sorry, Trish's Tips and Tricks could not be loaded at this time.</p>
+      )}
       <style jsx>{`
         .resources-container {
           max-width: 700px;
@@ -66,6 +125,48 @@ export default function Resources() {
         }
         a:hover {
           color: #3498db;
+        }
+        .tabs {
+          display: flex;
+          gap: 1.2rem;
+          margin-bottom: 2rem;
+        }
+        .tab {
+          background: none;
+          border: none;
+          font-size: 1.08rem;
+          font-weight: 600;
+          color: #217dbb;
+          padding: 0.5rem 1.2rem;
+          border-bottom: 2px solid transparent;
+          cursor: pointer;
+          transition: border-bottom 0.2s, color 0.2s;
+        }
+        .tab.active {
+          color: #3a2c2a;
+          border-bottom: 2px solid #3a2c2a;
+        }
+        .expand-btn {
+          margin-bottom: 1.2rem;
+          background: #eaf2fa;
+          color: #217dbb;
+          border: none;
+          border-radius: 6px;
+          padding: 0.5rem 1.2rem;
+          font-size: 1.08rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background 0.2s, color 0.2s;
+        }
+        .expand-btn:hover {
+          background: #d4e6f7;
+          color: #145a8a;
+        }
+        .trish-tips-preview {
+          margin-bottom: 0.5rem;
+        }
+        .trish-tips-rest {
+          margin-top: 0.5rem;
         }
       `}</style>
     </div>

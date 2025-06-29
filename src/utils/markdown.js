@@ -96,4 +96,19 @@ export async function getAllStoriesData() {
   }));
 
   return allStoriesData;
+}
+
+export async function getTrishTipsData() {
+  const fullPath = path.join(process.cwd(), 'static/md', 'trish-tips.md');
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const { data, content } = matter(fileContents);
+  const processedContent = await remark()
+    .use(remarkGfm)
+    .use(html, { sanitize: false })
+    .process(content);
+  const contentHtml = processedContent.toString();
+  return {
+    ...data,
+    contentHtml,
+  };
 } 
