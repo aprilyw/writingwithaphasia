@@ -16,7 +16,7 @@ import XYZ from 'ol/source/XYZ';
 // Tighter US bounds (continental US)
 const US_EXTENT = transformExtent([-124.0, 26.0, -66.0, 49.0], 'EPSG:4326', 'EPSG:3857');
 
-export default function MapComponent({ stories, onMarkerClick, selectedStory, zoomToStory, onZoomComplete }) {
+export default function MapComponent({ stories, onMarkerClick, selectedStory, zoomToStory, onZoomComplete, resetSignal }) {
   const mapRef = useRef();
   const mapInstance = useRef(null);
 
@@ -121,6 +121,14 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
       });
     }
   }, [zoomToStory, onZoomComplete]);
+
+  // Reset map view when resetSignal changes
+  useEffect(() => {
+    if (!mapInstance.current) return;
+    // Reset to initial center and zoom
+    mapInstance.current.getView().setCenter(fromLonLat([-98.5795, 39.8283]));
+    mapInstance.current.getView().setZoom(4.7);
+  }, [resetSignal]);
 
   return (
     <div ref={mapRef} style={{ width: '100%', height: '100%' }} />

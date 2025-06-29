@@ -14,9 +14,10 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ stories }) {
+export default function Home({ stories, handleHomeClick }) {
   const [selectedStory, setSelectedStory] = useState(null);
   const [zoomToStory, setZoomToStory] = useState(null);
+  const [resetMapSignal, setResetMapSignal] = useState(0);
   const zoomTimeout = useRef(null);
 
   // Handler for marker click: open sidebar, then zoom after transition
@@ -35,23 +36,23 @@ export default function Home({ stories }) {
     if (zoomTimeout.current) clearTimeout(zoomTimeout.current);
   };
 
+  // Handler for Home click
+  const onHomeClick = () => {
+    setSelectedStory(null);
+    setZoomToStory(null);
+    setResetMapSignal((s) => s + 1);
+  };
+
+  // Expose handler for _app.js
+  if (typeof window !== 'undefined') {
+    window.handleHomeClick = onHomeClick;
+  }
+
   return (
     <>
-      <nav className="navbar">
-        <div className="navbar-content">
-          <span className="navbar-title">Writing With Aphasia</span>
-          <div className="navbar-links">
-            <a href="/about">About</a>
-            <a href="/resources">Resources</a>
-          </div>
-        </div>
-      </nav>
       <div className="container">
         <Head>
-          <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-            rel="stylesheet"
-          />
+          {/* Removed Inter font import - now using Source Sans Pro and Merriweather */}
         </Head>
         <div className={`map-container ${selectedStory ? 'map-shrunk' : ''}`}>
           <MapComponent 
@@ -60,6 +61,7 @@ export default function Home({ stories }) {
             selectedStory={selectedStory}
             zoomToStory={zoomToStory}
             onZoomComplete={() => setZoomToStory(null)}
+            resetSignal={resetMapSignal}
           />
         </div>
         <div className={`sidebar-container ${selectedStory ? 'sidebar-expanded' : ''}`}>
@@ -70,71 +72,6 @@ export default function Home({ stories }) {
         </div>
       </div>
       <style jsx>{`
-        .navbar {
-          width: 100vw;
-          background: linear-gradient(90deg, #3498db 60%, #6dd5fa 100%);
-          color: #fff;
-          padding: 1.2rem 0 1.2rem 0;
-          box-shadow: 0 4px 16px rgba(52,152,219,0.10);
-          border-radius: 0 0 18px 18px;
-          position: relative;
-          z-index: 10;
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-        .navbar-content {
-          max-width: 1400px;
-          margin: 0 auto;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 0 2rem;
-        }
-        .navbar-title {
-          font-size: 2.1rem;
-          font-weight: 700;
-          letter-spacing: 0.01em;
-          text-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-        .navbar-links {
-          display: flex;
-          gap: 1.5rem;
-        }
-        .navbar-links a {
-          color: #fff;
-          background: rgba(255,255,255,0.10);
-          border-radius: 8px;
-          padding: 0.55rem 1.3rem;
-          text-decoration: none;
-          font-size: 1.15rem;
-          font-weight: 500;
-          box-shadow: 0 2px 8px rgba(52,152,219,0.08);
-          transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-          border: 1px solid rgba(255,255,255,0.18);
-        }
-        .navbar-links a:hover {
-          background: #fff;
-          color: #3498db;
-          box-shadow: 0 4px 16px rgba(52,152,219,0.18);
-        }
-        @media (max-width: 600px) {
-          .navbar-content {
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 0 1rem;
-          }
-          .navbar-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-          }
-          .navbar-links {
-            gap: 0.7rem;
-          }
-          .navbar-links a {
-            margin-left: 0;
-            font-size: 1rem;
-            padding: 0.45rem 1rem;
-          }
-        }
         .container {
           display: flex;
           flex-direction: row;

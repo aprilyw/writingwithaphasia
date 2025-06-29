@@ -13,7 +13,7 @@ export default function Sidebar({ selectedStory, onClose }) {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
           }
           .select-prompt {
             color: #666;
@@ -71,7 +71,7 @@ export default function Sidebar({ selectedStory, onClose }) {
           display: flex;
           flex-direction: column;
           position: relative;
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          font-family: 'Source Sans Pro', sans-serif;
         }
         .header {
           position: relative;
@@ -102,12 +102,13 @@ export default function Sidebar({ selectedStory, onClose }) {
           background: #2980b9;
         }
         h2 {
+          font-family: 'Merriweather', serif;
           margin: 0;
           color: #2c3e50;
           font-size: 2rem;
-          font-weight: 600;
+          font-weight: 700;
           padding-bottom: 10px;
-          letter-spacing: -0.02em;
+          letter-spacing: 0.01em;
           text-align: center;
         }
         .location, .date {
@@ -136,13 +137,16 @@ export default function Sidebar({ selectedStory, onClose }) {
           margin: 0.7em 0 0.7em 0;
         }
         .story-content :global(h1) {
-          color: #2c3e50;
-          font-size: 1.5rem;
-          margin: 1em 0 0.5em 0;
-          font-weight: 700;
-          letter-spacing: -0.01em;
-          text-align: justify;
-          text-align-last: center;
+          font-family: 'Source Sans Pro', sans-serif;
+          color: #666;
+          font-size: 1.3rem;
+          margin: 1.5em 0 0.8em 0;
+          font-weight: 600;
+          letter-spacing: 0.01em;
+          line-height: 1.3;
+          text-align: left;
+          border-bottom: none;
+          padding-bottom: 0;
         }
         .story-content :global(h2) {
           color: #2c3e50;

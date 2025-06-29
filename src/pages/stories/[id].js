@@ -62,11 +62,16 @@ export default function Story({ storyData }) {
           text-decoration: underline;
         }
         .story h1 {
+          font-family: 'Merriweather', serif;
           color: #2c3e50;
-          font-size: 2.5rem;
+          font-size: 2.7rem;
+          font-weight: 700;
           margin-bottom: 1.5rem;
-          border-bottom: 3px solid #3498db;
+          border-bottom: 2.5px solid #bcbcbc;
           padding-bottom: 0.5rem;
+          letter-spacing: 0.01em;
+          line-height: 1.15;
+          text-align: left;
         }
         .content {
           font-size: 1.1rem;
