@@ -3,18 +3,8 @@ import Head from 'next/head';
 export default function About() {
   return (
     <div className="about-container">
-      <Head>
-        <title>About | Writing With Aphasia</title>
-      </Head>
-      <h1>About Writing With Aphasia</h1>
       <p>
-        <strong>Writing With Aphasia</strong> is a community storytelling project that shares the journeys, challenges, and triumphs of people living with aphasia. Our goal is to foster understanding, connection, and hope through personal stories and resources.
-      </p>
-      <p>
-        This project is built by and for people with aphasia, their families, and supporters. We believe in the power of words, images, and community to inspire recovery and resilience.
-      </p>
-      <p>
-        If you would like to contribute your story or get involved, please contact us!
+        This page is under construction.
       </p>
       <style jsx>{`
         .about-container {

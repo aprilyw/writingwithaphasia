@@ -124,6 +124,7 @@ export default function Sidebar({ selectedStory, onClose }) {
           padding-right: 10px;
         }
         .story-content {
+          font-family: 'Source Sans Pro', sans-serif;
           font-size: 1.08rem;
           line-height: 1.55;
           color: #222;
@@ -137,11 +138,11 @@ export default function Sidebar({ selectedStory, onClose }) {
           margin: 0.7em 0 0.7em 0;
         }
         .story-content :global(h1) {
-          font-family: 'Source Sans Pro', sans-serif;
-          color: #666;
-          font-size: 1.3rem;
-          margin: 1.5em 0 0.8em 0;
-          font-weight: 600;
+          font-family: 'Merriweather', serif;
+          color: #2c3e50;
+          font-size: 1.6rem;
+          margin: 1.8em 0 1em 0;
+          font-weight: 700;
           letter-spacing: 0.01em;
           line-height: 1.3;
           text-align: left;

@@ -9,10 +9,12 @@ export default function App({ Component, pageProps }) {
     <>
       <nav className="navbar">
         <div className="navbar-inner">
-          <div className="navbar-title">Writing With Aphasia</div>
+          <Link href="/" legacyBehavior>
+            <a className="navbar-title">Writing With Aphasia</a>
+          </Link>
           <div className="navbar-links">
             <Link href="/" legacyBehavior>
-              <a onClick={e => { if (typeof window !== 'undefined' && window.handleHomeClick) { e.preventDefault(); window.handleHomeClick(); } }}>Home</a>
+              <a>Home</a>
             </Link>
             <Link href="/about">About</Link>
             <Link href="/resources">Resources</Link>
@@ -50,6 +52,11 @@ export default function App({ Component, pageProps }) {
           color: #3a2c2a;
           letter-spacing: 0.01em;
           margin-left: 0;
+          text-decoration: none;
+          transition: color 0.2s;
+        }
+        .navbar-title:hover {
+          color: #217dbb;
         }
         .navbar-links {
           display: flex;

@@ -11,7 +11,7 @@ export default function Contact() {
         We'd love to hear from you! For questions, feedback, or to share your story, please email us at:
       </p>
       <p>
-        <a href="mailto:info@writingwithaphasia.org">info@writingwithaphasia.org</a>
+        <a href="mailto:ejlin2003@gmail.com">ejlin2003@gmail.com</a>
       </p>
       <style jsx>{`
         .contact-container {
