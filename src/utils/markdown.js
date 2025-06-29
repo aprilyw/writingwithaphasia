@@ -99,7 +99,7 @@ export async function getAllStoriesData() {
 }
 
 export async function getTrishTipsData() {
-  const fullPath = path.join(process.cwd(), 'static/md', 'trish-tips.md');
+  const fullPath = path.join(process.cwd(), 'static/articles', 'trish-tips.md');
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
   const processedContent = await remark()
