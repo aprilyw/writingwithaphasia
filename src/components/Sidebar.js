@@ -77,6 +77,7 @@ export default function Sidebar({ selectedStory, onClose }) {
           position: relative;
           padding-right: 40px;
           margin-bottom: 20px;
+          text-align: center;
         }
         .close-button {
           position: absolute;
@@ -107,12 +108,14 @@ export default function Sidebar({ selectedStory, onClose }) {
           font-weight: 600;
           padding-bottom: 10px;
           letter-spacing: -0.02em;
+          text-align: center;
         }
         .location, .date {
           color: #666;
           margin-top: 8px;
           font-size: 0.9rem;
           letter-spacing: 0.01em;
+          text-align: center;
         }
         .content-wrapper {
           flex: 1;
@@ -120,27 +123,73 @@ export default function Sidebar({ selectedStory, onClose }) {
           padding-right: 10px;
         }
         .story-content {
-          font-size: 1.1rem;
-          line-height: 1.6;
-          color: #333;
+          font-size: 1.08rem;
+          line-height: 1.55;
+          color: #222;
           letter-spacing: 0.01em;
+          max-width: 44rem;
+          margin: 0 auto;
+          text-align: left;
+          word-break: break-word;
         }
         .story-content :global(p) {
-          margin: 1em 0;
+          margin: 0.7em 0 0.7em 0;
+        }
+        .story-content :global(h1) {
+          color: #2c3e50;
+          font-size: 1.5rem;
+          margin: 1em 0 0.5em 0;
+          font-weight: 700;
+          letter-spacing: -0.01em;
+          text-align: justify;
+          text-align-last: center;
         }
         .story-content :global(h2) {
           color: #2c3e50;
-          font-size: 1.5rem;
-          margin: 1.5em 0 1em;
-          border-bottom: none;
-          padding-bottom: 0;
-          font-weight: 600;
+          font-size: 1.25rem;
+          margin: 1.2em 0 0.7em 0;
+          font-weight: 700;
+          letter-spacing: -0.01em;
         }
         .story-content :global(h3) {
           color: #2c3e50;
-          font-size: 1.2rem;
-          margin: 1.2em 0 0.8em;
+          font-size: 1.08rem;
+          margin: 1em 0 0.5em 0;
           font-weight: 600;
+        }
+        .story-content :global(ul),
+        .story-content :global(ol) {
+          margin: 0.5em 0 0.5em 1.5em;
+          padding: 0;
+        }
+        .story-content :global(li) {
+          margin-bottom: 0.3em;
+        }
+        .story-content :global(blockquote) {
+          border-left: 3px solid #b3c6e0;
+          margin: 1em 0;
+          padding: 0.5em 1em;
+          color: #555;
+          background: #f7fafd;
+          font-style: italic;
+        }
+        .story-content :global(hr) {
+          border: none;
+          border-top: 1px solid #e1e1e1;
+          margin: 2em 0;
+        }
+        .story-content :global(table) {
+          border-collapse: collapse;
+          width: 100%;
+          margin: 1em 0;
+          font-size: 0.98em;
+          border: none;
+        }
+        .story-content :global(th),
+        .story-content :global(td) {
+          border: none;
+          padding: 0.2em 0.2em;
+          text-align: left;
         }
         .images-container {
           margin: 20px 0 30px;

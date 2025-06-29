@@ -4,87 +4,50 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import { fromLonLat, transformExtent } from 'ol/proj';
+import { easeOut } from 'ol/easing';
 import { Feature } from 'ol';
 import { Point } from 'ol/geom';
 import { Vector as VectorLayer } from 'ol/layer';
 import { Vector as VectorSource } from 'ol/source';
 import { Style, Circle, Fill, Stroke } from 'ol/style';
 import OSM from 'ol/source/OSM';
+import XYZ from 'ol/source/XYZ';
 
-// US bounds in [west, south, east, north] format
-const US_EXTENT = transformExtent([-125.0, 24.396308, -66.93457, 49.384358], 'EPSG:4326', 'EPSG:3857');
+// Tighter US bounds (continental US)
+const US_EXTENT = transformExtent([-124.0, 26.0, -66.0, 49.0], 'EPSG:4326', 'EPSG:3857');
 
-export default function MapComponent({ stories, onMarkerClick }) {
+export default function MapComponent({ stories, onMarkerClick, selectedStory, zoomToStory, onZoomComplete }) {
   const mapRef = useRef();
-  const [map, setMap] = useState(null);
+  const mapInstance = useRef(null);
 
+  // Only create the map once
   useEffect(() => {
-    if (!mapRef.current) return;
+    if (!mapRef.current || mapInstance.current) return;
 
-    // Create map
     const initialMap = new Map({
       target: mapRef.current,
       layers: [
-        // Base map layer using OpenStreetMap
         new TileLayer({
-          source: new OSM({
-            attributions: ['© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors']
+          source: new XYZ({
+            url: 'https://{a-c}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+            attributions: [
+              '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+              '© <a href="https://carto.com/attributions">CARTO</a>'
+            ]
           })
         }),
       ],
       view: new View({
-        center: fromLonLat([-98.5795, 39.8283]), // Center of USA
-        zoom: 4,
-        extent: US_EXTENT, // Restrict pan to US bounds
-        minZoom: 3, // Prevent zooming out too far
-        maxZoom: 12, // Reasonable max zoom level
-        constrainOnlyCenter: true, // Allow slight overflow for better UX
+        center: fromLonLat([-98.5795, 39.8283]),
+        zoom: 4.7,
+        extent: US_EXTENT,
+        minZoom: 3,
+        maxZoom: 12,
+        constrainOnlyCenter: true,
       }),
     });
 
-    // Create markers for stories
-    const markers = stories.map(story => {
-      const feature = new Feature({
-        geometry: new Point(fromLonLat(story.coordinates)),
-        story: story,
-      });
-
-      feature.setStyle(
-        new Style({
-          image: new Circle({
-            radius: 8,
-            fill: new Fill({ color: '#3498db' }),
-            stroke: new Stroke({ 
-              color: '#fff',
-              width: 2
-            }),
-          }),
-        })
-      );
-
-      return feature;
-    });
-
-    // Add markers to map
-    const vectorSource = new VectorSource({
-      features: markers,
-    });
-
-    const vectorLayer = new VectorLayer({
-      source: vectorSource,
-      style: new Style({
-        image: new Circle({
-          radius: 8,
-          fill: new Fill({ color: '#3498db' }),
-          stroke: new Stroke({ 
-            color: '#fff',
-            width: 2
-          }),
-        }),
-      })
-    });
-
-    initialMap.addLayer(vectorLayer);
+    mapInstance.current = initialMap;
 
     // Handle click events
     initialMap.on('click', (event) => {
@@ -101,10 +64,63 @@ export default function MapComponent({ stories, onMarkerClick }) {
       mapRef.current.style.cursor = hit ? 'pointer' : '';
     });
 
-    setMap(initialMap);
-
     return () => initialMap.setTarget(undefined);
-  }, [stories, onMarkerClick]);
+  }, []);
+
+  // Update markers when stories change
+  useEffect(() => {
+    if (!mapInstance.current) return;
+    // Remove all vector layers first
+    mapInstance.current.getLayers().getArray().forEach(layer => {
+      if (layer instanceof VectorLayer) {
+        mapInstance.current.removeLayer(layer);
+      }
+    });
+    // Add new markers
+    const markers = stories.map(story => {
+      const feature = new Feature({
+        geometry: new Point(fromLonLat(story.coordinates)),
+        story: story,
+      });
+      feature.setStyle(
+        new Style({
+          image: new Circle({
+            radius: 8,
+            fill: new Fill({ color: '#3498db' }),
+            stroke: new Stroke({ color: '#fff', width: 2 }),
+          }),
+        })
+      );
+      return feature;
+    });
+    const vectorSource = new VectorSource({ features: markers });
+    const vectorLayer = new VectorLayer({
+      source: vectorSource,
+      style: new Style({
+        image: new Circle({
+          radius: 8,
+          fill: new Fill({ color: '#3498db' }),
+          stroke: new Stroke({ color: '#fff', width: 2 }),
+        }),
+      })
+    });
+    mapInstance.current.addLayer(vectorLayer);
+  }, [stories]);
+
+  // Zoom to story when zoomToStory changes (staggered effect)
+  useEffect(() => {
+    if (mapInstance.current && zoomToStory && zoomToStory.coordinates) {
+      const coords = fromLonLat(zoomToStory.coordinates);
+      mapInstance.current.getView().animate({
+        center: coords,
+        zoom: 7,
+        duration: 3500,
+        easing: easeOut
+      }, () => {
+        if (onZoomComplete) onZoomComplete();
+      });
+    }
+  }, [zoomToStory, onZoomComplete]);
 
   return (
     <div ref={mapRef} style={{ width: '100%', height: '100%' }} />
