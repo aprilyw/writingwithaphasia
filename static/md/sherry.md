@@ -14,7 +14,7 @@ I've always been more stubborn. Like if I want – If I think – I can get bett
 |  |  |
 |--|--|
 | ![](/static/img/sherry/Sock.jpg)  | ![](/static/img/sherry/Insta.jpg)  |
-| *A gift in December* | *The sweetest Christmas gift* |
+| *A gift I made in December* | |
 
 
 
@@ -71,6 +71,7 @@ Recently, I found out that my sister is getting better too. Her husband took a p
 
 I don't know exactly what's going to happen next in life but I want to get my daughter graduated, but I want her to grow as well. I don't want her to just graduate the home not knowing what she's doing. So once I get that done, I would like to get an RV and drive. Drive all my sewing machines and do a sewing show.
 
-
-![](/static/img/sherry/Sew.jpg)
-*Stitching in the ditch* 
+|  |  |
+|--|--|
+| ![](/static/img/sherry/Sew.jpg)  | ![](/static/img/sherry/Brain.jpg)  |
+| *Stitching in the ditch*  | |
