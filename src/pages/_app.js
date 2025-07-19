@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }) {
       <nav className="navbar">
         <div className="navbar-inner">
           <Link href="/" legacyBehavior>
-            <a className="navbar-title">Writing With Aphasia</a>
+            <a className="navbar-title">Living With Aphasia: An Anthology</a>
           </Link>
           <div className="navbar-links">
             <Link href="/" legacyBehavior>

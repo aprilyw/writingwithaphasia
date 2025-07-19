@@ -4,7 +4,7 @@ export default function Contact() {
   return (
     <div className="contact-container">
       <Head>
-        <title>Contact | Writing With Aphasia</title>
+        <title>Contact | Living With Aphasia: An Anthology</title>
       </Head>
       <h1>Contact</h1>
       <p>

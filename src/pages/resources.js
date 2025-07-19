@@ -42,7 +42,7 @@ export default function Resources({ trishTips }) {
   return (
     <div className="resources-container">
       <Head>
-        <title>Resources | Writing With Aphasia</title>
+        <title>Resources | Living With Aphasia: An Anthology</title>
       </Head>
       <h1>Resources</h1>
       <div className="tabs">
