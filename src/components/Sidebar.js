@@ -259,6 +259,17 @@ export default function Sidebar({ selectedStory, onClose }) {
           margin-bottom: 1.5rem;
           font-size: 0.9rem;
         }
+        .story-content :global(a) {
+          color: #217dbb;
+          text-decoration: underline;
+          transition: color 0.2s ease;
+        }
+        .story-content :global(a:hover) {
+          color: #3498db;
+        }
+        .story-content :global(a[href^="http"]) {
+          target: _blank;
+        }
       `}</style>
     </div>
   );

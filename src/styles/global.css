@@ -10,9 +10,20 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+/* Global link styling - blue and underlined */
 a {
-  color: inherit;
-  text-decoration: none;
+  color: #217dbb;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #3498db;
+}
+
+/* Ensure external links open in new tab */
+a[href^="http"] {
+  target: _blank;
 }
 
 * {

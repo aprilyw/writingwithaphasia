@@ -168,6 +168,20 @@ export default function Resources({ trishTips }) {
         .trish-tips-rest {
           margin-top: 0.5rem;
         }
+        .trish-tips-preview :global(a),
+        .trish-tips-rest :global(a) {
+          color: #217dbb;
+          text-decoration: underline;
+          transition: color 0.2s ease;
+        }
+        .trish-tips-preview :global(a:hover),
+        .trish-tips-rest :global(a:hover) {
+          color: #3498db;
+        }
+        .trish-tips-preview :global(a[href^="http"]),
+        .trish-tips-rest :global(a[href^="http"]) {
+          target: _blank;
+        }
       `}</style>
     </div>
   );

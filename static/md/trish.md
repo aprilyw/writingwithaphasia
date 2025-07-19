@@ -42,7 +42,7 @@ Two years after my stroke, my driver's license was reinstated. I've since put it
 
 I also got involved with the stroke and aphasia community as more than just a patient: I attended stroke conferences and ability fairs. I also rediscovered technology as my friend. 
 
-I went to Burke rehab in White Plains, New York for a study to assess the effect of tDCS in conjunction with robotic training. I also volunteered at O'Connor Hospital with another stroke survivor. We visited new stroke patients and talked with them about their hopes for recovery. Sometimes, the patients would feel mad or sad – or both. This inspired me to share my tips and tricks on a Stroke Survivor Strategies blog for when patients feel overwhelmed. 
+I went to Burke rehab in White Plains, New York for a study to assess [the effect of tDCS](https://youtu.be/AnD9p3OCbck) in conjunction with robotic training. I also volunteered at O'Connor Hospital with another stroke survivor. We visited new stroke patients and talked with them about their hopes for recovery. Sometimes, the patients would feel mad or sad – or both. This inspired me to share my tips and tricks on a Stroke Survivor Strategies blog for when patients feel overwhelmed. 
 
 I went to the 2013 Aphasia Recovery Connection (ARC) conference and met the Aphasia Lunch Bunch, people with aphasia who meet during lunches to socialize together.  
 

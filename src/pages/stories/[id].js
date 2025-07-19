@@ -81,6 +81,17 @@ export default function Story({ storyData }) {
         .content :global(p) {
           margin: 1.5em 0;
         }
+        .content :global(a) {
+          color: #217dbb;
+          text-decoration: underline;
+          transition: color 0.2s ease;
+        }
+        .content :global(a:hover) {
+          color: #3498db;
+        }
+        .content :global(a[href^="http"]) {
+          target: _blank;
+        }
         .images-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

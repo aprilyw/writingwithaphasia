@@ -21,7 +21,13 @@ export async function getStoryData(id) {
     .use(html, { sanitize: false }) // Allow img tags
     .process(content);
   
-  const contentHtml = processedContent.toString();
+  let contentHtml = processedContent.toString();
+
+  // Add target="_blank" and rel="noopener noreferrer" to external links
+  contentHtml = contentHtml.replace(
+    /<a href="(https?:\/\/[^"]+)"/g,
+    '<a href="$1" target="_blank" rel="noopener noreferrer"'
+  );
 
   // Get associated images
   const storyImagesDir = path.join(imagesDirectory, id);
@@ -106,7 +112,14 @@ export async function getTrishTipsData() {
     .use(remarkGfm)
     .use(html, { sanitize: false })
     .process(content);
-  const contentHtml = processedContent.toString();
+  let contentHtml = processedContent.toString();
+  
+  // Add target="_blank" and rel="noopener noreferrer" to external links
+  contentHtml = contentHtml.replace(
+    /<a href="(https?:\/\/[^"]+)"/g,
+    '<a href="$1" target="_blank" rel="noopener noreferrer"'
+  );
+  
   return {
     ...data,
     contentHtml,
