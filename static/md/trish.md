@@ -42,23 +42,23 @@ Two years after my stroke, my driver's license was reinstated. I've since put it
 
 I also got involved with the stroke and aphasia community as more than just a patient: I attended stroke conferences and ability fairs. I also rediscovered technology as my friend. 
 
-I went to Burke rehab in White Plains, New York for a study to assess [the effect of tDCS](https://youtu.be/AnD9p3OCbck) in conjunction with robotic training. I also volunteered at O'Connor Hospital with another stroke survivor. We visited new stroke patients and talked with them about their hopes for recovery. Sometimes, the patients would feel mad or sad – or both. This inspired me to share my tips and tricks on a Stroke Survivor Strategies blog for when patients feel overwhelmed. 
+I went to Burke rehab in White Plains, New York for a study to assess [the effect of tDCS](https://youtu.be/AnD9p3OCbck) in conjunction with robotic training. I also volunteered at O'Connor Hospital with another stroke survivor. We visited new stroke patients and talked with them about their hopes for recovery. Sometimes, the patients would feel mad or sad – or both. This inspired me to share my [tips and tricks](https://stroke-survivor-strategies.blogspot.com/search/label/iPhone%2FiPad) on a Stroke Survivor Strategies blog for when patients feel overwhelmed. 
 
 I went to the 2013 Aphasia Recovery Connection (ARC) conference and met the Aphasia Lunch Bunch, people with aphasia who meet during lunches to socialize together.  
 
-In the next few years, I didn't stop. I went to the 2013 ARC conference, 3 ARC cruises (April 2014, June 2015, March 2016), the Ohio ARC Retreat (August 2014) and ARC U Boot Camp (October 2015, March 2017).  At the 2017 ARC U Boot Camp, I made a video called "Yike! I had the yips for aphasia."
+In the next few years, I didn't stop. I went to the 2013 ARC conference, 3 ARC cruises (April 2014, June 2015, March 2016), the Ohio ARC Retreat (August 2014) and ARC U Boot Camp (October 2015, March 2017).  At the 2017 ARC U Boot Camp, I made a video called "[Yike! I had the yips for aphasia](https://youtu.be/x3ueXWAC-P0)."
 
 I was inspired by my experiences with ARC and wanted to create a similar community for people that lived near me. With one of my speech therapists in Silicon Valley, I started an aphasia support group called Chit-Chat Aphasia group. I created the Bay Area Aphasia Circle for people with aphasia to meet others in the Bay with aphasia. 
 
 I started looking for a house to buy in the Bay Area, but it was too expensive on disability. I decided to move to Florida. I reached out to my friend Ann who I had met through an ARC cruise: "I'm moving to St. Pete or Tampa. What do you think?" 
 
-"Dunedin," she said. So I moved to Dunedin, Florida, with help from my dad and Ann. It's warm most of the year, it's cheaper than California, I have support for aphasia. Most importantly, it's also where the Voices of Hope for Aphasia community is located. Voices of Hope changed my life, which I share more about in this video.
+"Dunedin," she said. So I moved to Dunedin, Florida, with help from my dad and Ann. It's warm most of the year, it's cheaper than California, I have support for aphasia. Most importantly, it's also where the Voices of Hope for Aphasia community is located. Voices of Hope changed my life, which I share more about in [this video](https://www.youtube.com/watch?v=Kn5stllkUpM).
 
 I got my condo, my new Florida driver's license, and set up my relationships with new doctors. I finally felt at home again. 
 
 Of the many groups I worked with, one of the most important has been Voices of Hope for Aphasia. When I got a puppy dog, Voices of Hope voted on her name. Punk! 
 
-However, I still couldn't speak well at the time, and "Punk" was hard to say. I had to rely on cues to help. Do you know the movie, Dirty Harry? In my mind, I would repeat, "hey, say it, Punk". I learned to train Punk commands with a P2Go app, an augmentative and alternative communication app (AAC). P2Go has illustrations of different commands, which I could click on. The app would then say the command: "Sit!" Or, "do your business!"
+However, I still couldn't speak well at the time, and "Punk" was hard to say. I had to rely on cues to help. Do you know the movie, Dirty Harry? In my mind, I would repeat, "hey, say it, Punk". I learned to train Punk commands with a [P2Go app](https://youtu.be/V1iIeUQslIc), an augmentative and alternative communication app (AAC). P2Go has illustrations of different commands, which I could click on. The app would then say the command: "Sit!" Or, "do your business!"
 
 Everywhere I go now, I take Punk: a Voices of Hope session; my doctor's visit; restaurants; walks at Braemoor Village. I'm not alone in my love for Punk. In 2019, Punk became the mascot for Voices of Hope. 
 
@@ -66,9 +66,9 @@ I speak about recovery from my stroke with SLPs, students, the public, and peopl
 
 I have attended 9 conferences with ASHA and Aphasia Access Leadership Summit. I have spoken at 3 of these ASHA conferences and 4 Aphasia Access conferences. In November 2022, I was part of a panel for an ASHA conference with Dr. Jackie Hinckley and Denise Lowell, a friend who also has aphasia. The panel was titled, "Twisties, Yips, and Hope: What People with Aphasia Want You to Know About Mental Health." Three years later, I will soon be presenting my own topic with ASHA, titled "A Person with Aphasia Speaks: An insider's advocacy perspective and what SLPs should know." I am also planning to attend the upcoming ROSA conference. 
 
-After attending the Project Bridge Conference, I am now part of a team that develops qualitative research questions for people with aphasia. With this team, I have worked on a project exploring post-traumatic growth in aphasia. I also joined another project for ARC to test Aphasia Games for Health.
+After attending the Project Bridge Conference, I am now part of a team that develops qualitative research questions for people with aphasia. With this team, I have worked on a [project exploring post-traumatic growth in aphasia](https://pubs.asha.org/doi/10.1044/2024_AJSLP-24-00351). I also joined another [project for ARC](https://dl.acm.org/doi/10.1145/3474697) to test [Aphasia Games for Health](https://www.aphasiagamesforhealth.com/).
 
-This doesn't mean that I'm not scared. I still am. But I've learned to accept my stroke and aphasia and work with it. I believe that when people with aphasia feel positive emotions, their speaking comes with fewer struggles, and they feel more hopeful, relaxed, and self-confident.  Read more about the science behind this here.
+This doesn't mean that I'm not scared. I still am. But I've learned to accept my stroke and aphasia and work with it. I believe that when people with aphasia feel positive emotions, their speaking comes with fewer struggles, and they feel more hopeful, relaxed, and self-confident.  Read more about the science behind this [here](https://aphasia.byu.edu/0000018e-0628-d1be-a9ae-eeeec0c90000/aphasia-friendly-how-positive-and-negative-emotions-affect-naming-pictures-for-pwa-pdf).
 
 A person with aphasia has much more difficulty speaking when they feel negative emotions, which is enhanced when they are tired and in a loud space. While anxiety causes anticipation and fear, holding hope leads to anticipation and trust in yourself.
 
@@ -76,7 +76,7 @@ Keep a positive attitude! Hope! Open yourself up to change! Own it! Find other p
 
 Katarina Haley, PhD, CCC-SLP, described it well in an Aphasia Access Zoom meeting: "Aphasia is a tough blow. It interferes with communication, social connection, psychological well-being." 
 
-I wanted to help, so I founded the National Aphasia Synergy (NAS), a nonprofit organization that promotes an aphasia community led by peers. I currently continue to serve as the president of NAS. 
+I wanted to help, so I founded the [National Aphasia Synergy](https://nationalaphasiasynergy.org) (NAS), a nonprofit organization that promotes an aphasia community led by peers. I currently continue to serve as the president of NAS. 
 
 Our strength is in sharing the stories of wins and challenges. NAS is driven to encourage optimism and positive outlook in people with aphasia. The unique part of NAS is that we are run by people with aphasia. Our website is intended to be a live storage of resources for people with aphasia.
 
@@ -86,17 +86,17 @@ We stay happier and healthier when we have opportunities for meaningful contribu
 
 
 ## Some tips and tricks below.
-For more, [read here](/resources#trish-tips-and-tricks). I have also made a separate video with more tips.
+For more, [read here](/resources#trish-tips-and-tricks). I have also made a [separate video](https://youtu.be/mv2AAYQQuu8) with more tips.
 - Use The Buddy System
 - It helps you feel safe 
 - People with aphasia can visit the community with a friend/family as back up support
- Teach your "back up" person the Supported Conversation developed by Aphasia Institute of Toronto 
+ Teach your "back up" person the [Supported Conversation](https://www.aphasia.ca/family-and-friends-of-people-with-aphasia/family-sca/) developed by Aphasia Institute of Toronto 
 - Teach your friend to wait until the person with aphasia wants help
 - Teach them to ask the person with aphasia if it's ok to help out in that situation
 
 Please, do it.  Please! It can really help to have a friend along! Practice, practice and practice… 
 
-Dr. Roy Hamilton, a neurologist at the University of Pennsylvania, said the following in the podcast "Brain Friends": "Neuroplasticity is also the bedrock". To hear more of this podcast, which was hosted by two-time stroke survivor Angie Cauthorn and Dr. Seles Gadson, click here. 
+Dr. Roy Hamilton, a neurologist at the University of Pennsylvania, said the following in the podcast "Brain Friends": "Neuroplasticity is also the bedrock". To hear more of this podcast, which was hosted by two-time stroke survivor Angie Cauthorn and Dr. Seles Gadson, click [here](https://brainfriends.buzzsprout.com/1959705/episodes/13953043-neuroplasticity-part-2). 
 
 Another neuropsychologist, Donald Hebbs, said that "neurons that fire together, wire together."
  
@@ -111,9 +111,12 @@ If one doesn't work, try something else.
 Keep trying! And tweak your toolbox. 
 
   aphasia card and whiteboard = Win
+
   aphasia card, pictures, and talking = Win
+
   aphasia card and talking = Win
+
   aphasia card and having your buddy = Win 
  
-Rock on!  Thanks
+Rock on!  Thanks.
 

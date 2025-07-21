@@ -178,10 +178,7 @@ export default function Resources({ trishTips }) {
         .trish-tips-rest :global(a:hover) {
           color: #3498db;
         }
-        .trish-tips-preview :global(a[href^="http"]),
-        .trish-tips-rest :global(a[href^="http"]) {
-          target: _blank;
-        }
+        /* External links are handled by markdown processing */
       `}</style>
     </div>
   );

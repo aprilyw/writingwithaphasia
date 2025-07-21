@@ -89,9 +89,7 @@ export default function Story({ storyData }) {
         .content :global(a:hover) {
           color: #3498db;
         }
-        .content :global(a[href^="http"]) {
-          target: _blank;
-        }
+        /* External links are handled by markdown processing */
         .images-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

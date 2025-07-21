@@ -267,9 +267,7 @@ export default function Sidebar({ selectedStory, onClose }) {
         .story-content :global(a:hover) {
           color: #3498db;
         }
-        .story-content :global(a[href^="http"]) {
-          target: _blank;
-        }
+        /* External links are handled by markdown processing */
       `}</style>
     </div>
   );
