@@ -108,7 +108,7 @@ I speak about recovery from my stroke with SLPs, students, the public, and peopl
 
 |  |  |
 |--|--|
-| ![](/static/img/trish/Camera.jpg)  | ![](/static/img/trish/Celebrity.jpg)  |
+| ![](/static/img/trish/Camera.JPG)  | ![](/static/img/trish/Celebrity.jpg)  |
 | *Employee training at St. Petersburg*  | *Me in the news with Punk!* |
 
 
