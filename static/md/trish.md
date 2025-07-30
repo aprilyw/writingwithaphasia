@@ -118,7 +118,7 @@ I have attended 9 conferences with ASHA and Aphasia Access Leadership Summit. I 
 *An ASHA conference in New Orleans*
 |  |  |
 |--|--|
-![](/static/img/trish/AA.JPG) | ![](/static/img/trish/OrlandoConference.jpg)  |
+![](/static/img/trish/AA.JPG) | ![](/static/img/trish/OrlandoConference.JPG)  |
 | *An Aphasia Access conference* | *Another conference in Orlando* |
 
 
