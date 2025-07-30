@@ -1,6 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import ImageModal from './ImageModal';
 
 export default function Sidebar({ selectedStory, onClose }) {
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Provide global function for markdown images to call
+  useEffect(() => {
+    window.openImageModal = (src, alt) => {
+      setSelectedImage({ src, alt });
+      setIsModalOpen(true);
+    };
+
+    return () => {
+      delete window.openImageModal;
+    };
+  }, []);
   if (!selectedStory) {
     return (
       <div className="sidebar">
@@ -45,7 +60,10 @@ export default function Sidebar({ selectedStory, onClose }) {
           <div className="images-grid">
             {selectedStory.images.map((image, index) => (
               <figure key={index} className="image-figure">
-                <div className="image-wrapper">
+                <div className="image-wrapper" onClick={() => {
+                  setSelectedImage(image);
+                  setIsModalOpen(true);
+                }}>
                   <img src={image.src} alt={image.alt} />
                 </div>
                 {image.caption && (
@@ -62,6 +80,15 @@ export default function Sidebar({ selectedStory, onClose }) {
           <div dangerouslySetInnerHTML={{ __html: selectedStory.contentHtml }} />
         </div>
       </div>
+
+      <ImageModal 
+        image={selectedImage}
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          setSelectedImage(null);
+        }}
+      />
 
       <style jsx>{`
         .sidebar {
@@ -216,11 +243,13 @@ export default function Sidebar({ selectedStory, onClose }) {
           overflow: hidden;
           border-radius: 12px;
           box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-          transition: transform 0.2s;
+          transition: transform 0.2s, box-shadow 0.2s;
           margin-bottom: 0.5rem;
+          cursor: pointer;
         }
         .image-wrapper:hover {
           transform: scale(1.02);
+          box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
         .image-wrapper img {
           position: absolute;
@@ -246,10 +275,12 @@ export default function Sidebar({ selectedStory, onClose }) {
           margin: 1.5rem auto;
           display: block;
           box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-          transition: transform 0.2s ease;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+          cursor: pointer;
         }
         .story-content :global(img:hover) {
           transform: scale(1.02);
+          box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
         .story-content :global(em) {
           display: block;

@@ -29,6 +29,12 @@ export async function getStoryData(id) {
     '<a href="$1" target="_blank" rel="noopener noreferrer"'
   );
 
+  // Add click handlers to images for modal functionality
+  contentHtml = contentHtml.replace(
+    /<img([^>]+)>/g,
+    '<img$1 onclick="window.openImageModal && window.openImageModal(this.src, this.alt)" style="cursor: pointer;">'
+  );
+
   // Get associated images
   const storyImagesDir = path.join(imagesDirectory, id);
   let images = [];
