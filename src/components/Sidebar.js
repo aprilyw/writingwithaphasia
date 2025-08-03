@@ -137,7 +137,7 @@ export default function Sidebar({ selectedStory, onClose }) {
           line-height: 1.55;
           color: #222;
           letter-spacing: 0.01em;
-          max-width: 44rem;
+          max-width: 52rem;
           margin: 0 auto;
           text-align: left;
           word-break: break-word;
