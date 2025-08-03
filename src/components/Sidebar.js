@@ -103,7 +103,7 @@ export default function Sidebar({ selectedStory, onClose }) {
         .header {
           position: relative;
           padding-right: 40px;
-          margin-bottom: 20px;
+          margin-bottom: 10px;
           text-align: center;
         }
         .close-button {
@@ -114,8 +114,8 @@ export default function Sidebar({ selectedStory, onClose }) {
           height: 32px;
           border-radius: 50%;
           border: none;
-          background: #3498db;
-          color: white;
+          background: transparent;
+          color: #333;
           font-size: 24px;
           cursor: pointer;
           display: flex;
@@ -126,7 +126,7 @@ export default function Sidebar({ selectedStory, onClose }) {
           line-height: 1;
         }
         .close-button:hover {
-          background: #2980b9;
+          background: rgba(0, 0, 0, 0.1);
         }
         h2 {
           font-family: 'Merriweather', serif;
@@ -149,6 +149,11 @@ export default function Sidebar({ selectedStory, onClose }) {
           flex: 1;
           overflow-y: auto;
           padding-right: 10px;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .content-wrapper::-webkit-scrollbar {
+          display: none;
         }
         .story-content {
           font-family: 'Source Sans Pro', sans-serif;
@@ -162,7 +167,7 @@ export default function Sidebar({ selectedStory, onClose }) {
           word-break: break-word;
         }
         .story-content :global(p) {
-          margin: 0.7em 0 0.7em 0;
+          margin: 0.5em 0 0.5em 0;
         }
         .story-content :global(h1) {
           font-family: 'Merriweather', serif;

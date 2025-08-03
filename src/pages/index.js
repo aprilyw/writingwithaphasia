@@ -86,19 +86,19 @@ export default function Home({ stories, handleHomeClick }) {
           transition: width 0.3s;
         }
         .sidebar-container {
-          flex: 0.8;
+          flex: 1.2;
           height: 100vh;
-          min-width: 350px;
-          max-width: 1200px;
+          min-width: 450px;
+          max-width: 1400px;
           background: #fff;
           overflow-y: auto;
           transition: width 1s cubic-bezier(0.22, 0.61, 0.36, 1);
         }
         .map-shrunk {
-          flex: 0.5;
+          flex: 0.4;
         }
         .sidebar-expanded {
-          flex: 3.5;
+          flex: 4.5;
         }
         @media (max-width: 900px) {
           .container {

@@ -87,15 +87,13 @@ I started looking for a house to buy in the Bay Area, but it was too expensive o
 
 "Dunedin," she said. So I moved to Dunedin, Florida, with help from my dad and Ann. It's warm most of the year, it's cheaper than California, I have support for aphasia. Most importantly, it's also where the Voices of Hope for Aphasia community is located. Voices of Hope changed my life, which I share more about in [this video](https://www.youtube.com/watch?v=Kn5stllkUpM).
 
-|  |  |
-|--|--|
-![](/static/img/trish/cruise.JPG)| ![](/static/img/trish/VOC.jpg)  |
-| *Voices of Hope cruise*  | *More Voices of Hope* |
+|  |  |  |
+|--|--|--|
+![](/static/img/trish/cruise.JPG)| ![](/static/img/trish/VOC.jpg)  | ![](/static/img/trish/Halloween.JPG) |
+| *Voices of Hope cruise*  | *More Voices of Hope* | *Halloween at Voices of Hope* |
 
-|  |  |
-|--|--|
-![](/static/img/trish/Art.jpg)|![](/static/img/trish/Halloween.JPG)
- | *Art I made with Voices of Hope* | *Halloween at Voices of Hope*
+![](/static/img/trish/Art.jpg)
+*Art I made with Voices of Hope*
 I got my condo, my new Florida driver's license, and set up my relationships with new doctors. I finally felt at home again. 
 
 Of the many groups I worked with, one of the most important has been Voices of Hope for Aphasia. When I got a puppy dog, Voices of Hope voted on her name. Punk! 
