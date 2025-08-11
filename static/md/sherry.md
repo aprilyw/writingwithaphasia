@@ -1,6 +1,6 @@
 ---
 title: "Sherry's Story"
-name: "Sherry L."
+name: "Sherry Lovellette"
 coordinates: [-80.4776, 25.4687] # Homestead, Florida coordinates
 date: "2025-02-01"
 location: "Homestead, Florida"
