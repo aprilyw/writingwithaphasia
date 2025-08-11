@@ -9,7 +9,7 @@ import { Feature } from 'ol';
 import { Point } from 'ol/geom';
 import { Vector as VectorLayer } from 'ol/layer';
 import { Vector as VectorSource } from 'ol/source';
-import { Style, Circle, Fill, Stroke } from 'ol/style';
+import { Style, Circle, Fill, Stroke, Icon } from 'ol/style';
 import OSM from 'ol/source/OSM';
 import XYZ from 'ol/source/XYZ';
 
@@ -84,10 +84,10 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
       });
       feature.setStyle(
         new Style({
-          image: new Circle({
-            radius: 8,
-            fill: new Fill({ color: '#3498db' }),
-            stroke: new Stroke({ color: '#fff', width: 2 }),
+          image: new Icon({
+            src: '/static/svg/location-pin-2965.svg',
+            scale: 0.2,
+            anchor: [0.5, 1], // Anchor at bottom center of the pin
           }),
         })
       );
@@ -97,10 +97,10 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
     const vectorLayer = new VectorLayer({
       source: vectorSource,
       style: new Style({
-        image: new Circle({
-          radius: 8,
-          fill: new Fill({ color: '#3498db' }),
-          stroke: new Stroke({ color: '#fff', width: 2 }),
+        image: new Icon({
+          src: '/static/svg/location-pin-2965.svg',
+          scale: 0.2,
+          anchor: [0.5, 1], // Anchor at bottom center of the pin
         }),
       })
     });

@@ -15,11 +15,26 @@ export async function getStoryData(id) {
   // Use gray-matter to parse the post metadata section
   const { data, content } = matter(fileContents);
 
+  // Create frontmatter HTML to include in the content
+  let frontmatterHtml = '';
+  if (data.name || data.title) {
+    frontmatterHtml += `<h1>${data.name || data.title}</h1>\n`;
+  }
+  if (data.location) {
+    frontmatterHtml += `<div class="location">${data.location}</div>\n`;
+  }
+  if (data.date) {
+    frontmatterHtml += `<div class="date">${data.date}</div>\n`;
+  }
+
+  // Combine frontmatter with content
+  const fullContent = frontmatterHtml + content;
+
   // Use remark to convert markdown into HTML string
   const processedContent = await remark()
     .use(remarkGfm) // Enables GFM (tables, strikethrough, etc.)
     .use(html, { sanitize: false }) // Allow img tags
-    .process(content);
+    .process(fullContent);
   
   let contentHtml = processedContent.toString();
 

@@ -46,13 +46,6 @@ export default function Sidebar({ selectedStory, onClose }) {
         <button className="close-button" onClick={onClose}>
           ×
         </button>
-        <h2>{selectedStory.name || selectedStory.title}</h2>
-        {selectedStory.location && (
-          <div className="location">{selectedStory.location}</div>
-        )}
-        {selectedStory.date && (
-          <div className="date">{selectedStory.date}</div>
-        )}
       </div>
 
       {selectedStory.images && selectedStory.images.length > 0 && (
@@ -103,7 +96,7 @@ export default function Sidebar({ selectedStory, onClose }) {
         .header {
           position: relative;
           padding-right: 40px;
-          margin-bottom: 20px;
+          margin-bottom: 10px;
           text-align: center;
         }
         .close-button {
@@ -114,8 +107,8 @@ export default function Sidebar({ selectedStory, onClose }) {
           height: 32px;
           border-radius: 50%;
           border: none;
-          background: #3498db;
-          color: white;
+          background: transparent;
+          color: #333;
           font-size: 24px;
           cursor: pointer;
           display: flex;
@@ -126,29 +119,17 @@ export default function Sidebar({ selectedStory, onClose }) {
           line-height: 1;
         }
         .close-button:hover {
-          background: #2980b9;
-        }
-        h2 {
-          font-family: 'Merriweather', serif;
-          margin: 0;
-          color: #2c3e50;
-          font-size: 2rem;
-          font-weight: 700;
-          padding-bottom: 10px;
-          letter-spacing: 0.01em;
-          text-align: center;
-        }
-        .location, .date {
-          color: #666;
-          margin-top: 8px;
-          font-size: 0.9rem;
-          letter-spacing: 0.01em;
-          text-align: center;
+          background: rgba(0, 0, 0, 0.1);
         }
         .content-wrapper {
           flex: 1;
           overflow-y: auto;
           padding-right: 10px;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .content-wrapper::-webkit-scrollbar {
+          display: none;
         }
         .story-content {
           font-family: 'Source Sans Pro', sans-serif;
@@ -156,25 +137,39 @@ export default function Sidebar({ selectedStory, onClose }) {
           line-height: 1.55;
           color: #222;
           letter-spacing: 0.01em;
-          max-width: 44rem;
+          max-width: 52rem;
           margin: 0 auto;
           text-align: left;
           word-break: break-word;
         }
         .story-content :global(p) {
-          margin: 0.7em 0 0.7em 0;
+          margin: 0.5em 0 0.5em 0;
         }
         .story-content :global(h1) {
           font-family: 'Merriweather', serif;
           color: #2c3e50;
-          font-size: 1.6rem;
-          margin: 1.8em 0 1em 0;
+          font-size: 2rem;
+          margin: 0 0 0.5em 0;
           font-weight: 700;
           letter-spacing: 0.01em;
           line-height: 1.3;
-          text-align: left;
+          text-align: center;
           border-bottom: none;
           padding-bottom: 0;
+        }
+        .story-content :global(.location) {
+          color: #666;
+          margin: 0.5em 0;
+          font-size: 0.9rem;
+          letter-spacing: 0.01em;
+          text-align: center;
+        }
+        .story-content :global(.date) {
+          color: #666;
+          margin: 0.5em 0 1.5em 0;
+          font-size: 0.9rem;
+          letter-spacing: 0.01em;
+          text-align: center;
         }
         .story-content :global(h2) {
           color: #2c3e50;

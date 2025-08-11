@@ -64,12 +64,21 @@ export default function Home({ stories, handleHomeClick }) {
             resetSignal={resetMapSignal}
           />
         </div>
-        <div className={`sidebar-container ${selectedStory ? 'sidebar-expanded' : ''}`}>
-          <Sidebar 
-            selectedStory={selectedStory} 
-            onClose={handleCloseSidebar}
-          />
-        </div>
+        {selectedStory && (
+          <div className={`sidebar-container ${selectedStory ? 'sidebar-expanded' : ''}`}>
+            <Sidebar 
+              selectedStory={selectedStory} 
+              onClose={handleCloseSidebar}
+            />
+          </div>
+        )}
+        {!selectedStory && (
+          <div className="overlay-text">
+            <div className="overlay-content">
+              Click a pin to view its story
+            </div>
+          </div>
+        )}
       </div>
       <style jsx>{`
         .container {
@@ -84,21 +93,41 @@ export default function Home({ stories, handleHomeClick }) {
           height: 100vh;
           min-width: 0;
           transition: width 0.3s;
+          position: relative;
+        }
+        .overlay-text {
+          position: fixed;
+          bottom: 2rem;
+          left: 2rem;
+          z-index: 99999;
+          pointer-events: none;
+        }
+        .overlay-content {
+          background: #ffffff;
+          padding: 1rem 2rem;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+          font-family: 'Source Sans Pro', sans-serif;
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: #3a2c2a;
+          text-align: center;
+          border: 2px solid #3a2c2a;
         }
         .sidebar-container {
-          flex: 0.8;
+          flex: 1.2;
           height: 100vh;
-          min-width: 350px;
-          max-width: 1200px;
+          min-width: 450px;
+          max-width: 1400px;
           background: #fff;
           overflow-y: auto;
           transition: width 1s cubic-bezier(0.22, 0.61, 0.36, 1);
         }
         .map-shrunk {
-          flex: 0.5;
+          flex: 0.4;
         }
         .sidebar-expanded {
-          flex: 3.5;
+          flex: 4.5;
         }
         @media (max-width: 900px) {
           .container {

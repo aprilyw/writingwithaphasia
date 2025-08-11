@@ -39,11 +39,12 @@ export default function App({ Component, pageProps }) {
         }
         .navbar-inner {
           max-width: 1200px;
-          margin: 0 auto;
+          margin: 0 0 0 2rem;
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          justify-content: flex-start;
           width: 100%;
+          gap: 2rem;
         }
         .navbar-title {
           font-family: 'Merriweather', serif;
@@ -61,11 +62,12 @@ export default function App({ Component, pageProps }) {
         .navbar-links {
           display: flex;
           gap: 2.2rem;
-          border-bottom: 1px solid #bcbcbc;
+          border-bottom: none;
           padding-bottom: 0.2rem;
           margin-left: 0;
-          justify-content: flex-end;
+          justify-content: flex-start;
           font-family: 'Source Sans Pro', sans-serif;
+          align-items: center;
         }
         .navbar-links a, .navbar-links :global(a) {
           color: #3a2c2a;
