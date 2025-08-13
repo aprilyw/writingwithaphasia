@@ -9,7 +9,7 @@ On the day when I had a stroke, the lights went off. Two months later, the light
 
 * * * * *
 
-My name is Brian Bassett. I was born in New Jersey in 1970. I was the eldest of four siblings: I had a younger sister and two younger brothers. When I was 9 years old, my family moved to Colorado. We lived in Colorado until I graduated with high school. Before I went to college, my family often went skiing. 
+My name is Brian Bassett. I was born in New Jersey in 1970. I was the eldest of four siblings: I had a younger sister and two younger brothers. When I was 9 years old, my family moved to Colorado. We lived in Colorado until I graduated from high school. Before I went to college, my family often went skiing. 
 
 For college, I went to Amherst College in Amherst, Massachusetts. My major was economics. I met my wife, Sarah, in college, and she was lovely. But she had one little problem: she would not ski. So, I decided that I would not ski either. 
 
@@ -25,13 +25,24 @@ In May of 2015, my family took a trip to South Bend, Indiana. We went to my wife
 
 The stroke happened on Sunday, May 3. It was completely out of the blue. Before it happened, I had a general doctor’s appointment every year and my doctor always said I was healthy. 
 
-I had a stroke on the airplane. My wife tells me that when we got back to Boston, we went on the ambulance from Logan Airport to Massachusetts General Hospital. I was unconscious in the airplane and I was unconscious for about a week. 
+I had a stroke on the airplane. My wife tells me that when we got back to Boston, we went on the ambulance from Logan Airport to Massachusetts General Hospital. I was unconscious in the airplane and I was unconscious for about a week.
+
+![](/static/img/brian/Spaulding.jpg)
+*I was transferred from Massachusetts General Hospital to Spaulding Rehabilitation Hospital. Here, I am building Legos with my younger son, Hughie, who was six at the time (June 2015).*
 
 In the hospital, the doctors found that my brain had been swelling. It had swollen so much that it was putting too much pressure on my skull. The doctors decided that I should have a major surgery on Monday morning. The surgery was to remove part of my skull. The surgery was a success; my brain would shrink now that part of my skull was removed.
 
 Because part of my skull was now missing, it was really important that I wore a helmet 24 hours a day, 7 days a week. It was dangerous if I was not wearing my helmet. (I wore it for six weeks before my second major surgery to replace the part of my skull that the doctors had initially removed.)
 
+![](/static/img/brian/Helmet.jpg)
+*This is what my helmet looked like.*
+
 Now I had another problem after the first major surgery:  I was mute.  After I woke up, I was assigned a speech therapist. The speech therapist would ask me simple questions. My problem was not understanding what the speech therapist asked me; it was that I was mute. I could understand what the speech therapist was asking but I could not respond.
+
+|  |  |
+|--|--|
+| <img src="/static/img/brian/before.jpg" alt="Brian before shaving" style="width: 300px; height: 300px; object-fit: cover;" />  | <img src="/static/img/brian/after%20shave.jpg" alt="Brian after shaving" style="width: 300px; height: 300px; object-fit: cover;" />  |
+| *I shave every day. Right after my stroke though, I could not shave, so my beard grew out (July 13th, 2015).* | *A photo from the same day, after I had my beard shaved (later on July 13th, 2015).* |
 
 * * * * *
 
@@ -45,19 +56,28 @@ I was silent with Hughie in his room. Then, all of a sudden, I talked. I did not
 
 I had many, many basic questions about what happened. To answer my questions, Hughie got a piece of paper and he wrote:  May 1, May 2, May 3, May 4. He circled May 3 and said, “You had a stroke on May 3.” 
 
+![](/static/img/brian/IceCream.jpg)
+*Me and Hughie getting ice cream in Beacon Hill after my stroke. It was really nice.*
+
 After Hughie and I talked for about half an hour, I met my older son Henry. We went to the park and I had another conversation with Henry for around half an hour. When Henry and I returned, my wife was there waiting. 
 
 I said, “I have news for you. One: I can talk now. Two: I am very, very tired so I must go to sleep. But when I wake up, we should have a conversation.” 
 
-I slept until midnight and then I woke up. Sarah was awake, and I had another conversation with Sarah for two hours. I was satisfied with the basic facts.
+I slept until midnight and then I woke up. Sarah was awake, and I had another conversation with her for two hours. I was satisfied with the basic facts.
 
 * * * * *
 
-When I had a conversation with Sarah, Sarah told me that I had a stroke, and I also had aphasia.  Aphasia is an acquired language disorder caused by a stroke or brain injury that impairs a person’s ability to communicate, but does not affect intelligence.  After I had a stroke, my language was affected.
+When I had a conversation with Sarah, she told me that I had a stroke, and I also had aphasia.  Aphasia is an acquired language disorder caused by a stroke or brain injury that impairs a person’s ability to communicate, but does not affect intelligence.  After I had a stroke, my language was affected.
 
 The main focus was speech therapy.  I worked with my speech therapist for five problems: speaking, listening, reading, writing and prosody (intonation, tone, stress and rhythm). My speech therapist and I worked for three years and eventually, I improved a lot. 
 
-The other new thing was to take an afternoon nap for two hours, from 4:00 to 6:00pm.  After I woke up, my family would eat dinner, I wash the dishes and then go back to sleep at 11:00pm. 
+![](/static/img/brian/Bike.jpg)
+*I also did physical therapy at Spaulding in Charlestown. Here, you can see my beard and my helmet!*
+
+![](/static/img/brian/Golf.jpg)
+*I also golfed at Spaulding (still with my beard and helmet).*
+
+The other new thing I did was to take an afternoon nap for two hours, from 4:00 to 6:00pm.  After I woke up, my family would eat dinner, I would wash the dishes and then go back to sleep at 11:00pm. 
 
 Before I had my stroke, I spent most of my time working as a lawyer. After I had my stroke, I had a conversation with my law firm and we both decided that I should retire. My attention changed, and I spent most of my time recovering from the stroke and aphasia. 
 
@@ -67,11 +87,11 @@ On May 3, 2025, ten years ago, I had a stroke and now I have aphasia. Here is a 
 
 __Aphasia:__
 
-•	Speech Therapy: My main weakness is communication. A few years later, I switched to speech therapy at the Massachusetts General Hospital Institute of Health Professions (IHP), in Charlestown, Massachusetts. Currently I do speech therapy one time a week. I focus on speech, listen, read and write.  
+•	Speech Therapy: My main weakness is communication. A few years later, I switched to speech therapy at the Massachusetts General Hospital Institute of Health Professions (IHP), in Charlestown, Massachusetts. Currently I do speech therapy one time a week. I focus on speech, listening, reading and writing.  
 
-•	Aphasia Conversation Group: At IHP, we have Aphasia Conversation Group once a week. Sorry – the group of people only have aphasia! We just chat.
+•	Aphasia Conversation Group: At IHP, we have Aphasia Conversation Group once a week. Sorry – this group is only for people with aphasia! We just chat.
 
-•	Aphasia Community Group: At Boston University Aphasia Resource Center (ARC), every other Saturday for one-a-half-hours we have Aphasia Community Group, led by Jerry Kaplan. Sorry again – only with aphasia! Sometimes we have another great speaker – it is exciting!
+•	Aphasia Community Group: At Boston University Aphasia Resource Center (ARC), every other Saturday for one-a-half-hours we have Aphasia Community Group, led by Jerry Kaplan. Sorry again – only for those with aphasia! Sometimes we have another great speaker – it is exciting!
 
 •	Book Clubs: I have two Book Clubs – one for nonfiction at Boston University ARC and one for fiction at Clarity Brain Wellness. Reading is hard for me; we read one book over eight to ten weeks. We read just 40 pages per week. Again, it is slow – but I read the whole book, which is satisfying.  
 
@@ -79,7 +99,7 @@ __Aphasia:__
 
 •	Film Club: Every other Thursday, we have Film Club at the West End Branch of the Boston Public Library. During two weeks, we watch one film on the internet, and then on Thursday we discuss the film. It is fun! 
 
-__Voluntary Positions:__
+__Volunteer Positions:__
 
 •	Stroke Peer Visitor: At Spaulding Rehabilitation Hospital, I volunteer as a Stroke Peer Visitor. I go to the fourth floor, where I stayed when I had a stroke ten years ago, and I visit stroke survivors. Many stroke survivors are very different; they do physical, occupational and speech therapy at Spaulding, and I comfort them. It is heartfelt.
 
@@ -100,8 +120,11 @@ __Sports:__
 
 •	Baseball: My younger son Hughie plays baseball, at Thayer Academy (spring), with US9Prospects (summer) and at Jamaica Plain (autumn). In addition, I enjoy the Boston Red Sox, sitting on the third base side of Fenway Park.
 
-I was once a lawyer at Ropes & Gray, and I meet my fellow lawyers at Ropes & Gray. I am very grateful for the lawyers.
+I was once a lawyer at Ropes & Gray, and I still meet my fellow lawyers. I am very grateful for the lawyers.
 
 Finally, I am grateful for my wife, Sarah, and for my two sons, Henry and Hughie.
 
 Thank you very much!
+
+![](/static/img/brian/B4.jpg)
+*My wife, Sarah, and my two sons, Henry and Hughie.*
