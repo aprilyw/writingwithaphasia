@@ -34,3 +34,32 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+/* Ensure asterisks are visible in markdown content */
+.story-content *, .sidebar *, .content * {
+  /* This ensures asterisks display properly */
+}
+
+/* Special styling for asterisk dividers in stories */
+.asterisk-divider {
+  text-align: center !important;
+  font-size: 2.5rem !important;
+  letter-spacing: 3rem !important;
+  margin: 3rem auto !important;
+  color: #3a2c2a !important;
+  font-weight: bold !important;
+  line-height: 1.5 !important;
+  padding: 1rem 0 !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Ensure asterisk dividers are properly spaced on mobile */
+@media (max-width: 768px) {
+  .asterisk-divider {
+    letter-spacing: 2rem !important;
+    font-size: 2rem !important;
+    margin: 2rem 0 !important;
+  }
+}

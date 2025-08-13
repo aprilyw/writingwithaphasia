@@ -7,7 +7,7 @@ location: "Boston, Massachusetts"
 ---
 On the day when I had a stroke, the lights went off. Two months later, the lights came back. 
 
-*     *     *     *     *
+* * * * *
 
 My name is Brian Bassett. I was born in New Jersey in 1970. I was the eldest of four siblings: I had a younger sister and two younger brothers. When I was 9 years old, my family moved to Colorado. We lived in Colorado until I graduated with high school. Before I went to college, my family often went skiing. 
 
@@ -19,7 +19,7 @@ On a typical weekday, I would walk from home to Ropes & Gray. I would arrive at 
 
 During the weekends, I tried not to work because that was when my sons were free from school. 
 
-*     *     *     *     *
+* * * * *
 
 In May of 2015, my family took a trip to South Bend, Indiana. We went to my wife’s grandfather’s memorial service. My wife’s grandfather was 102 years old and he was quite healthy. Sadly, he died and we had a memorial service. We went from Friday, May 1 to Sunday, May 3.
 
@@ -33,10 +33,7 @@ Because part of my skull was now missing, it was really important that I wore a 
 
 Now I had another problem after the first major surgery:  I was mute.  After I woke up, I was assigned a speech therapist. The speech therapist would ask me simple questions. My problem was not understanding what the speech therapist asked me; it was that I was mute. I could understand what the speech therapist was asking but I could not respond.
 
-*     *     *     *     *
-
-
-
+* * * * *
 
 When I got discharged and returned home, I was still mute. But one day, the lights came back. I could speak again.
 
@@ -54,7 +51,7 @@ I said, “I have news for you. One: I can talk now. Two: I am very, very tired 
 
 I slept until midnight and then I woke up. Sarah was awake, and I had another conversation with Sarah for two hours. I was satisfied with the basic facts.
 
-*     *     *     *     *
+* * * * *
 
 When I had a conversation with Sarah, Sarah told me that I had a stroke, and I also had aphasia.  Aphasia is an acquired language disorder caused by a stroke or brain injury that impairs a person’s ability to communicate, but does not affect intelligence.  After I had a stroke, my language was affected.
 
@@ -64,8 +61,7 @@ The other new thing was to take an afternoon nap for two hours, from 4:00 to 6:0
 
 Before I had my stroke, I spent most of my time working as a lawyer. After I had my stroke, I had a conversation with my law firm and we both decided that I should retire. My attention changed, and I spent most of my time recovering from the stroke and aphasia. 
 
-*     *     *     *     *
-
+* * * * *
 
 On May 3, 2025, ten years ago, I had a stroke and now I have aphasia. Here is a typical week, much different when I was a lawyer:
 
@@ -88,10 +84,14 @@ Voluntary Positions
 Sports
 
 •	Swimming: Three times a week, I walk to the YMCA at Charlestown and I swim for a mile. The limitation is that my heart cannot beat more than 120 beats per minute, so I am again slow – but I swim a mile!
+
 •	Walking: I cannot drive since I had a stroke, so I walk: to Boston University ARC, to IHP, to Spaulding, to Fenway Park.
+
 •	Bicycling: I bicycle too.  In Boston, I have a Bluebike, and I bicycle to and from Shady Hill School on the Esplanade. At Martha’s Vineyard, I have a bicycle of my own, and I bicycle from West Tisbury to Edgartown and back. In October, I have a Bicycle Tour on Martha’s Vineyard with the Spaulding Adaptive Sports, and I have friends who bicycle with me on Martha’s Vineyard.
+
 •	Skiing: Also with the Spaulding Adaptive Sports, I go skiing, either in Steamboat in Colorado or in Park City in Utah. Coincidentally, I have two aunts in Colorado and friends in Utah, so after I ski, I spend time with companions.
-•	Baseball: My younger son Hughie plays baseball, at Thayer Academy (spring), with US9Prospects (summer) and at Jamaica Plain (autumn). In addition, I enjoy the Boston Red Sox, sitting on the third base side of Fenway Park. 
+
+•	Baseball: My younger son Hughie plays baseball, at Thayer Academy (spring), with US9Prospects (summer) and at Jamaica Plain (autumn). In addition, I enjoy the Boston Red Sox, sitting on the third base side of Fenway Park.
 
 I was once a lawyer at Ropes & Gray, and I meet my fellow lawyers at Ropes & Gray. I am very grateful for the lawyers.
 
