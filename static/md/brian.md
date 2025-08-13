@@ -65,23 +65,30 @@ Before I had my stroke, I spent most of my time working as a lawyer. After I had
 
 On May 3, 2025, ten years ago, I had a stroke and now I have aphasia. Here is a typical week, much different when I was a lawyer:
 
-Aphasia
+Aphasia:
 
 •	Speech Therapy: My main weakness is communication. A few years later, I switched to speech therapy at the Massachusetts General Hospital Institute of Health Professions (IHP), in Charlestown, Massachusetts. Currently I do speech therapy one time a week. I focus on speech, listen, read and write.  
+
 •	Aphasia Conversation Group: At IHP, we have Aphasia Conversation Group once a week. Sorry – the group of people only have aphasia! We just chat.
+
 •	Aphasia Community Group: At Boston University Aphasia Resource Center (ARC), every other Saturday for one-a-half-hours we have Aphasia Community Group, led by Jerry Kaplan. Sorry again – only with aphasia! Sometimes we have another great speaker – it is exciting!
+
 •	Book Clubs: I have two Book Clubs – one for nonfiction at Boston University ARC and one for fiction at Clarity Brain Wellness. Reading is hard for me; we read one book over eight to ten weeks. We read just 40 pages per week. Again, it is slow – but I read the whole book, which is satisfying.  
+
 •	Toastmasters: I also have Toastmasters at Boston University ARC. I make a speech, but I also have slides as well. It is four minutes long, and I share a small part of my life – child, teenager or adult.
+
 •	Film Club: Every other Thursday, we have Film Club at the West End Branch of the Boston Public Library. During two weeks, we watch one film on the internet, and then on Thursday we discuss the film. It is fun! 
 
-Voluntary Positions
+Voluntary Positions:
 
 •	Stroke Peer Visitor: At Spaulding Rehabilitation Hospital, I volunteer as a Stroke Peer Visitor. I go to the fourth floor, where I stayed when I had a stroke ten years ago, and I visit stroke survivors. Many stroke survivors are very different; they do physical, occupational and speech therapy at Spaulding, and I comfort them. It is heartfelt.
+
 •	Boston Athenaeum: One day a week, I go to the Conservation Lab at the Boston Athenaeum. The Conservation Lab focuses primarily on book conservation. For me, I have old, tattered books, and I restore them to make new books. It is satisfying.
+
 •	Shady Hill School Library: Our two sons Henry and Hughie graduated from Shady Hill School, but my wife, Sarah, is on the Board of Trustees of Shady Hill School, and I volunteer at the Shady Hill School library, shelving books.
 
 
-Sports
+Sports:
 
 •	Swimming: Three times a week, I walk to the YMCA at Charlestown and I swim for a mile. The limitation is that my heart cannot beat more than 120 beats per minute, so I am again slow – but I swim a mile!
 
