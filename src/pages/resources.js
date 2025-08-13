@@ -62,28 +62,32 @@ export default function Resources({ trishTips }) {
       {activeTab === 'websites' && (
         <>
           <p>
-            Here are some helpful organizations, tools, and communities for people with aphasia and their loved ones:
+            Some resources here! Please reach out if you have any other resources you think would be important to highlight!
           </p>
           <ul>
             <li>
-              <a href="https://www.aphasia.org/" target="_blank" rel="noopener noreferrer"><strong>National Aphasia Association</strong></a><br />
-              Information, support, and resources for people with aphasia and their families.
-            </li>
-            <li>
-              <a href="https://virtualconnections.aphasia.com/" target="_blank" rel="noopener noreferrer"><strong>Virtual Connections</strong></a><br />
-              Free online groups and activities for people with aphasia, hosted by Lingraphica and partners.
-            </li>
-            <li>
               <a href="https://www.aphasiarecoveryconnection.org/" target="_blank" rel="noopener noreferrer"><strong>Aphasia Recovery Connection</strong></a><br />
-              Peer support, education, and advocacy for the aphasia community.
+              Peer support, education, and advocacy for the aphasia community
             </li>
             <li>
-              <a href="https://www.stroke.org/en/about-stroke/effects-of-stroke/physical-impact-of-stroke/aphasia" target="_blank" rel="noopener noreferrer"><strong>American Stroke Association: Aphasia</strong></a><br />
-              Medical information and resources about aphasia after stroke.
+              <a href="https://www.beyondstillness.org/" target="_blank" rel="noopener noreferrer"><strong>Beyond Stillness</strong></a><br />
+              One of our key collaborators, which showcases stories from stroke survivors
             </li>
             <li>
               <a href="https://www.lingraphica.com/" target="_blank" rel="noopener noreferrer"><strong>Lingraphica</strong></a><br />
-              Communication devices, therapy apps, and support for people with aphasia.
+              Communication devices, therapy apps, and support for people with aphasia
+            </li>
+            <li>
+              <a href="https://www.aphasia.org/" target="_blank" rel="noopener noreferrer"><strong>National Aphasia Association</strong></a><br />
+              Information, support, and resources for people with aphasia and their families
+            </li>
+            <li>
+              <a href="https://www.nationalaphasiasynergy.org/" target="_blank" rel="noopener noreferrer"><strong>National Aphasia Synergy</strong></a><br />
+              National Aphasia Synergy is a peer-led group which seeks to raise awareness of aphasia and develop a rich peer network of people with aphasia. Learn more <a href="https://www.youtube.com/watch?v=GThkxrKbQTI" target="_blank" rel="noopener noreferrer">here</a>.
+            </li>
+            <li>
+              <a href="https://virtualconnections.aphasia.com/" target="_blank" rel="noopener noreferrer"><strong>Virtual Connections</strong></a><br />
+              Free online groups and activities for people with aphasia, hosted by Lingraphica and partners
             </li>
           </ul>
         </>

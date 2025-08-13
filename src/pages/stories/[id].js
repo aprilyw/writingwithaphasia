@@ -1,6 +1,7 @@
 // pages/stories/[id].js
 import { getAllStoryIds, getStoryData } from '../../utils/markdown';
 import Link from 'next/link';
+import Head from 'next/head';
 
 export async function getStaticPaths() {
   const paths = getAllStoryIds();
@@ -22,6 +23,12 @@ export async function getStaticProps({ params }) {
 export default function Story({ storyData }) {
   return (
     <div className="container">
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Source+Sans+Pro:wght@400;600&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
       <nav className="nav">
         <Link href="/">
           <a>← Back to Map</a>
@@ -62,7 +69,7 @@ export default function Story({ storyData }) {
           text-decoration: underline;
         }
         .story h1 {
-          font-family: 'Merriweather', serif;
+          font-family: 'Inter', sans-serif;
           color: #2c3e50;
           font-size: 2.7rem;
           font-weight: 700;
