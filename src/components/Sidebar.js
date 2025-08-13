@@ -146,7 +146,7 @@ export default function Sidebar({ selectedStory, onClose }) {
           margin: 0.5em 0 0.5em 0;
         }
         .story-content :global(h1) {
-          font-family: 'Merriweather', serif;
+          font-family: 'Inter', sans-serif;
           color: #2c3e50;
           font-size: 2rem;
           margin: 0 0 0.5em 0;

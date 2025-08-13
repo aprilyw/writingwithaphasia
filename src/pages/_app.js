@@ -25,7 +25,7 @@ export default function App({ Component, pageProps }) {
       <Component {...pageProps} />
       <Head>
         <link
-          href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Source+Sans+Pro:wght@400;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Source+Sans+Pro:wght@400;600&display=swap"
           rel="stylesheet"
         />
       </Head>
@@ -38,23 +38,22 @@ export default function App({ Component, pageProps }) {
           font-family: 'Source Sans Pro', sans-serif;
         }
         .navbar-inner {
-          max-width: 1200px;
-          margin: 0 0 0 2rem;
+          margin: 0 2rem;
           display: flex;
           align-items: center;
           justify-content: flex-start;
-          width: 100%;
-          gap: 2rem;
+          width: calc(100% - 4rem);
         }
         .navbar-title {
-          font-family: 'Merriweather', serif;
+          font-family: 'Inter', sans-serif;
           font-size: 2.1rem;
-          font-weight: 700;
+          font-weight: 600;
           color: #3a2c2a;
           letter-spacing: 0.01em;
           margin-left: 0;
           text-decoration: none;
           transition: color 0.2s;
+          line-height: 1.2;
         }
         .navbar-title:hover {
           color: #217dbb;
@@ -63,11 +62,12 @@ export default function App({ Component, pageProps }) {
           display: flex;
           gap: 2.2rem;
           border-bottom: none;
-          padding-bottom: 0.2rem;
-          margin-left: 0;
+          padding-bottom: 0;
+          margin-left: auto;
           justify-content: flex-start;
           font-family: 'Source Sans Pro', sans-serif;
           align-items: center;
+          height: 100%;
         }
         .navbar-links a, .navbar-links :global(a) {
           color: #3a2c2a;
@@ -77,13 +77,16 @@ export default function App({ Component, pageProps }) {
           font-weight: 600;
           letter-spacing: 0.18em;
           text-transform: uppercase;
-          padding: 0 0.2rem;
-          transition: border-bottom 0.2s, color 0.2s;
-          border-bottom: 2px solid transparent;
+          padding: 0.5rem 0.2rem;
+          transition: color 0.2s, background-color 0.2s;
+          border-radius: 4px;
+          display: flex;
+          align-items: center;
+          height: 100%;
         }
         .navbar-links a:hover, .navbar-links :global(a:hover) {
-          border-bottom: 2px solid #3a2c2a;
           color: #217dbb;
+          background-color: rgba(33, 125, 187, 0.1);
         }
         @media (max-width: 700px) {
           .navbar-inner {
