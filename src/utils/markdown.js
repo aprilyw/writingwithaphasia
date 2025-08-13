@@ -30,26 +30,13 @@ export async function getStoryData(id) {
   // Combine frontmatter with content
   const fullContent = frontmatterHtml + content;
   
-  // Escape asterisks that should be displayed literally by replacing them with HTML entities
-  // This prevents markdown from interpreting them as emphasis markers
-  const escapedContent = fullContent.replace(/\*/g, '&#42;');
-
   // Use remark to convert markdown into HTML string
   const processedContent = await remark()
     .use(remarkGfm) // Enables GFM (tables, strikethrough, etc.)
     .use(html, { sanitize: false }) // Allow img tags
-    .process(escapedContent);
+    .process(fullContent);
   
   let contentHtml = processedContent.toString();
-  
-  // No need to restore asterisks - HTML entities will display as asterisks automatically
-  
-  // Add special styling for asterisk divider lines
-  // This finds paragraphs that contain only asterisks and spaces, and adds a special class
-  contentHtml = contentHtml.replace(
-    /<p>(\s*&#42;(\s+&#42;)*\s*)<\/p>/g,
-    '<p class="asterisk-divider">$1</p>'
-  );
 
   // Add target="_blank" and rel="noopener noreferrer" to external links
   contentHtml = contentHtml.replace(
