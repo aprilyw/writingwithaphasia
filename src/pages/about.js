@@ -7,7 +7,7 @@ export default function About() {
       
       <section className="intro">
         <p>
-          Hello! I founded Living With Aphasia in May 2024. My goal was to create space for those with aphasia to share their stories in their own words. To do so, I help those living with aphasia to weave their story together through the following process:
+          Hello! I'm Elizabeth, and I founded Living With Aphasia in May 2024. My goal was to create space for those with aphasia to share their stories in their own words. To do so, I help those living with aphasia to weave their story together through the following process:
         </p>
       </section>
 
