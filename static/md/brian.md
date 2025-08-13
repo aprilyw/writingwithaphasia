@@ -35,7 +35,7 @@ In the hospital, the doctors found that my brain had been swelling. It had swoll
 Because part of my skull was now missing, it was really important that I wore a helmet 24 hours a day, 7 days a week. It was dangerous if I was not wearing my helmet. (I wore it for six weeks before my second major surgery to replace the part of my skull that the doctors had initially removed.)
 
 ![](/static/img/brian/Helmet.jpg)
-*This is what my helmet looked like.*
+*This is what my helmet looked like. I am with my older son, Henry, who was fourteen at the time.*
 
 Now I had another problem after the first major surgery:  I was mute.  After I woke up, I was assigned a speech therapist. The speech therapist would ask me simple questions. My problem was not understanding what the speech therapist asked me; it was that I was mute. I could understand what the speech therapist was asking but I could not respond.
 
