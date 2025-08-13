@@ -202,8 +202,22 @@ export default function Sidebar({ selectedStory, onClose }) {
         }
         .story-content :global(hr) {
           border: none;
-          border-top: 1px solid #e1e1e1;
-          margin: 2em 0;
+          height: auto;
+          margin: 2.5em 0;
+          text-align: center;
+          background: none;
+          position: relative;
+        }
+        
+        .story-content :global(hr)::before {
+          content: "*     *     *     *     *";
+          font-size: 1.2em;
+          color: #666;
+          letter-spacing: 0.1em;
+          font-weight: 300;
+          display: block;
+          text-align: center;
+          line-height: 1;
         }
         .story-content :global(table) {
           border-collapse: collapse;

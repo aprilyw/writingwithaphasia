@@ -53,31 +53,46 @@ img {
   height: auto;
 }
 
-/* Ensure asterisks are visible in markdown content */
-.story-content *, .sidebar *, .content * {
-  /* This ensures asterisks display properly */
+/* Custom styling for asterisk page breaks */
+.story-content hr,
+.content hr {
+  border: none;
+  height: auto;
+  margin: 2.5em 0;
+  text-align: center;
+  background: none;
+  position: relative;
 }
 
-/* Special styling for asterisk dividers in stories */
-.asterisk-divider {
-  text-align: center !important;
-  font-size: 2.5rem !important;
-  letter-spacing: 3rem !important;
-  margin: 3rem auto !important;
-  color: #3a2c2a !important;
-  font-weight: bold !important;
-  line-height: 1.5 !important;
-  padding: 1rem 0 !important;
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
+.story-content hr::before,
+.content hr::before {
+  content: "*     *     *     *     *";
+  font-size: 1.2em;
+  color: #666;
+  letter-spacing: 0.1em;
+  font-weight: 300;
+  display: block;
+  text-align: center;
+  line-height: 1;
 }
 
-/* Ensure asterisk dividers are properly spaced on mobile */
-@media (max-width: 768px) {
-  .asterisk-divider {
-    letter-spacing: 2rem !important;
-    font-size: 2rem !important;
-    margin: 2rem 0 !important;
-  }
+/* Alternative styling for a more decorative look */
+.story-content hr.decorative,
+.content hr.decorative {
+  border: none;
+  height: auto;
+  margin: 3em 0;
+  text-align: center;
+  background: none;
+}
+
+.story-content hr.decorative::before,
+.content hr.decorative::before {
+  content: "✧     ✧     ✧     ✧     ✧";
+  font-size: 1.1em;
+  color: #888;
+  letter-spacing: 0.15em;
+  display: block;
+  text-align: center;
+  line-height: 1;
 }
