@@ -9,9 +9,7 @@ export default function App({ Component, pageProps }) {
     <>
       <nav className="navbar">
         <div className="navbar-inner">
-          <Link href="/" legacyBehavior>
-            <a className="navbar-title">Living With Aphasia: An Anthology</a>
-          </Link>
+          <div className="navbar-title">Living With Aphasia: An Anthology</div>
           <div className="navbar-links">
             <Link href="/" legacyBehavior>
               <a>Home</a>
@@ -52,11 +50,7 @@ export default function App({ Component, pageProps }) {
           letter-spacing: 0.01em;
           margin-left: 0;
           text-decoration: none;
-          transition: color 0.2s;
           line-height: 1.2;
-        }
-        .navbar-title:hover {
-          color: #217dbb;
         }
         .navbar-links {
           display: flex;
