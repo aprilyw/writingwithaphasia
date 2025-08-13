@@ -13,6 +13,8 @@ import { Style, Circle, Fill, Stroke, Icon, Text } from 'ol/style';
 import OSM from 'ol/source/OSM';
 import XYZ from 'ol/source/XYZ';
 import Cluster from 'ol/source/Cluster';
+import Zoom from 'ol/control/Zoom';
+import ZoomSlider from 'ol/control/ZoomSlider';
 
 // Tighter US bounds (continental US)
 const US_EXTENT = transformExtent([-124.0, 26.0, -66.0, 49.0], 'EPSG:4326', 'EPSG:3857');
@@ -41,12 +43,26 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
       ],
       view: new View({
         center: fromLonLat([-98.5795, 39.8283]),
-        zoom: 4.7,
+        zoom: 2.8, // Zoomed out even more to show full US, Canada, and Mexico
         extent: US_EXTENT,
-        minZoom: 3,
-        maxZoom: 12,
+        minZoom: 2.5,
+        maxZoom: 15, // Increased max zoom for better detail
         constrainOnlyCenter: true,
+        zoomFactor: 3, // Much faster zoom with mouse wheel
+        zoomDuration: 150, // Faster zoom animations
       }),
+      controls: [
+        // Add zoom controls for easier navigation
+        new Zoom({
+          className: 'custom-zoom-controls',
+          zoomInTipLabel: 'Zoom In',
+          zoomOutTipLabel: 'Zoom Out',
+          delta: 2, // Zoom by 2 levels at a time for faster navigation
+        }),
+        new ZoomSlider({
+          className: 'custom-zoom-slider',
+        }),
+      ],
     });
 
     mapInstance.current = initialMap;
@@ -60,7 +76,7 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
           // This is a cluster - zoom in to expand it
           const extent = clusterSourceRef.current.getExtent();
           initialMap.getView().fit(extent, {
-            duration: 500,
+            duration: 150, // Ultra fast cluster expansion
             padding: [50, 50, 50, 50],
             maxZoom: 10,
           });
@@ -76,10 +92,58 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
       }
     });
 
+    // Add double-click zoom for faster navigation
+    initialMap.on('dblclick', (event) => {
+      const view = initialMap.getView();
+      const zoom = view.getZoom();
+      view.animate({
+        zoom: zoom + 2, // Zoom in by 2 levels on double-click
+        center: event.coordinate,
+        duration: 200, // Very fast double-click zoom
+        easing: easeOut
+      });
+    });
+
     // Change cursor on hover
     initialMap.on('pointermove', (event) => {
       const hit = initialMap.hasFeatureAtPixel(event.pixel);
       mapRef.current.style.cursor = hit ? 'pointer' : '';
+    });
+
+    // Add keyboard shortcuts for faster navigation
+    document.addEventListener('keydown', (event) => {
+      if (!mapRef.current.contains(document.activeElement)) return;
+      
+      const view = initialMap.getView();
+      const zoom = view.getZoom();
+      
+      switch(event.key) {
+        case '+':
+        case '=':
+          event.preventDefault();
+          view.animate({
+            zoom: zoom + 2,
+            duration: 150
+          });
+          break;
+        case '-':
+        case '_':
+          event.preventDefault();
+          view.animate({
+            zoom: zoom - 2,
+            duration: 150
+          });
+          break;
+        case '0':
+          event.preventDefault();
+          // Reset to initial view
+          view.animate({
+            center: fromLonLat([-98.5795, 39.8283]),
+            zoom: 2.8,
+            duration: 300
+          });
+          break;
+      }
     });
 
     return () => initialMap.setTarget(undefined);
@@ -159,14 +223,14 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
     mapInstance.current.addLayer(clusterLayer);
   }, [stories]);
 
-  // Zoom to story when zoomToStory changes (staggered effect)
+  // Zoom to story when zoomToStory changes (ultra fast now)
   useEffect(() => {
     if (mapInstance.current && zoomToStory && zoomToStory.coordinates) {
       const coords = fromLonLat(zoomToStory.coordinates);
       mapInstance.current.getView().animate({
         center: coords,
         zoom: 7,
-        duration: 3500,
+        duration: 200, // Ultra fast - reduced to 200ms
         easing: easeOut
       }, () => {
         if (onZoomComplete) onZoomComplete();
@@ -179,7 +243,7 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
     if (!mapInstance.current) return;
     // Reset to initial center and zoom
     mapInstance.current.getView().setCenter(fromLonLat([-98.5795, 39.8283]));
-    mapInstance.current.getView().setZoom(4.7);
+    mapInstance.current.getView().setZoom(2.8);
   }, [resetSignal]);
 
   return (

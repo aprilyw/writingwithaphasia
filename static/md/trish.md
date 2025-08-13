@@ -2,7 +2,7 @@
 title: "Trish Hambridge"
 name: "Trish Hambridge"
 coordinates: [-82.7868, 28.0199] # Dunedin, Florida coordinates
-date: "2025-06-29"
+date: "06-29-2025"
 location: "Dunedin, Florida"
 
 ---

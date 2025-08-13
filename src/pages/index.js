@@ -33,10 +33,10 @@ export default function Home({ stories, handleHomeClick }) {
     // For any new story selection (whether sidebar is open or not): start zoom animation
     setZoomToStory(story);
     
-    // Open sidebar after zoom animation completes (3.5 seconds)
+    // Open sidebar after zoom animation completes (much faster now - 400ms)
     zoomTimeout.current = setTimeout(() => {
       setSelectedStory(story);
-    }, 3500); // match zoom animation duration
+    }, 400); // Reduced from 3500ms to 400ms for much faster story loading
   };
 
   // When sidebar closes, clear zoom
