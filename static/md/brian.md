@@ -2,7 +2,7 @@
 title: "Brian's Story"
 name: "Brian Bassett"
 coordinates: [-71.0565, 42.3555] # Boston, Massachusetts coordinates
-date: "2025-7-22"
+date: "7-22-2025"
 location: "Boston, Massachusetts"
 ---
 On the day when I had a stroke, the lights went off. Two months later, the lights came back. 
