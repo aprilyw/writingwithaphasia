@@ -81,3 +81,47 @@ img {
     margin: 2rem 0 !important;
   }
 }
+
+/* Custom styling for asterisk page breaks */
+.story-content hr,
+.content hr {
+  border: none;
+  height: auto;
+  margin: 2.5em 0;
+  text-align: center;
+  background: none;
+  position: relative;
+}
+
+.story-content hr::before,
+.content hr::before {
+  content: "*     *     *     *     *";
+  font-size: 1.2em;
+  color: #666;
+  letter-spacing: 0.1em;
+  font-weight: 300;
+  display: block;
+  text-align: center;
+  line-height: 1;
+}
+
+/* Alternative styling for a more decorative look */
+.story-content hr.decorative,
+.content hr.decorative {
+  border: none;
+  height: auto;
+  margin: 3em 0;
+  text-align: center;
+  background: none;
+}
+
+.story-content hr.decorative::before,
+.content hr.decorative::before {
+  content: "✧     ✧     ✧     ✧     ✧";
+  font-size: 1.1em;
+  color: #888;
+  letter-spacing: 0.15em;
+  display: block;
+  text-align: center;
+  line-height: 1;
+}

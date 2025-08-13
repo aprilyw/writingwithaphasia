@@ -96,6 +96,25 @@ export default function Story({ storyData }) {
         .content :global(a:hover) {
           color: #3498db;
         }
+        .content :global(hr) {
+          border: none;
+          height: auto;
+          margin: 2.5em 0;
+          text-align: center;
+          background: none;
+          position: relative;
+        }
+        
+        .content :global(hr)::before {
+          content: "*     *     *     *     *";
+          font-size: 1.2em;
+          color: #666;
+          letter-spacing: 0.1em;
+          font-weight: 300;
+          display: block;
+          text-align: center;
+          line-height: 1;
+        }
         /* External links are handled by markdown processing */
         .images-grid {
           display: grid;

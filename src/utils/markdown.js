@@ -63,6 +63,12 @@ export async function getStoryData(id) {
     '<img$1 onclick="window.openImageModal && window.openImageModal(this.src, this.alt)" style="cursor: pointer;">'
   );
 
+  // Convert asterisk page breaks to hr tags for styling
+  contentHtml = contentHtml.replace(
+    /<p>\*     \*     \*     \*     \*<\/p>/g,
+    '<hr>'
+  );
+
   // Get associated images
   const storyImagesDir = path.join(imagesDirectory, id);
   let images = [];
