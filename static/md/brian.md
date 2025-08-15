@@ -77,7 +77,7 @@ The main focus was speech therapy.  I worked with my speech therapist for five p
 ![](/static/img/brian/Golf.jpg)
 *I also golfed at Spaulding (still with my beard and helmet).*
 
-The other new thing I did was to take an afternoon nap for two hours, from 4:00 to 6:00pm.  After I woke up, my family would eat dinner, I would wash the dishes and then go back to sleep at 11:00pm. 
+The other new thing I did was to take an afternoon nap for two hours, from 4:00 to 6:00pm.  After I woke up, my family would eat dinner. I would wash the dishes and then go back to sleep at 11:00pm. 
 
 Before I had my stroke, I spent most of my time working as a lawyer. After I had my stroke, I had a conversation with my law firm and we both decided that I should retire. My attention changed, and I spent most of my time recovering from the stroke and aphasia. 
 
@@ -91,7 +91,7 @@ __Aphasia:__
 
 •	Aphasia Conversation Group: At IHP, we have Aphasia Conversation Group once a week. Sorry – this group is only for people with aphasia! We just chat.
 
-•	Aphasia Community Group: At Boston University Aphasia Resource Center (ARC), every other Saturday for one-a-half-hours we have Aphasia Community Group, led by Jerry Kaplan. Sorry again – only for those with aphasia! Sometimes we have another great speaker – it is exciting!
+•	Aphasia Community Group: At Boston University Aphasia Resource Center (ARC), every other Saturday for one-and-a-half-hours we have Aphasia Community Group, led by Jerry Kaplan. Sorry again – only for those with aphasia! Sometimes we have another great speaker – it is exciting!
 
 •	Book Clubs: I have two Book Clubs – one for nonfiction at Boston University ARC and one for fiction at Clarity Brain Wellness. Reading is hard for me; we read one book over eight to ten weeks. We read just 40 pages per week. Again, it is slow – but I read the whole book, which is satisfying.  
 
