@@ -15,6 +15,12 @@ My grandfather and grandmother, the Chiaradonna’s, lived right up the hill. Th
 
 Because my older cousins and my aunts and uncles wanted to talk, I would play with the kids. I would always play school and it was so fun. In the summer, we would use sidewalk chalk and make hopscotches and stuff like that. I would always say, “Keep it in line. You will be first, you will be second.” That’s when I started to think that I could really be a teacher. 
 
+|  |  |
+|--|--|
+|![](/static/img/mary/Cousin.jpg)|![](/static/img/mary/Nephew.jpg)|
+|*My cousin Marie and her family.*| *My niece and nephew.*|
+
+
 When I was in high school, we had a career day. We had to sign up for two career sessions that we wanted to attend and then go to that room, sit at a desk, and listen to professionals from that career. At the time, I really wanted to be a photographer. I had tons of pictures. I was still interested in teaching, but in high school, I was more interested in photography.
 
 So, the first career talk I went to was about photography. I thought it was so exciting… until the photographer said, “news doesn’t wait if you’re in bed and you’re sleeping. A story could happen at 2, 2:30 in the morning. Even if you are sleeping, you still have to wake up and go.”
@@ -23,7 +29,10 @@ When I heard we were on call twenty-four hours a day, I thought, that’s really
 
 I got into Boston College as an education major and decided to go there. My grandfather Borrelli wanted me to have a more stable career, so he was always telling me, “You know, if teaching doesn’t work out, I have a friend at the bank who would hire you as a teller. You tell me, and it’s done.”
 
-“But, papa,” I would say, “I don’t want to do banking. I want to teach.” So I went to Boston College to study education. 
+![](/static/img/mary/Roommates.jpg)
+*My roommates from Boston College.*
+
+“But, grandpa,” I would say, “I don’t want to do banking. I want to teach.” So I went to Boston College to study education. 
 
 When I was at Boston College, we had a consortium at the Hynes Convention Center in Boston. At this consortium, you could interview right on the spot for a teaching job. I said, “Oh, I’m going to put my name down as an elementary school teacher for Long Beach, California, Elmira, New York, and Ridgewood, New Jersey.” I thought to myself that I probably wouldn’t be called for all these places. 
 
@@ -35,6 +44,9 @@ After April, May, June, July, August, September, October, she finally said, “C
 
 The new doctor in Swampscott, the town over from us, said, “I think that it’s cancer, but we have to do more testing.” 
 
+![](/static/img/mary/IMG_0101.jpg)
+*The last photo my mother and I took together.*
+
 I canceled my teaching plans and stayed at home with my mother. I still wanted to stay in teaching somehow though. That year, they had a position for a nursery school teacher at the YMCA. It was morning and afternoon classes, and then I could go home. That was good, because I could take my mother to all of her appointments. 
 
 Working at the YMCA helped because it served as a respite when I wasn’t going with my mother to appointments. After a year, I got promoted to the Director of Youth Services because the former director was leaving the position. However, a year and a half after my promotion, my mother passed away after two years of chemotherapy and radiation. It was really hard.
@@ -45,6 +57,8 @@ I worked as a substitute teacher in all 17 schools in the Lynn district, but I m
 
 After two years of subbing, the lady in charge of personnel called me down and said they had a job for me. It was teaching second grade at Washington. I said, “Oh yeah, I’ll take that.”
 
+![](/static/img/mary/Teachers.jpg)
+ *Me and my teacher friends from Washington Community School.*
 I loved it there and stayed for 22 years. I got to do a lot of different things like be a first grade teacher, a second grade teacher, and a third grade teacher. When I was at Washington, I took classes to be certified as an English Language Learning (ELL) teacher because there were so many kids at Washington from all over the world. For instance, we had many Portuguese, Dominican, Guatemalan and Greek kids where English was not their first language.
 
 After teaching third grade for 6 years, Jeff, the principal, told me that we needed someone to cover ELL for a year. So I took over.
@@ -62,8 +76,17 @@ She made a list of every step we needed to take despite only being a rising four
 
 On the day of the play, Deborah and I went to school together really early. We rolled out a plastic red tablecloth on the school steps. Then, we took the limousine we had rented and picked up each student from their home. As we picked up the students, we gave them a pair of sunglasses. When they got to school, they were ready to take on Hollywood! 
 
-![](/static/img/mary/Limo.jpg)
-*Studetns ready to take on Hollywood in the limousine!*
+|  |  |
+|--|--|
+|![](/static/img/mary/Car.jpg)|![](/static/img/mary/Limo.jpg)|
+|*Students ready to take on Hollywood.*| *In the limousine!*||
+
+|  |  |
+|--|--|
+|![](/static/img/mary/RedCarpet.jpg)|![](/static/img/mary/Jeff.jpg)|
+|*The red carpet.*|*Jeff, the principal who first encouraged me to consider principalship, introducing the students onto the stage.*|
+
+
 Even after the play, these students took their work and repurposed it for the Lynn youth parade in August. They put all of their scenery onto a flat-bed truck they borrowed from a towing company that one of the students’ fathers worked at. All of the students wore their costumes and makeup that day. Then, they used Deborah’s karaoke machine to take turns reading The Great Kapok Tree! 
 
 ![](/static/img/mary/Parade.jpg)
@@ -112,14 +135,24 @@ By the time I left Spaulding for the step-down facility, Sherrill House, in Bost
 |  |  |
 |--|--|
 | ![](/static/img/mary/Sherill1.jpg)  | ![](/static/img/mary/Sherill2.jpg)  |
-| *My birthday party at Sherill House!* | *Me with more friends.*|
+| *My birthday party at Sherill House!* | *Me with my family.*|
+
+|  |  |
+|--|--|
+| ![](/static/img/mary/SherrillFamily.jpg)  | ![](/static/img/mary/SherrillTeacher.jpg)  |
+| *Me with more family.* | *Me with my teacher friends from Washington Community School.*|
 
 I would always try to formulate a sentence that had the 5 Ws. What? Who? Why? When? Where? 
 
 I finally came home in August 2010. I did my home therapy – speech language and occupational therapy. In October, I was told to look for an outpatient facility to keep on working on my recovery. I wanted to go to Spaulding but they told me it was a six month wait. I couldn’t wait that long. I ended up going to a satellite Spaulding location that was further away. 
 
-![](/static/img/mary/DayWithMaryFundraiser.png)
-*A fundraiser flyer my friends made to support my transition home.*
+|  |  |
+|--|--|
+|![](/static/img/mary/DayWithMaryFundraiser.png)|![](/static/img/mary/BestFriend.jpg)|
+|*A fundraiser flyer my friends made to support my transition home.*|*My best friend Pam and her husband Paul wearing shirts from the fundraiser.*|
+
+| ![](/static/img/mary/Cake.jpg)  |
+*A cake from the fundraiser party.*
 
 When I was doing my outpatient therapy here, my speech therapist, Jerry, said there was going to be an intensive aphasia program at Boston University for six weeks. He asked me if I wanted to be a part of this. I said yes. 
 
@@ -150,6 +183,7 @@ The superintendent of Lynn public schools said, "I'm so glad this day has come. 
 
 The superintendent said, "there is now."
 
+
 As I started my second year at Lincoln Thompson, I was asked by the Constant Therapy team I had worked with if I could speak about Constant Therapy as someone who had gone back to work after my aphasia. I agreed to be interviewed and ended up on Channel 5 News!
 
 I stayed at Lincoln Thompson as the ELL teacher for ten years until I had accrued enough time to retire at 80%.
@@ -162,7 +196,7 @@ I stayed at Lincoln Thompson as the ELL teacher for ten years until I had accrue
 |  |  |
 |--|--|
 | ![](/static/img/mary/Cookies.jpg)  | ![](/static/img/mary/Christmas.jpg)  |
-| *Homemade Italian Anisette Cookies.* | *Me (Mary), Carol, my niece, Samatha, my nephew, Cameron. My brother, Anthony (everyone calls him Tony), is in the back.* |
+| *Homemade Italian Anisette Cookies.* | *Me (Mary), Carol, my niece, Samantha, my nephew, Cameron. My brother, Anthony (everyone calls him Tony), is in the back.* |
 
 ***
 When I was sad at the very beginning after my stroke, I used to cry all the time when I was at Spaulding and Sherrill House. Even when I was back teaching for two years, I would go to shower and I would cry for five minutes. I would mourn the life that I lost. But then I would say, "It is a new beginning. I have things to offer, and I just have to speak slowly and formulate my thoughts and I will get them out."
@@ -175,7 +209,7 @@ When I was sad at the very beginning after my stroke, I used to cry all the time
 |  |  |
 |--|--|
 |![](/static/img/mary/MaryB.jpg) |![](/static/img/mary/StretchLab.jpg)|
-| *Biking at the Peabody.* |*The Stretch Lab.* |
+| *Biking at the park in Peabody.* |*The Stretch Lab.* |
 
 I would say to others, "I have aphasia. Do you know what that is?" When they said no, I explained that it was a communication disorder that resulted from my stroke.
 
@@ -187,4 +221,7 @@ I might have to take a long time to speak, but I will speak.
 
 <video src="/static/videos/mary/IMG_0813.mp4" controls style="width: 50%; max-width: 50%; height: auto; margin: 2rem auto; display: block;"></video>
 
-*A portion of my speech at the Brain Injury Association of Massachusetts.*
+*A portion of my speech at the Brain Injury Association of Massachusetts Annual Conference.*
+
+![](/static/img/mary/Poster.jpeg)
+*The poster from this conference!*
