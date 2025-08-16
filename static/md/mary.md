@@ -6,14 +6,12 @@ date: "08-13-2025"
 location: "Lynn, Massachusetts"
 ---
 
-My whole life, I have lived on East Park Avenue in Lynn, Massachusetts. My grandmother and grandfather Borrelli put a downpayment on the house in 1961 so my mother and father could live there when they got married.
+My whole life, I have lived in Lynn, Massachusetts. I lived with my mother, my father and my younger brother. We were just a five minute walk away from the rest of my family: Auntie Anna, Auntie Jo, Uncle John, Auntie Ellen.
 
 ![](/static/img/mary/ImmediateFamily.jpg)
 *My immediate family.*
 
-My grandfather and grandmother, the Chiaradonna’s, lived right up the hill on Spring Road. They had come to America from Italy by boat. They were stopped at Ellis Island and ended up in Lynn because there were a lot of Italian immigrants who lived there. In Lynn, they bought land, built their house, and all nine of their children lived there with them. They ran a farm and had lambs, cows, and all sorts of fruits like pear trees, apple trees – everything. 
-
-While my parents and I stayed on East Park Avenue, everybody else – Auntie Anna, Auntie Jo, Uncle John, Auntie Ellen – lived on Manson Street right by Spring Road. We just had to walk five minutes and we were there.
+My grandfather and grandmother, the Chiaradonna’s, lived right up the hill. They had come to America from Italy by boat. They were stopped at Ellis Island and ended up in Lynn because there were a lot of Italian immigrants who lived there. In Lynn, they bought land, built their house, and all nine of their children lived there with them. They ran a farm and had lambs, cows, and all sorts of fruits like pear trees, apple trees – everything. 
 
 Because my older cousins and my aunts and uncles wanted to talk, I would play with the kids. I would always play school and it was so fun. In the summer, we would use sidewalk chalk and make hopscotches and stuff like that. I would always say, “Keep it in line. You will be first, you will be second.” That’s when I started to think that I could really be a teacher. 
 
@@ -184,6 +182,8 @@ I would say to others, "I have aphasia. Do you know what that is?" When they sai
 The last message I would like to pass is, patience, patience, patience! Because I live with aphasia, you have to be patient with me. 
 
 I might have to take a long time to speak, but I will speak. 
+
+
 
 <video src="/static/videos/mary/IMG_0813.mp4" controls style="width: 50%; max-width: 50%; height: auto; margin: 2rem auto; display: block;"></video>
 
