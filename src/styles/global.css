@@ -138,3 +138,59 @@ img {
   border: 1px solid #e0e0e0;
   padding: 10px 5px;
 }
+
+/* Photo grid styling for consistent sizing and caption wrapping */
+.story-content table img,
+.content table img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 0;
+}
+
+/* Caption styling with proper wrapping */
+.story-content table em,
+.content table em {
+  display: block;
+  font-style: italic;
+  color: #666;
+  margin: 0.5rem 0 1rem 0;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Table styling for photo grids */
+.story-content table,
+.content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+}
+
+.story-content td,
+.content td {
+  padding: 0.5rem;
+  vertical-align: top;
+  width: 50%;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+  .story-content table img,
+  .content table img {
+    height: 200px;
+  }
+  
+  .story-content td,
+  .content td {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+

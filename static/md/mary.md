@@ -8,6 +8,9 @@ location: "Lynn, Massachusetts"
 
 My whole life, I have lived on East Park Avenue in Lynn, Massachusetts. My grandmother and grandfather Borrelli put a downpayment on the house in 1961 so my mother and father could live there when they got married.
 
+![](/static/img/mary/ImmediateFamily.jpg)
+*My immediate family.*
+
 My grandfather and grandmother, the Chiaradonna’s, lived right up the hill on Spring Road. They had come to America from Italy by boat. They were stopped at Ellis Island and ended up in Lynn because there were a lot of Italian immigrants who lived there. In Lynn, they bought land, built their house, and all nine of their children lived there with them. They ran a farm and had lambs, cows, and all sorts of fruits like pear trees, apple trees – everything. 
 
 While my parents and I stayed on East Park Avenue, everybody else – Auntie Anna, Auntie Jo, Uncle John, Auntie Ellen – lived on Manson Street right by Spring Road. We just had to walk five minutes and we were there.
@@ -48,8 +51,8 @@ I loved it there and stayed for 22 years. I got to do a lot of different things 
 
 After teaching third grade for 6 years, Jeff, the principal, told me that we needed someone to cover ELL for a year. So I took over.
 
-
-
+![](/static/img/mary/ELLFirstGradeClassroom.jpg)
+*My first grade ELL classroom.*
 
 I liked it. But the next year they cut the ELL teaching position. I was going to go back to my third grade classroom. But my principal said, “Mary, come here in the office. Would you like to teach fifth grade?” So instead of teaching third grade, I taught fifth grade.
 
@@ -61,8 +64,12 @@ She made a list of every step we needed to take despite only being a rising four
 
 On the day of the play, Deborah and I went to school together really early. We rolled out a plastic red tablecloth on the school steps. Then, we took the limousine we had rented and picked up each student from their home. As we picked up the students, we gave them a pair of sunglasses. When they got to school, they were ready to take on Hollywood! 
 
+![](/static/img/mary/Limo.jpg)
+*Studetns ready to take on Hollywood in the limousine!*
 Even after the play, these students took their work and repurposed it for the Lynn youth parade in August. They put all of their scenery onto a flat-bed truck they borrowed from a towing company that one of the students’ fathers worked at. All of the students wore their costumes and makeup that day. Then, they used Deborah’s karaoke machine to take turns reading The Great Kapok Tree! 
 
+![](/static/img/mary/Parade.jpg)
+*Everyone at the Lynn youth parade.*
 Eventually, after twenty-four years of teaching, I decided to try and go for a principal position. After two years of graduate studies, I sent a bid out in June to become a principal. While I didn’t get principalship the first time, the deputy superintendent emailed me and said, “Mary, you knocked it out of the park. You have to go again. I’m telling you. You are meant to be a principal.”
 
 And a year later in October, there was an opening for the Hood School, which I had attended as a kid. I was the first person they asked to step in as acting principal. For two months, I worked there as the principal. I loved it, getting the promotion and a chance to run my school as I saw fit. I would always be in the lunchroom. There were three lunch periods and I would talk to the kids as they were eating. As I was the principal, the school seemed to calm down a little.
@@ -85,6 +92,10 @@ The firemen put a blanket around me. I said, “thank you.” That’s the only 
 ***
 I woke up three weeks later in the intensive care unit in Massachusetts General Hospital. Two days later after waking up, I was transferred to Spaulding Rehabilitation Hospital. The day that I arrived, I started working with my therapy team, which included my speech pathologist, my occupational therapist, and my physical therapist. 
 
+<video src="/static/videos/mary/IMG_0007.mp4" controls style="width: 50%; max-width: 50%; height: auto; margin: 2rem auto; display: block;"></video>
+
+*Occupational Therapy.*
+
 Four weeks later, my neuropsychologist took me to get a language evaluation. At this moment, I realized for the first time that I would have to learn to read and write again.
 
 I told him, “I want to go back to my room. I want to go back to my room.” He tried to calm me down. I wouldn’t have it. I just wanted to go back to my room. 
@@ -100,38 +111,80 @@ It was also very difficult to walk after my stroke. I spent nine weeks of recove
 
 By the time I left Spaulding for the step-down facility, Sherrill House, in Boston, I was doing three words in a sentence. My brother got Scrabble for me. That’s when I really started to learn the letters and the sounds again. I slowly began speaking more clearly.
 
+|  |  |
+|--|--|
+| ![](/static/img/mary/Sherill1.jpg)  | ![](/static/img/mary/Sherill2.jpg)  |
+| *My birthday party at Sherill House!* | *Me with more friends.*|
+
 I would always try to formulate a sentence that had the 5 Ws. What? Who? Why? When? Where? 
 
 I finally came home in August 2010. I did my home therapy – speech language and occupational therapy. In October, I was told to look for an outpatient facility to keep on working on my recovery. I wanted to go to Spaulding but they told me it was a six month wait. I couldn’t wait that long. I ended up going to a satellite Spaulding location that was further away. 
+
+![](/static/img/mary/DayWithMaryFundraiser.png)
+*A fundraiser flyer my friends made to support my transition home.*
 
 When I was doing my outpatient therapy here, my speech therapist, Jerry, said there was going to be an intensive aphasia program at Boston University for six weeks. He asked me if I wanted to be a part of this. I said yes. 
 
 Two weeks went by and I was working with my occupational therapist when Jerry came in and told me that I was accepted into the Boston University intensive aphasia program. There was going to be a lot of speech therapy as well as physical therapy, occupational therapy, and nutrition classes at lunch. I was so happy to be accepted.
 
+![](/static/img/mary/PTBU.jpg)
+*Physical Therapy at Boston University.*
+
 When I was at the intensive aphasia program, I volunteered to participate in a pilot therapy called Constant Therapy. This entailed speech therapy every day for six months.
 
-I also started to talk with my doctor at the Aphasia Resource Center about going back to teaching, but I didn’t know if I could take a full day of school. 
+![](/static/img/mary/Bean.jpg)
+*Canine Assisted Aphasia Group - Bean, the comfort dog of Boston University.*
+
+I also started to talk with my doctor at the Aphasia Resource Center about going back to teaching, but I didn't know if I could take a full day of school. 
 
 I called a friend and former colleague, Helen, who was the principal at Lincoln Thompson, to ask if I could work with their ELL students. I wanted to see if I was able to teach a full school week without being too fatigued.
 
-Helen said, “Sure, there’s a lot of help that we need from you.” So I went and taught the first day.
+Helen said, "Sure, there's a lot of help that we need from you." So I went and taught the first day.
 
-I incorporated “wait time.” I would always say to the students after I spoke, “There is one minute of think time, and then we can go around the room and see what you have to say.” While they were thinking, I was also formulating my words so that I could speak afterwards. While wait time is a strategy for ELL students, I could use it for my own thoughts as well.
+![](/static/img/mary/2ndESL.JPG)
+*Second grade ELL students.*
 
-I ended up working at Lincoln Thompson for the full school year. At the end of the year, I had a meeting with Helen. I said, “So Helen, what do you think of my language skills? Do the kids think that they can understand me? Enough that I can be back in a classroom setting?” And she said, “Of course you can be a teacher again.”
+I incorporated "wait time." I would always say to the students after I spoke, "There is one minute of think time, and then we can go around the room and see what you have to say." While they were thinking, I was also formulating my words so that I could speak afterwards. While wait time is a strategy for ELL students, I could use it for my own thoughts as well.
 
-The superintendent of Lynn public schools said, “I’m so glad this day has come. You have earned it. I’m going to look at the postings, and I will call you back in an hour.” And then she came, she did her magic, and an hour later, she called and said, “Mary, I want to congratulate you on your new position as an ELL teacher at Lincoln Thompson.” I said, “What? There isn’t a job there.”
+I ended up working at Lincoln Thompson for the full school year. At the end of the year, I had a meeting with Helen. I said, "So Helen, what do you think of my language skills? Do the kids think that they can understand me? Enough that I can be back in a classroom setting?" And she said, "Of course you can be a teacher again."
 
-The superintendent said, “there is now.”
+The superintendent of Lynn public schools said, "I'm so glad this day has come. You have earned it. I'm going to look at the postings, and I will call you back in an hour." And then she came, she did her magic, and an hour later, she called and said, "Mary, I want to congratulate you on your new position as an ELL teacher at Lincoln Thompson." I said, "What? There isn't a job there."
+
+The superintendent said, "there is now."
 
 As I started my second year at Lincoln Thompson, I was asked by the Constant Therapy team I had worked with if I could speak about Constant Therapy as someone who had gone back to work after my aphasia. I agreed to be interviewed and ended up on Channel 5 News!
 
 I stayed at Lincoln Thompson as the ELL teacher for ten years until I had accrued enough time to retire at 80%.
-***
-When I was sad at the very beginning after my stroke, I used to cry all the time when I was at Spaulding and Sherrill House. Even when I was back teaching for two years, I would go to shower and I would cry for five minutes. I would mourn the life that I lost. But then I would say, “It is a new beginning. I have things to offer, and I just have to speak slowly and formulate my thoughts and I will get them out.”
 
-I would say to others, “I have aphasia. Do you know what that is?” When they said no, I explained that it was a communication disorder that resulted from my stroke.
+|  |  |
+|--|--|
+| ![](/static/img/mary/Mushrooms.jpg)  | ![](/static/img/mary/Sauce.jpg)  |
+| *December 24, 2017. The first Christmas Eve dinner I prepared for my family since my AVM. In Fall 2017, I had taken one-handed cooking classes with a group at Boston University. The group was run by a Speech Language Pathologist and an Occupational Therapist.* | *Stuffed mushrooms on the left and me stirring homemade sauce with stuffed calamari (squid) above!* |
+
+|  |  |
+|--|--|
+| ![](/static/img/mary/Cookies.jpg)  | ![](/static/img/mary/Christmas.jpg)  |
+| *Homemade Italian Anisette Cookies.* | *Me (Mary), Carol, my niece, Samatha, my nephew, Cameron. My brother, Anthony (everyone calls him Tony), is in the back.* |
+
+***
+When I was sad at the very beginning after my stroke, I used to cry all the time when I was at Spaulding and Sherrill House. Even when I was back teaching for two years, I would go to shower and I would cry for five minutes. I would mourn the life that I lost. But then I would say, "It is a new beginning. I have things to offer, and I just have to speak slowly and formulate my thoughts and I will get them out."
+
+|  |  |
+|--|--|
+| ![](/static/img/mary/IMG_0064.jpg)  | ![](/static/img/mary/IMG_0067.jpg)  |
+| *I go Tuesday & Thursday to the YMCA to workout with my intern from Supportive Living. (Myself & Tamara).* | |
+
+|  |  |
+|--|--|
+|![](/static/img/mary/MaryB.jpg) |![](/static/img/mary/StretchLab.jpg)|
+| *Biking at the Peabody.* |*The Stretch Lab.* |
+
+I would say to others, "I have aphasia. Do you know what that is?" When they said no, I explained that it was a communication disorder that resulted from my stroke.
 
 The last message I would like to pass is, patience, patience, patience! Because I live with aphasia, you have to be patient with me. 
 
 I might have to take a long time to speak, but I will speak. 
+
+<video src="/static/videos/mary/IMG_0813.mp4" controls style="width: 50%; max-width: 50%; height: auto; margin: 2rem auto; display: block;"></video>
+
+*A portion of my speech at the Brain Injury Association of Massachusetts.*
