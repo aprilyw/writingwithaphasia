@@ -16,7 +16,6 @@ export default function App({ Component, pageProps }) {
             </Link>
             <Link href="/about">About</Link>
             <Link href="/resources">Resources</Link>
-            <Link href="/contact">Contact</Link>
           </div>
         </div>
       </nav>
@@ -38,7 +37,7 @@ export default function App({ Component, pageProps }) {
         .navbar-inner {
           margin: 0 2rem;
           display: flex;
-          align-items: center;
+          align-items: bottom;
           justify-content: flex-start;
           width: calc(100% - 4rem);
         }
@@ -60,7 +59,7 @@ export default function App({ Component, pageProps }) {
           margin-left: auto;
           justify-content: flex-start;
           font-family: 'Source Sans Pro', sans-serif;
-          align-items: center;
+          align-items: bottom;
           height: 100%;
         }
         .navbar-links a, .navbar-links :global(a) {

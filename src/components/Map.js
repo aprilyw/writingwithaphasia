@@ -172,7 +172,7 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
     
     // Create clustered source
     const clusterSource = new Cluster({
-      distance: 40, // Distance in pixels within which features will be clustered
+      distance: 5, // Distance in pixels within which features will be clustered
       source: vectorSource,
     });
     
