@@ -20,7 +20,6 @@ Because my older cousins and my aunts and uncles wanted to talk, I would play wi
 |![](/static/img/mary/Cousin.jpg)|![](/static/img/mary/Nephew.jpg)|
 |*My cousin Marie and her family.*| *My niece and nephew.*|
 
-
 When I was in high school, we had a career day. We had to sign up for two career sessions that we wanted to attend and then go to that room, sit at a desk, and listen to professionals from that career. At the time, I really wanted to be a photographer. I had tons of pictures. I was still interested in teaching, but in high school, I was more interested in photography.
 
 So, the first career talk I went to was about photography. I thought it was so exciting… until the photographer said, “news doesn’t wait if you’re in bed and you’re sleeping. A story could happen at 2, 2:30 in the morning. Even if you are sleeping, you still have to wake up and go.”
@@ -80,9 +79,6 @@ On the day of the play, Deborah and I went to school together really early. We r
 |--|--|
 |![](/static/img/mary/Car.jpg)|![](/static/img/mary/Limo.jpg)|
 |*Students ready to take on Hollywood.*| *In the limousine!*||
-
-|  |  |
-|--|--|
 |![](/static/img/mary/RedCarpet.jpg)|![](/static/img/mary/Jeff.jpg)|
 |*The red carpet.*|*Jeff, the principal who first encouraged me to consider principalship, introducing the students onto the stage.*|
 
@@ -136,9 +132,6 @@ By the time I left Spaulding for the step-down facility, Sherrill House, in Bost
 |--|--|
 | ![](/static/img/mary/Sherill1.jpg)  | ![](/static/img/mary/Sherill2.jpg)  |
 | *My birthday party at Sherill House!* | *Me with my family.*|
-
-|  |  |
-|--|--|
 | ![](/static/img/mary/SherrillFamily.jpg)  | ![](/static/img/mary/SherrillTeacher.jpg)  |
 | *Me with more family.* | *Me with my teacher friends from Washington Community School.*|
 
@@ -150,7 +143,6 @@ I finally came home in August 2010. I did my home therapy – speech language an
 |--|--|
 |![](/static/img/mary/DayWithMaryFundraiser.png)|![](/static/img/mary/BestFriend.jpg)|
 |*A fundraiser flyer my friends made to support my transition home.*|*My best friend Pam and her husband Paul wearing shirts from the fundraiser.*|
-
 | ![](/static/img/mary/Cake.jpg)  |
 *A cake from the fundraiser party.*
 
