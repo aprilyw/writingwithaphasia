@@ -128,7 +128,8 @@ export async function getAllStoriesData() {
     return await getStoryData(id);
   }));
 
-  return allStoriesData;
+  // Temporarily filter out Ayse's story as it's not complete yet
+  return allStoriesData.filter(story => story.id !== 'ayse');
 }
 
 export async function getTrishTipsData() {

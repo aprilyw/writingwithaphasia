@@ -89,9 +89,11 @@ I started looking for a house to buy in the Bay Area, but it was too expensive o
 
 |  |  |  |
 |--|--|--|
-![](/static/img/trish/cruise.JPG)| ![](/static/img/trish/VOC.jpg)  | ![](/static/img/trish/Halloween.JPG) |
-| *Voices of Hope cruise*  | *More Voices of Hope* | *Halloween at Voices of Hope* |
+![](/static/img/trish/cruise.JPG)| ![](/static/img/trish/VOC.jpg)  
+| *Voices of Hope cruise*  | *More Voices of Hope* | 
 
+![](/static/img/trish/Halloween.JPG) 
+*Halloween at Voices of Hope* 
 ![](/static/img/trish/Art.jpg)
 *Art I made with Voices of Hope*
 I got my condo, my new Florida driver's license, and set up my relationships with new doctors. I finally felt at home again. 
