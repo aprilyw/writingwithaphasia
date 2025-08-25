@@ -128,7 +128,7 @@ export async function getAllStoriesData() {
     return await getStoryData(id);
   }));
 
-  // Temporarily filter out Ayse's story as it's not complete yet
+  // Temporarily hide Ayse's story online
   return allStoriesData.filter(story => story.id !== 'ayse');
 }
 
