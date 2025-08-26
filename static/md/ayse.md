@@ -115,6 +115,7 @@ People ask me “When will you get better?”
 Aphasia is usually the rest of your life.
 
 I accept aphasia now.
+
 |  |  |
 |--|--|
 | ![](/static/img/ayse/Family2.JPEG)  | ![](/static/img/ayse/Dog.JPEG)  |
@@ -123,3 +124,4 @@ I accept aphasia now.
 | ![](/static/img/ayse/Recent2.JPG)   |  ![](/static/img/ayse/NeverGiveUp.JPEG)  |
 |*Me with my cousin and her daughter, who visited me from Turkey!*||
 
+To listen to a recent video Ayse co-created, click [here](https://www.canva.com/design/DAGxGlxyDH8/DwCKMxMpAm3ZDH0h4lZtEQ/view?utm_content=DAGxGlxyDH8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h261fb38cc6).
