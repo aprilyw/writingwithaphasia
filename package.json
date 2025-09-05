@@ -1,0 +1,22 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "start": "next start"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "next": "latest",
+    "next-mdx-remote": "^5.0.0",
+    "ol": "^10.4.0",
+    "react": "latest",
+    "react-dom": "latest",
+    "remark": "^15.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-html": "^16.0.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

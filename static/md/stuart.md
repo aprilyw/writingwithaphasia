@@ -1,0 +1,9 @@
+---
+title: "Stuart's Story"
+name: "Stuart"
+coordinates: [-86.1581, 39.7684] # Indianapolis, Indiana
+date: "TBD"
+location: "Indianapolis, Indiana"
+---
+
+This story is coming soon.
