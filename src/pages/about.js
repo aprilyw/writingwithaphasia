@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { getFontFamilyVar } from '../styles/fonts';
 
 export default function About() {
   return (
@@ -69,7 +70,7 @@ export default function About() {
           background: #f7fafc;
           border-radius: 16px;
           box-shadow: 0 2px 12px rgba(52,152,219,0.07);
-          font-family: 'Source Sans Pro', sans-serif;
+          font-family: ${getFontFamilyVar()};
         }
         
         h1 {

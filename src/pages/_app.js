@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Link from 'next/link';
 import Head from 'next/head';
+import { fonts, getFontFamilyVar } from '../styles/fonts';
 
 export default function App({ Component, pageProps }) {
   return (
@@ -21,7 +22,7 @@ export default function App({ Component, pageProps }) {
       <Component {...pageProps} />
       <Head>
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Source+Sans+Pro:wght@400;600&display=swap"
+          href={fonts.googleFontsUrl}
           rel="stylesheet"
         />
       </Head>
@@ -31,7 +32,7 @@ export default function App({ Component, pageProps }) {
           background: #f7fafc;
           border-bottom: 1.5px solid #bcbcbc;
           padding: 1.2rem 0 0.7rem 0;
-          font-family: 'Source Sans Pro', sans-serif;
+          font-family: ${getFontFamilyVar()};
         }
         .navbar-inner {
           margin: 0 2rem;
@@ -41,7 +42,7 @@ export default function App({ Component, pageProps }) {
           width: calc(100% - 4rem);
         }
         .navbar-title {
-          font-family: 'Inter', sans-serif;
+          font-family: ${getFontFamilyVar()};
           font-size: 2.1rem;
           font-weight: 600;
           color: #3a2c2a;
@@ -57,14 +58,14 @@ export default function App({ Component, pageProps }) {
           padding-bottom: 0;
           margin-left: auto;
           justify-content: flex-start;
-          font-family: 'Source Sans Pro', sans-serif;
+          font-family: ${getFontFamilyVar()};
           align-items: bottom;
           height: 100%;
         }
         .navbar-links a, .navbar-links :global(a) {
           color: #3a2c2a;
           text-decoration: none;
-          font-family: 'Source Sans Pro', sans-serif;
+          font-family: ${getFontFamilyVar()};
           font-size: 1.08rem;
           font-weight: 600;
           letter-spacing: 0.18em;

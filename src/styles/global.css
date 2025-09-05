@@ -1,8 +1,12 @@
+:root {
+  --font-family-primary: 'TASA Orbiter', sans-serif;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: var(--font-family-primary);
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
@@ -25,7 +29,7 @@ body::-webkit-scrollbar {
 
 /* Markdown/story content font */
 .story-content, .sidebar, .content, .select-prompt {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: var(--font-family-primary);
 }
 
 /* Global link styling - blue and underlined */

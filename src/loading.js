@@ -1,3 +1,5 @@
+import { getFontFamily } from './styles/fonts'
+
 export default function Loading() {
   return (
     <div style={{
@@ -6,7 +8,7 @@ export default function Loading() {
       alignItems: 'center',
       justifyContent: 'center',
       height: '100vh',
-      fontFamily: 'Source Sans Pro, sans-serif',
+      fontFamily: getFontFamily(),
       textAlign: 'center',
       padding: '2rem'
     }}>

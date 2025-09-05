@@ -12,7 +12,10 @@ export async function getStaticProps() {
   return { props: { trishTips } };
 }
 
-export default function Resources({ trishTips }) {
+import Head from 'next/head';
+import { getFontFamilyVar } from '../styles/fonts';
+
+export default function Resources() {
   const [activeTab, setActiveTab] = useState('websites');
   const [expanded, setExpanded] = useState(false);
   let trishTipsContent = null;
@@ -103,7 +106,7 @@ export default function Resources({ trishTips }) {
           background: #f7fafc;
           border-radius: 16px;
           box-shadow: 0 2px 12px rgba(52,152,219,0.07);
-          font-family: 'Source Sans Pro', sans-serif;
+          font-family: ${getFontFamilyVar()};
         }
         h1 {
           color: #3498db;

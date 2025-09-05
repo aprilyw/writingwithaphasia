@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { getFontFamily } from './styles/fonts'
 
 export default function Error({ error, reset }) {
   useEffect(() => {
@@ -15,7 +16,7 @@ export default function Error({ error, reset }) {
       alignItems: 'center',
       justifyContent: 'center',
       height: '100vh',
-      fontFamily: 'Source Sans Pro, sans-serif',
+      fontFamily: getFontFamily(),
       textAlign: 'center',
       padding: '2rem'
     }}>

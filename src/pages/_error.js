@@ -1,3 +1,5 @@
+import { getFontFamily } from '../styles/fonts'
+
 function Error({ statusCode }) {
   return (
     <div style={{
@@ -6,7 +8,7 @@ function Error({ statusCode }) {
       alignItems: 'center',
       justifyContent: 'center',
       height: '100vh',
-      fontFamily: 'Source Sans Pro, sans-serif',
+      fontFamily: getFontFamily(),
       textAlign: 'center',
       padding: '2rem'
     }}>

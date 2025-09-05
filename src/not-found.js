@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { getFontFamily } from './styles/fonts'
 
 export default function NotFound() {
   return (
@@ -8,7 +9,7 @@ export default function NotFound() {
       alignItems: 'center',
       justifyContent: 'center',
       height: '100vh',
-      fontFamily: 'Source Sans Pro, sans-serif',
+      fontFamily: getFontFamily(),
       textAlign: 'center',
       padding: '2rem'
     }}>

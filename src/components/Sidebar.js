@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ImageModal from './ImageModal';
+import { getFontFamilyVar } from '../styles/fonts';
 
 export default function Sidebar({ selectedStory, onClose }) {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -28,7 +29,7 @@ export default function Sidebar({ selectedStory, onClose }) {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Source Sans Pro', sans-serif;
+            font-family: ${getFontFamilyVar()};
           }
           .select-prompt {
             color: #666;
@@ -91,7 +92,7 @@ export default function Sidebar({ selectedStory, onClose }) {
           display: flex;
           flex-direction: column;
           position: relative;
-          font-family: 'Source Sans Pro', sans-serif;
+          font-family: ${getFontFamilyVar()};
         }
         .header {
           position: relative;
@@ -132,7 +133,7 @@ export default function Sidebar({ selectedStory, onClose }) {
           display: none;
         }
         .story-content {
-          font-family: 'Source Sans Pro', sans-serif;
+          font-family: ${getFontFamilyVar()};
           font-size: 1.08rem;
           line-height: 1.55;
           color: #222;
@@ -146,7 +147,7 @@ export default function Sidebar({ selectedStory, onClose }) {
           margin: 0.5em 0 0.5em 0;
         }
         .story-content :global(h1) {
-          font-family: 'Inter', sans-serif;
+          font-family: ${getFontFamilyVar()};
           color: #2c3e50;
           font-size: 2rem;
           margin: 0 0 0.5em 0;

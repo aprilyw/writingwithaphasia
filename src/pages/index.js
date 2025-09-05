@@ -4,6 +4,7 @@ import MapComponent from '../components/Map';
 import Sidebar from '../components/Sidebar';
 import { getAllStoriesData } from '../utils/markdown';
 import Head from 'next/head';
+import { getFontFamilyVar } from '../styles/fonts';
 
 export async function getStaticProps() {
   const allStoriesData = await getAllStoriesData();
@@ -64,7 +65,7 @@ export default function Home({ stories, handleHomeClick }) {
     <>
       <div className="container">
         <Head>
-          {/* Removed Inter font import - now using Source Sans Pro and Merriweather */}
+          {/* Font now using TASA Orbiter */}
         </Head>
         <div className={`map-container ${selectedStory ? 'map-shrunk' : ''}`}>
           <MapComponent 
@@ -132,7 +133,7 @@ export default function Home({ stories, handleHomeClick }) {
           padding: 1rem 2rem;
           border-radius: 8px;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-          font-family: 'Source Sans Pro', sans-serif;
+          font-family: ${getFontFamilyVar()};
           font-size: 1.1rem;
           font-weight: 600;
           color: #3a2c2a;
