@@ -1,51 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=TASA+Orbiter:wght@300;400;500;600;700&display=swap');
+
 :root {
   --font-family-primary: 'TASA Orbiter', sans-serif;
 }
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: var(--font-family-primary);
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
+@layer base {
+  html {
+    font-family: var(--font-family-primary);
+  }
+  
+  body {
+    @apply bg-white text-gray-900;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  body::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbars for all elements */
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  *::-webkit-scrollbar {
+    display: none;
+  }
 }
 
-/* Hide scrollbars for WebKit browsers (Chrome, Safari, Edge) */
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbars for all elements */
-* {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-}
-
-*::-webkit-scrollbar {
-  display: none; /* WebKit browsers */
-}
-
-/* Markdown/story content font */
-.story-content, .sidebar, .content, .select-prompt {
-  font-family: var(--font-family-primary);
-}
-
-/* Global link styling - blue and underlined */
-a {
-  color: #217dbb;
-  text-decoration: underline;
-  transition: color 0.2s ease;
-}
-
-a:hover {
-  color: #3498db;
-}
-
-/* Ensure external links open in new tab */
-a[href^="http"] {
-  target: _blank;
+@layer components {
+  .story-content {
+    @apply prose prose-lg max-w-none;
+  }
+  
+  .story-content h1 {
+    @apply text-4xl font-bold text-gray-900 mb-6;
+  }
+  
+  .story-content h2 {
+    @apply text-3xl font-semibold text-gray-800 mb-4 mt-8;
+  }
+  
+  .story-content p {
+    @apply text-gray-700 leading-relaxed mb-4;
+  }
+  
+  .story-content a {
+    @apply text-blue-600 hover:text-blue-800 underline;
+  }
+  
+  .story-content img {
+    @apply rounded-lg shadow-md mx-auto;
+  }
+  
+  .story-content table {
+    @apply w-full border-collapse border border-gray-300 my-6;
+  }
+  
+  .story-content th,
+  .story-content td {
+    @apply border border-gray-300 px-4 py-2;
+  }
+  
+  .story-content th {
+    @apply bg-gray-50 font-semibold;
+  }
 }
 
 * {
