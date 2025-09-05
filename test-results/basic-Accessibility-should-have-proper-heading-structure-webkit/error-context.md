@@ -4,301 +4,301 @@
 - generic [active] [ref=e1]:
   - generic [ref=e2]:
     - navigation [ref=e3]:
-      - generic [ref=e4]:
-        - generic [ref=e5]: "Living With Aphasia: An Anthology"
-        - generic [ref=e6]:
-          - link "Home" [ref=e7]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: "Living With Aphasia: An Anthology"
+        - generic [ref=e7]:
+          - link "Home" [ref=e8]:
             - /url: /
-          - link "About" [ref=e8]:
+          - link "About" [ref=e9]:
             - /url: /about
-          - link "Resources" [ref=e9]:
+          - link "Resources" [ref=e10]:
             - /url: /resources
-    - generic [ref=e10]:
-      - navigation [ref=e11]:
-        - link "← Back to Map" [ref=e12]:
+    - generic [ref=e11]:
+      - navigation [ref=e12]:
+        - link "← Back to Map" [ref=e13]:
           - /url: /
-      - article [ref=e13]:
-        - generic [ref=e14]:
-          - heading "Ayse Needham" [level=1] [ref=e15]
-          - paragraph [ref=e16]: 📍 Atlanta, Georgia
-          - paragraph [ref=e17]: 8-19-2025
-        - generic [ref=e18]:
-          - paragraph [ref=e19]:
+      - article [ref=e14]:
+        - generic [ref=e15]:
+          - heading "Ayse Needham" [level=1] [ref=e16]
+          - paragraph [ref=e17]: 📍 Atlanta, Georgia
+          - paragraph [ref=e18]: 8-19-2025
+        - generic [ref=e19]:
+          - paragraph [ref=e20]:
             - text: "| | | |--|--| |"
             - text: "|"
             - text: "|"
-          - paragraph [ref=e22]: If you are meeting me for the first time, you might be greeted with these aphasia cards…but there is a lot more to my life. I have a story to share!
-          - paragraph [ref=e23]:
+          - paragraph [ref=e23]: If you are meeting me for the first time, you might be greeted with these aphasia cards…but there is a lot more to my life. I have a story to share!
+          - paragraph [ref=e24]:
             - text: "| | | |--|--|"
             - text: "|"
             - text: "| |"
-            - emphasis [ref=e26]: Me as a child.
+            - emphasis [ref=e27]: Me as a child.
             - text: "|"
-            - emphasis [ref=e27]: Me now!
+            - emphasis [ref=e28]: Me now!
             - text: "|"
-          - paragraph [ref=e28]: I was born in Ankara, Turkey 🇹🇷. I moved to Heidelberg, Germany 🇩🇪 when I was 14 years old. I met my husband Don in Heidelberg when he was in the American army as a military police. On October 11th, 1979, after five months of knowing each other, we got married in Copenhagen, Denmark 🇩🇰. We chose to get married in Copenhagen because we only had to wait a week. In Heidelberg, we would have had to wait a year!
-          - paragraph [ref=e29]:
-            - emphasis [ref=e31]: My husband Don.
-          - paragraph [ref=e32]:
-            - emphasis [ref=e34]: Me and Don.
-          - paragraph [ref=e35]: "Together, we moved three times. In 1982, we moved to Melbourne, Victoria, Australia 🇦🇺. In 1986, we moved to Clearwater, Florida, USA 🇺🇸. In 1990, we moved to Atlanta, Georgia, USA 🇺🇸, where we still live now. I can speak three languages: English, German, and Turkish."
-          - paragraph [ref=e36]: "For our 10th year anniversary, we went on an expensive trip that we got as a gift from my dad. We went to four countries on the trip: Heidelberg, Germany 🇩🇪 (where we met), Copenhagen, Denmark 🇩🇰 (where we got married), Paris, France 🇫🇷, and Istanbul, Turkey 🇹🇷."
-          - paragraph [ref=e37]:
+          - paragraph [ref=e29]: I was born in Ankara, Turkey 🇹🇷. I moved to Heidelberg, Germany 🇩🇪 when I was 14 years old. I met my husband Don in Heidelberg when he was in the American army as a military police. On October 11th, 1979, after five months of knowing each other, we got married in Copenhagen, Denmark 🇩🇰. We chose to get married in Copenhagen because we only had to wait a week. In Heidelberg, we would have had to wait a year!
+          - paragraph [ref=e30]:
+            - emphasis [ref=e32]: My husband Don.
+          - paragraph [ref=e33]:
+            - emphasis [ref=e35]: Me and Don.
+          - paragraph [ref=e36]: "Together, we moved three times. In 1982, we moved to Melbourne, Victoria, Australia 🇦🇺. In 1986, we moved to Clearwater, Florida, USA 🇺🇸. In 1990, we moved to Atlanta, Georgia, USA 🇺🇸, where we still live now. I can speak three languages: English, German, and Turkish."
+          - paragraph [ref=e37]: "For our 10th year anniversary, we went on an expensive trip that we got as a gift from my dad. We went to four countries on the trip: Heidelberg, Germany 🇩🇪 (where we met), Copenhagen, Denmark 🇩🇰 (where we got married), Paris, France 🇫🇷, and Istanbul, Turkey 🇹🇷."
+          - paragraph [ref=e38]:
             - text: "| | | |--|--| |"
             - text: "|"
             - text: "|"
-            - emphasis [ref=e40]: Some paintings my father made.
+            - emphasis [ref=e41]: Some paintings my father made.
             - text: "| | | |"
             - text: "|"
             - text: "| |"
-            - emphasis [ref=e43]: Me with my father when I was younger.
+            - emphasis [ref=e44]: Me with my father when I was younger.
             - text: "|"
-            - emphasis [ref=e44]: Me with my mother more recently.
+            - emphasis [ref=e45]: Me with my mother more recently.
             - text: "|"
-          - paragraph [ref=e45]:
+          - paragraph [ref=e46]:
             - text: "We also received another special gift for our 10th year anniversary: the day before our flight took off, I found out I was pregnant with my son, Michael! Michael is all grown up now. He is married to his wife Ashley, and they live in Chattanooga, Tennessee. Ashley is a Senior Product Design Manager, and she actually helped me to make the aphasia cards I use now! | | | |--|--| |"
             - text: "|"
             - text: "| |"
-            - emphasis [ref=e48]: Me with my son, Michael.
+            - emphasis [ref=e49]: Me with my son, Michael.
             - text: "|"
-            - emphasis [ref=e49]: Me with Michael and his wife, Ashley.
+            - emphasis [ref=e50]: Me with Michael and his wife, Ashley.
             - text: "|"
-          - paragraph [ref=e50]:
-            - emphasis [ref=e52]: A family photo from Michael and Ashley's wedding. My mother, stepfather, cousin, and his son all came from to Turkey attend!
+          - paragraph [ref=e51]:
+            - emphasis [ref=e53]: A family photo from Michael and Ashley's wedding. My mother, stepfather, cousin, and his son all came from to Turkey attend!
             - text: "While Don used to work in customer service at Kennestone Hospital in Atlanta (he retired earlier this year in 2025), I used to work as the Training and Development Manager at Heineken. I traveled all over the United States and even to Amsterdam, Netherlands 🇳🇱. Funny fact: despite working for Heineken, I don’t drink!"
-          - paragraph [ref=e53]: At Heineken, I co-developed and managed the Heineken Sales Campus. I was the two-time winner of the Heineken Star Performer Award in recognition of exemplary job performance.
-          - paragraph [ref=e54]:
-            - emphasis [ref=e56]: Me with the President of Heineken.
-            - emphasis [ref=e58]: The Heineken Sales Campus.
-          - paragraph [ref=e59]: Outside of work, I had a lot of other hobbies and interests. For instance, I used to belly dance when I was a teenager in Heidelberg. I was so good at it that I started teaching the wives of American army soldiers. We would meet once a week on Wednesday, where we did six courses of belly dancing. After, we would go to the nearby Turkish restaurant so we could eat and then belly dance with live music.
-          - paragraph [ref=e60]:
-            - emphasis [ref=e62]: Me bellydancing when I was younger.
-            - emphasis [ref=e64]: A newspaper feature on my belly dancing classes.
-          - paragraph [ref=e65]: I also liked to ride motorcycles and travel. My husband and I have gone all over the world. Some countries we have gone to include Turkey 🇹🇷, the Netherlands 🇫🇷, Denmark 🇩🇰, USA 🇺🇸, and Australia 🇦🇺.
-          - paragraph [ref=e66]:
-            - emphasis [ref=e68]: Me with my husband's motorcycle.
+          - paragraph [ref=e54]: At Heineken, I co-developed and managed the Heineken Sales Campus. I was the two-time winner of the Heineken Star Performer Award in recognition of exemplary job performance.
+          - paragraph [ref=e55]:
+            - emphasis [ref=e57]: Me with the President of Heineken.
+            - emphasis [ref=e59]: The Heineken Sales Campus.
+          - paragraph [ref=e60]: Outside of work, I had a lot of other hobbies and interests. For instance, I used to belly dance when I was a teenager in Heidelberg. I was so good at it that I started teaching the wives of American army soldiers. We would meet once a week on Wednesday, where we did six courses of belly dancing. After, we would go to the nearby Turkish restaurant so we could eat and then belly dance with live music.
+          - paragraph [ref=e61]:
+            - emphasis [ref=e63]: Me bellydancing when I was younger.
+            - emphasis [ref=e65]: A newspaper feature on my belly dancing classes.
+          - paragraph [ref=e66]: I also liked to ride motorcycles and travel. My husband and I have gone all over the world. Some countries we have gone to include Turkey 🇹🇷, the Netherlands 🇫🇷, Denmark 🇩🇰, USA 🇺🇸, and Australia 🇦🇺.
+          - paragraph [ref=e67]:
+            - emphasis [ref=e69]: Me with my husband's motorcycle.
             - text: However, my story took a turn in November 2009, when I had an AVM stroke.
-          - paragraph [ref=e69]: I was alone because my husband was out of town. He was on a motorcycle coming back from Dunedin, Florida. I was in bed, and then suddenly, I couldn’t talk. I couldn't say help. I went to the next-door neighbors to get help, but they thought I was drunk because I wasn’t speaking and I was walking funny.
-          - paragraph [ref=e70]: They called my husband and said that they thought I was drunk. My husband said that wasn’t possible because I don’t drink. So, the neighbors realized that they should call for an ambulance to Kennestone Hospital. At Kennestone, they realized how severe my condition was and flew me via helicopter to Emory Hospital, the best hospital in the world.
-          - paragraph [ref=e71]: I was in a coma for three weeks. Once I came out of the coma, I could only say the word “no” for one whole year. I wanted to share my story, but I couldn’t talk.
-          - paragraph [ref=e72]
-          - paragraph [ref=e75]:
+          - paragraph [ref=e70]: I was alone because my husband was out of town. He was on a motorcycle coming back from Dunedin, Florida. I was in bed, and then suddenly, I couldn’t talk. I couldn't say help. I went to the next-door neighbors to get help, but they thought I was drunk because I wasn’t speaking and I was walking funny.
+          - paragraph [ref=e71]: They called my husband and said that they thought I was drunk. My husband said that wasn’t possible because I don’t drink. So, the neighbors realized that they should call for an ambulance to Kennestone Hospital. At Kennestone, they realized how severe my condition was and flew me via helicopter to Emory Hospital, the best hospital in the world.
+          - paragraph [ref=e72]: I was in a coma for three weeks. Once I came out of the coma, I could only say the word “no” for one whole year. I wanted to share my story, but I couldn’t talk.
+          - paragraph [ref=e73]
+          - paragraph [ref=e76]:
             - text: Because of my stroke, I have Broca’s aphasia and apraxia, meaning I now have trouble with saying numbers. I went to many years of therapy. My speech and occupational therapists helped me to regain many skills.
-            - emphasis [ref=e77]: Photos from earlier therapy in 2010.
+            - emphasis [ref=e78]: Photos from earlier therapy in 2010.
             - text: "| | | |--|--| |"
             - text: "|"
             - text: "|"
-            - emphasis [ref=e80]: Fifteen years later in 2025.
-          - paragraph [ref=e81]: After my stroke, Facebook, Aphasia Recovery Connection, and Virtual Connections have also been my life saviors. Connecting with others is important. Connecting by helping others with aphasia has been the best thing. Now, I have friends all over the world.
-          - paragraph [ref=e82]:
-            - emphasis [ref=e84]: Me with a friend who also lives with aphasia.
+            - emphasis [ref=e81]: Fifteen years later in 2025.
+          - paragraph [ref=e82]: After my stroke, Facebook, Aphasia Recovery Connection, and Virtual Connections have also been my life saviors. Connecting with others is important. Connecting by helping others with aphasia has been the best thing. Now, I have friends all over the world.
+          - paragraph [ref=e83]:
+            - emphasis [ref=e85]: Me with a friend who also lives with aphasia.
             - text: At Kennestone Hospital, I was a part of the Kennestone Neuro Outpatient Rehabilitation Aphasia Support Group. We’ve met once a month, and I’ve gone all the time for 15 years now. The group was run by speech language pathologists.
-          - paragraph [ref=e85]: From my experiences, I learned that many people do not know what aphasia is. Even doctors and nurses! In Kennestone Hospital, there were still many doctors and nurses that didn’t know about aphasia or understand how to help me.
-          - paragraph [ref=e86]:
+          - paragraph [ref=e86]: From my experiences, I learned that many people do not know what aphasia is. Even doctors and nurses! In Kennestone Hospital, there were still many doctors and nurses that didn’t know about aphasia or understand how to help me.
+          - paragraph [ref=e87]:
             - text: To help educate doctors and nurses in Kennestone Hospital, our Kennestone Neuro Outpatient Rehabilitation Aphasia Support Group set up a booth in the Kennestone Hospital cafeteria in order to spread education and awareness about aphasia.
-            - emphasis [ref=e88]: Presenting about aphasia at Kennestone Hospital with an SLP.
-          - paragraph [ref=e89]: When I went to Kennestone Hospital emergency room for kidney stones in 2014, the hospital team was still not equipped to help me. I was in the hospital for ten days.
-          - paragraph [ref=e90]: When my husband and son went home at night, I would hit the Nurse button when I needed help. They would ask, “how can I help you?” over the intercom. However, because of my aphasia, it was hard to tell them what I needed. I needed them to come to my bedside. But, because I had no way of communicating with them, they didn’t know.
-          - paragraph [ref=e91]:
+            - emphasis [ref=e89]: Presenting about aphasia at Kennestone Hospital with an SLP.
+          - paragraph [ref=e90]: When I went to Kennestone Hospital emergency room for kidney stones in 2014, the hospital team was still not equipped to help me. I was in the hospital for ten days.
+          - paragraph [ref=e91]: When my husband and son went home at night, I would hit the Nurse button when I needed help. They would ask, “how can I help you?” over the intercom. However, because of my aphasia, it was hard to tell them what I needed. I needed them to come to my bedside. But, because I had no way of communicating with them, they didn’t know.
+          - paragraph [ref=e92]:
             - text: "| | | |--|--| |"
             - text: "|"
             - text: "|"
-          - paragraph [ref=e94]
-          - paragraph [ref=e96]:
+          - paragraph [ref=e95]
+          - paragraph [ref=e97]:
             - text: "| | | |--|--| |"
             - text: "|"
             - text: "| |"
-            - emphasis [ref=e99]: Me and my son presenting at Georgia State University.
+            - emphasis [ref=e100]: Me and my son presenting at Georgia State University.
             - text: "|"
-            - emphasis [ref=e100]: Me with a professor at Georgia State University.
+            - emphasis [ref=e101]: Me with a professor at Georgia State University.
             - text: "|"
-          - paragraph [ref=e101]:
+          - paragraph [ref=e102]:
             - text: My experiences have led me to serve as an aphasia advocate with many different groups. I have presented many times at Georgia State University, Georgia Southern University and Kennesaw State Nursing University. I was a Tour Guide for Turkey 🇹🇷 with Virtual Connections, where I gave a presentation titled, "Let's go to Turkey”. I also gave another Virtual Connections presentation about working at Heineken. I am a National Aphasia Association mentor ambassador. | | | |--|--| |
             - text: "|"
             - text: "| |"
-            - emphasis [ref=e104]: Also at Georgia State University!
+            - emphasis [ref=e105]: Also at Georgia State University!
             - text: "|"
-            - emphasis [ref=e105]: My NAA certificate.
+            - emphasis [ref=e106]: My NAA certificate.
             - text: "|"
-          - paragraph [ref=e106]: I keep busy. I have four Zoom calls a day. But I keep my Sundays free.
-          - paragraph [ref=e107]: I am a part of many aphasia groups at different universities and four different book clubs. I participate in many research studies from different universities. I also present at many hospitals. I am really active!
-          - paragraph [ref=e108]: I have made many presentations with Virtual Connections’ Show and Tell group, such as a presentation on my story. I practice my presentations all the time, again and again. Each time I practice a presentation, I add a tally mark.
-          - paragraph [ref=e110]:
-            - emphasis [ref=e112]: Me in my office!
-          - paragraph [ref=e113]: I believe that mental health is especially important to recovery. Every day, I meditate. I also do yoga three times a week and walk about two miles per day. I pray, “God, thank you for blessing me.”
-          - paragraph [ref=e114]: People ask me “When will you get better?”
-          - paragraph [ref=e115]: Aphasia is usually the rest of your life.
-          - paragraph [ref=e116]: I accept aphasia now.
-          - paragraph [ref=e117]:
+          - paragraph [ref=e107]: I keep busy. I have four Zoom calls a day. But I keep my Sundays free.
+          - paragraph [ref=e108]: I am a part of many aphasia groups at different universities and four different book clubs. I participate in many research studies from different universities. I also present at many hospitals. I am really active!
+          - paragraph [ref=e109]: I have made many presentations with Virtual Connections’ Show and Tell group, such as a presentation on my story. I practice my presentations all the time, again and again. Each time I practice a presentation, I add a tally mark.
+          - paragraph [ref=e111]:
+            - emphasis [ref=e113]: Me in my office!
+          - paragraph [ref=e114]: I believe that mental health is especially important to recovery. Every day, I meditate. I also do yoga three times a week and walk about two miles per day. I pray, “God, thank you for blessing me.”
+          - paragraph [ref=e115]: People ask me “When will you get better?”
+          - paragraph [ref=e116]: Aphasia is usually the rest of your life.
+          - paragraph [ref=e117]: I accept aphasia now.
+          - paragraph [ref=e118]:
             - text: "| | | |--|--| |"
             - text: "|"
             - text: "| |"
-            - emphasis [ref=e120]: My family at Christmas!
+            - emphasis [ref=e121]: My family at Christmas!
             - text: "|"
-            - emphasis [ref=e121]: My dog, Schatzi.
+            - emphasis [ref=e122]: My dog, Schatzi.
             - text: "| | | | |"
             - text: "|"
             - text: "| |"
-            - emphasis [ref=e124]: Me with my cousin and her daughter, who visited me from Turkey two weeks ago!
+            - emphasis [ref=e125]: Me with my cousin and her daughter, who visited me from Turkey two weeks ago!
             - text: "||"
-        - generic [ref=e125]:
-          - heading "Photo Gallery" [level=2] [ref=e126]
-          - generic [ref=e128]:
-            - generic [ref=e129]:
-              - img "ARCPoster" [ref=e130]
-              - paragraph [ref=e131]: ARCPoster
-            - generic [ref=e132]:
-              - img "Ayse" [ref=e133]
-              - paragraph [ref=e134]: Ayse
-            - generic [ref=e135]:
-              - img "AyseAsKid" [ref=e136]
-              - paragraph [ref=e137]: AyseAsKid
-            - generic [ref=e138]:
-              - img "AyseInfo" [ref=e139]
-              - paragraph [ref=e140]: AyseInfo
-            - generic [ref=e141]:
-              - img "BellyDancing" [ref=e142]
-              - paragraph [ref=e143]: BellyDancing
-            - generic [ref=e144]:
-              - img "Card1" [ref=e145]
-              - paragraph [ref=e146]: Card1
-            - generic [ref=e147]:
-              - img "Card2" [ref=e148]
-              - paragraph [ref=e149]: Card2
-            - generic [ref=e150]:
-              - img "Dad" [ref=e151]
-              - paragraph [ref=e152]: Dad
-            - generic [ref=e153]:
-              - img "Dad1" [ref=e154]
-              - paragraph [ref=e155]: Dad1
-            - generic [ref=e156]:
-              - img "Dad2" [ref=e157]
-              - paragraph [ref=e158]: Dad2
-            - generic [ref=e159]:
-              - img "Dog" [ref=e160]
-              - paragraph [ref=e161]: Dog
-            - generic [ref=e162]:
-              - img "Don" [ref=e163]
-              - paragraph [ref=e164]: Don
-            - generic [ref=e165]:
-              - img "Family2" [ref=e166]
-              - paragraph [ref=e167]: Family2
-            - generic [ref=e168]:
-              - img "Flowers" [ref=e169]
-              - paragraph [ref=e170]: Flowers
-            - generic [ref=e171]:
-              - img "Friend" [ref=e172]
-              - paragraph [ref=e173]: Friend
-            - generic [ref=e174]:
-              - img "GM" [ref=e175]
-              - paragraph [ref=e176]: GM
-            - generic [ref=e177]:
-              - img "GM2" [ref=e178]
-              - paragraph [ref=e179]: GM2
-            - generic [ref=e180]:
-              - img "GM3" [ref=e181]
-              - paragraph [ref=e182]: GM3
-            - generic [ref=e183]:
-              - img "GSU" [ref=e184]
-              - paragraph [ref=e185]: GSU
-            - generic [ref=e186]:
-              - img "GSUPresentation" [ref=e187]
-              - paragraph [ref=e188]: GSUPresentation
-            - generic [ref=e189]:
-              - img "Heineken" [ref=e190]
-              - paragraph [ref=e191]: Heineken
-            - generic [ref=e192]:
-              - img "HeinekenPrez" [ref=e193]
-              - paragraph [ref=e194]: HeinekenPrez
-            - generic [ref=e195]:
-              - img "Hospital" [ref=e196]
-              - paragraph [ref=e197]: Hospital
-            - generic [ref=e198]:
-              - img "HospitalAwareness" [ref=e199]
-              - paragraph [ref=e200]: HospitalAwareness
-            - generic [ref=e201]:
-              - img "IMG 3300" [ref=e202]
-              - paragraph [ref=e203]: IMG 3300
-            - generic [ref=e204]:
-              - img "June" [ref=e205]
-              - paragraph [ref=e206]: June
-            - generic [ref=e207]:
-              - img "MA" [ref=e208]
-              - paragraph [ref=e209]: MA
-            - generic [ref=e210]:
-              - img "Mom" [ref=e211]
-              - paragraph [ref=e212]: Mom
-            - generic [ref=e213]:
-              - img "Motorcycle" [ref=e214]
-              - paragraph [ref=e215]: Motorcycle
-            - generic [ref=e216]:
-              - img "NAA" [ref=e217]
-              - paragraph [ref=e218]: NAA
-            - generic [ref=e219]:
-              - img "NAAAmbassador" [ref=e220]
-              - paragraph [ref=e221]: NAAAmbassador
-            - generic [ref=e222]:
-              - img "NeverGiveUp" [ref=e223]
-              - paragraph [ref=e224]: NeverGiveUp
-            - generic [ref=e225]:
-              - img "Newspaper" [ref=e226]
-              - paragraph [ref=e227]: Newspaper
-            - generic [ref=e228]:
-              - img "Now" [ref=e229]
-              - paragraph [ref=e230]: Now
-            - generic [ref=e231]:
-              - img "Recent1" [ref=e232]
-              - paragraph [ref=e233]: Recent1
-            - generic [ref=e234]:
-              - img "Recent2" [ref=e235]
-              - paragraph [ref=e236]: Recent2
-            - generic [ref=e237]:
-              - img "Son" [ref=e238]
-              - paragraph [ref=e239]: Son
-            - generic [ref=e240]:
-              - img "Therapy1" [ref=e241]
-              - paragraph [ref=e242]: Therapy1
-            - generic [ref=e243]:
-              - img "Therapy2" [ref=e244]
-              - paragraph [ref=e245]: Therapy2
-            - generic [ref=e246]:
-              - img "Therapy3" [ref=e247]
-              - paragraph [ref=e248]: Therapy3
-            - generic [ref=e249]:
-              - img "Wedding" [ref=e250]
-              - paragraph [ref=e251]: Wedding
-  - alert [ref=e252]
-  - dialog "Unhandled Runtime Error" [ref=e255]:
-    - generic [ref=e257]:
-      - generic [ref=e258]:
-        - navigation [ref=e259]:
-          - button "previous" [disabled] [ref=e260]:
-            - img "previous" [ref=e261]
-          - button "next" [disabled] [ref=e263]:
-            - img "next" [ref=e264]
-          - generic [ref=e266]:
-            - generic [ref=e267]: "1"
-            - text: of
+        - generic [ref=e126]:
+          - heading "Photo Gallery" [level=2] [ref=e127]
+          - generic [ref=e129]:
+            - generic [ref=e130]:
+              - img "ARCPoster" [ref=e131]
+              - paragraph [ref=e132]: ARCPoster
+            - generic [ref=e133]:
+              - img "Ayse" [ref=e134]
+              - paragraph [ref=e135]: Ayse
+            - generic [ref=e136]:
+              - img "AyseAsKid" [ref=e137]
+              - paragraph [ref=e138]: AyseAsKid
+            - generic [ref=e139]:
+              - img "AyseInfo" [ref=e140]
+              - paragraph [ref=e141]: AyseInfo
+            - generic [ref=e142]:
+              - img "BellyDancing" [ref=e143]
+              - paragraph [ref=e144]: BellyDancing
+            - generic [ref=e145]:
+              - img "Card1" [ref=e146]
+              - paragraph [ref=e147]: Card1
+            - generic [ref=e148]:
+              - img "Card2" [ref=e149]
+              - paragraph [ref=e150]: Card2
+            - generic [ref=e151]:
+              - img "Dad" [ref=e152]
+              - paragraph [ref=e153]: Dad
+            - generic [ref=e154]:
+              - img "Dad1" [ref=e155]
+              - paragraph [ref=e156]: Dad1
+            - generic [ref=e157]:
+              - img "Dad2" [ref=e158]
+              - paragraph [ref=e159]: Dad2
+            - generic [ref=e160]:
+              - img "Dog" [ref=e161]
+              - paragraph [ref=e162]: Dog
+            - generic [ref=e163]:
+              - img "Don" [ref=e164]
+              - paragraph [ref=e165]: Don
+            - generic [ref=e166]:
+              - img "Family2" [ref=e167]
+              - paragraph [ref=e168]: Family2
+            - generic [ref=e169]:
+              - img "Flowers" [ref=e170]
+              - paragraph [ref=e171]: Flowers
+            - generic [ref=e172]:
+              - img "Friend" [ref=e173]
+              - paragraph [ref=e174]: Friend
+            - generic [ref=e175]:
+              - img "GM" [ref=e176]
+              - paragraph [ref=e177]: GM
+            - generic [ref=e178]:
+              - img "GM2" [ref=e179]
+              - paragraph [ref=e180]: GM2
+            - generic [ref=e181]:
+              - img "GM3" [ref=e182]
+              - paragraph [ref=e183]: GM3
+            - generic [ref=e184]:
+              - img "GSU" [ref=e185]
+              - paragraph [ref=e186]: GSU
+            - generic [ref=e187]:
+              - img "GSUPresentation" [ref=e188]
+              - paragraph [ref=e189]: GSUPresentation
+            - generic [ref=e190]:
+              - img "Heineken" [ref=e191]
+              - paragraph [ref=e192]: Heineken
+            - generic [ref=e193]:
+              - img "HeinekenPrez" [ref=e194]
+              - paragraph [ref=e195]: HeinekenPrez
+            - generic [ref=e196]:
+              - img "Hospital" [ref=e197]
+              - paragraph [ref=e198]: Hospital
+            - generic [ref=e199]:
+              - img "HospitalAwareness" [ref=e200]
+              - paragraph [ref=e201]: HospitalAwareness
+            - generic [ref=e202]:
+              - img "IMG 3300" [ref=e203]
+              - paragraph [ref=e204]: IMG 3300
+            - generic [ref=e205]:
+              - img "June" [ref=e206]
+              - paragraph [ref=e207]: June
+            - generic [ref=e208]:
+              - img "MA" [ref=e209]
+              - paragraph [ref=e210]: MA
+            - generic [ref=e211]:
+              - img "Mom" [ref=e212]
+              - paragraph [ref=e213]: Mom
+            - generic [ref=e214]:
+              - img "Motorcycle" [ref=e215]
+              - paragraph [ref=e216]: Motorcycle
+            - generic [ref=e217]:
+              - img "NAA" [ref=e218]
+              - paragraph [ref=e219]: NAA
+            - generic [ref=e220]:
+              - img "NAAAmbassador" [ref=e221]
+              - paragraph [ref=e222]: NAAAmbassador
+            - generic [ref=e223]:
+              - img "NeverGiveUp" [ref=e224]
+              - paragraph [ref=e225]: NeverGiveUp
+            - generic [ref=e226]:
+              - img "Newspaper" [ref=e227]
+              - paragraph [ref=e228]: Newspaper
+            - generic [ref=e229]:
+              - img "Now" [ref=e230]
+              - paragraph [ref=e231]: Now
+            - generic [ref=e232]:
+              - img "Recent1" [ref=e233]
+              - paragraph [ref=e234]: Recent1
+            - generic [ref=e235]:
+              - img "Recent2" [ref=e236]
+              - paragraph [ref=e237]: Recent2
+            - generic [ref=e238]:
+              - img "Son" [ref=e239]
+              - paragraph [ref=e240]: Son
+            - generic [ref=e241]:
+              - img "Therapy1" [ref=e242]
+              - paragraph [ref=e243]: Therapy1
+            - generic [ref=e244]:
+              - img "Therapy2" [ref=e245]
+              - paragraph [ref=e246]: Therapy2
+            - generic [ref=e247]:
+              - img "Therapy3" [ref=e248]
+              - paragraph [ref=e249]: Therapy3
+            - generic [ref=e250]:
+              - img "Wedding" [ref=e251]
+              - paragraph [ref=e252]: Wedding
+  - alert [ref=e253]
+  - dialog "Unhandled Runtime Error" [ref=e256]:
+    - generic [ref=e258]:
+      - generic [ref=e259]:
+        - navigation [ref=e260]:
+          - button "previous" [disabled] [ref=e261]:
+            - img "previous" [ref=e262]
+          - button "next" [disabled] [ref=e264]:
+            - img "next" [ref=e265]
+          - generic [ref=e267]:
             - generic [ref=e268]: "1"
+            - text: of
+            - generic [ref=e269]: "1"
             - text: error
-          - generic [ref=e269]:
-            - generic "There is a newer version (15.5.2) available, upgrade recommended!" [ref=e271]: Next.js (15.1.6) out of date
-            - link "(learn more)" [ref=e272]:
+          - generic [ref=e270]:
+            - generic "There is a newer version (15.5.2) available, upgrade recommended!" [ref=e272]: Next.js (15.1.6) out of date
+            - link "(learn more)" [ref=e273]:
               - /url: https://nextjs.org/docs/messages/version-staleness
-        - button "Close" [ref=e273] [cursor=pointer]:
-          - img [ref=e275] [cursor=pointer]
-      - generic [ref=e278]:
-        - heading "Unhandled Runtime Error" [level=1] [ref=e279]
-        - generic [ref=e280]:
-          - button "Copy error stack" [ref=e281] [cursor=pointer]:
-            - img [ref=e282] [cursor=pointer]
-          - link "Learn more about enabling Node.js inspector for server code with Chrome DevTools" [ref=e285]:
+        - button "Close" [ref=e274] [cursor=pointer]:
+          - img [ref=e276] [cursor=pointer]
+      - generic [ref=e279]:
+        - heading "Unhandled Runtime Error" [level=1] [ref=e280]
+        - generic [ref=e281]:
+          - button "Copy error stack" [ref=e282] [cursor=pointer]:
+            - img [ref=e283] [cursor=pointer]
+          - link "Learn more about enabling Node.js inspector for server code with Chrome DevTools" [ref=e286]:
             - /url: https://nextjs.org/docs/app/building-your-application/configuring/debugging#server-side-code
-            - img [ref=e286]
-      - paragraph [ref=e289]: In HTML, <div> cannot be a descendant of <p>. This will cause a hydration error.
-      - paragraph [ref=e290]: "- A server/client branch `if (typeof window !== 'undefined')`. - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called. - Date formatting in a user's locale which doesn't match the server. - External changing data without sending a snapshot of it along with the HTML. - Invalid HTML tag nesting. It can also happen if the client has a browser extension installed which messes with the HTML before React loaded."
-      - paragraph [ref=e291]:
+            - img [ref=e287]
+      - paragraph [ref=e290]: In HTML, <div> cannot be a descendant of <p>. This will cause a hydration error.
+      - paragraph [ref=e291]: "- A server/client branch `if (typeof window !== 'undefined')`. - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called. - Date formatting in a user's locale which doesn't match the server. - External changing data without sending a snapshot of it along with the HTML. - Invalid HTML tag nesting. It can also happen if the client has a browser extension installed which messes with the HTML before React loaded."
+      - paragraph [ref=e292]:
         - text: "See more info here:"
-        - link "https://nextjs.org/docs/messages/react-hydration-error" [ref=e292]:
+        - link "https://nextjs.org/docs/messages/react-hydration-error" [ref=e293]:
           - /url: https://nextjs.org/docs/messages/react-hydration-error
 ```

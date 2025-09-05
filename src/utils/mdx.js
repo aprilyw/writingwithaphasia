@@ -7,10 +7,19 @@ import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 
 const storiesDirectory = path.join(process.cwd(), 'static/md')
+const mdxStoriesDirectory = path.join(process.cwd(), 'static/mdx')
 
 export async function getStoryData(id) {
-  const fullPath = path.join(storiesDirectory, `${id}.md`)
-  const fileContents = fs.readFileSync(fullPath, 'utf8')
+  // First check for MDX file, then fallback to MD file
+  let fullPath = path.join(mdxStoriesDirectory, `${id}.mdx`)
+  let fileContents
+  
+  if (fs.existsSync(fullPath)) {
+    fileContents = fs.readFileSync(fullPath, 'utf8')
+  } else {
+    fullPath = path.join(storiesDirectory, `${id}.md`)
+    fileContents = fs.readFileSync(fullPath, 'utf8')
+  }
   
   const { data, content } = matter(fileContents)
   
@@ -57,25 +66,52 @@ export async function getStoryImages(id) {
 }
 
 export function getAllStoryIds() {
-  const fileNames = fs.readdirSync(storiesDirectory)
-  return fileNames
+  let allFiles = []
+  
+  // Get MDX files from mdx directory
+  if (fs.existsSync(mdxStoriesDirectory)) {
+    const mdxFiles = fs.readdirSync(mdxStoriesDirectory)
+      .filter(name => name.endsWith('.mdx'))
+      .map(fileName => fileName.replace(/\.mdx$/, ''))
+    allFiles = allFiles.concat(mdxFiles)
+  }
+  
+  // Get MD files from md directory (but only if no MDX version exists)
+  const mdFiles = fs.readdirSync(storiesDirectory)
     .filter(name => name.endsWith('.md'))
-    .map(fileName => ({
-      params: {
-        id: fileName.replace(/\.md$/, '')
-      }
-    }))
+    .map(fileName => fileName.replace(/\.md$/, ''))
+    .filter(id => !allFiles.includes(id)) // Exclude if MDX version exists
+  
+  allFiles = allFiles.concat(mdFiles)
+  
+  return allFiles.map(id => ({
+    params: { id }
+  }))
 }
 
 export async function getAllStoriesData() {
-  const fileNames = fs.readdirSync(storiesDirectory)
+  let allFiles = []
+  
+  // Get MDX files from mdx directory
+  if (fs.existsSync(mdxStoriesDirectory)) {
+    const mdxFiles = fs.readdirSync(mdxStoriesDirectory)
+      .filter(name => name.endsWith('.mdx'))
+      .map(fileName => fileName.replace(/\.mdx$/, ''))
+    allFiles = allFiles.concat(mdxFiles)
+  }
+  
+  // Get MD files from md directory (but only if no MDX version exists)
+  const mdFiles = fs.readdirSync(storiesDirectory)
+    .filter(name => name.endsWith('.md'))
+    .map(fileName => fileName.replace(/\.md$/, ''))
+    .filter(id => !allFiles.includes(id)) // Exclude if MDX version exists
+  
+  allFiles = allFiles.concat(mdFiles)
+  
   const allStoriesData = await Promise.all(
-    fileNames
-      .filter(name => name.endsWith('.md'))
-      .map(async fileName => {
-        const id = fileName.replace(/\.md$/, '')
-        return await getStoryData(id)
-      })
+    allFiles.map(async id => {
+      return await getStoryData(id)
+    })
   )
   
   return allStoriesData.sort((a, b) => {
