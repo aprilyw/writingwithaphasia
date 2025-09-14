@@ -6,16 +6,6 @@ import { useEffect } from 'react';
 import Head from 'next/head';
 import { fonts } from '../../styles/fonts';
 
-// Utility: lazy FS access to avoid edge runtime conflicts
-function listMdxIds() {
-  const fs = require('fs');
-  const MDX_STORIES_DIR = path.join(process.cwd(), 'src/content/stories');
-  if (!fs.existsSync(MDX_STORIES_DIR)) return [];
-  return fs.readdirSync(MDX_STORIES_DIR)
-    .filter((f) => f.endsWith('.mdx'))
-    .map((f) => f.replace(/\.mdx$/, ''));
-}
-
 export async function getStaticPaths() { return { paths: [], fallback: 'blocking' }; }
 export async function getStaticProps({ params }) { return { props: { id: params.id } }; }
 
