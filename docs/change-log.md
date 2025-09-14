@@ -45,3 +45,18 @@ Action Items (captured in migration strategy doc):
 4. Consolidate frontmatter parsing (remove duplicate regex extraction once pipeline finalized).
 
 This addendum ensures the change log reflects current factual state before further migration steps.
+
+### 2025-09-14 (Later – Map & Content Enhancements)
+- Implemented cluster click inward zoom (tight extent fit, animated) and standardized zoom animation easing/duration.
+- Added initial extent auto-fit to encompass all story coordinates on first load.
+- Introduced map marker hover preview card (title, excerpt snippet, optional hero thumbnail); later enlarged for readability.
+- Added build-time validation script (`scripts/validate-content.js`) integrated into build process.
+- Extended lint/schema with `heroAlt` accessibility rule (warn when hero lacks alt for published stories).
+- Upgraded image presentation: `ImageGrid` now enforces uniform aspect boxes with caption overlay; `Figure`/`StoryImage` updated to cooperate with wrappers.
+- Standardized Mary story video embeds by replacing raw `<video>` tags with `<Video>` component (mp4 provider path handled).
+- Simplified draft UI legend & removed instructional query string text.
+
+Pending (new focus):
+- Sidebar Tailwind refinement (typography scale, spacing rhythm, scroll/overflow cues, anchor style unification).
+- Unused image detection and raw `<img>` lint rule.
+- Arrow key navigation between markers & prefetch on hover.

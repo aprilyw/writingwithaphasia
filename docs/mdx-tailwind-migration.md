@@ -397,15 +397,15 @@ Periodic migration tracking entry.
 Tailwind + base MDX wiring completed. Advanced story components, frontmatter-driven metadata, and map refactor pending. Build is stable after debugging remark plugin chain.
 
 ### Phase Progress
-| Phase | Status | Delta vs Plan |
-|-------|--------|---------------|
+| Phase | Status (Current) | Delta vs Original Plan |
+|-------|------------------|------------------------|
 | 1 Tooling bootstrap | DONE | Matches plan. |
-| 2 MDX infra | PARTIAL | Demo page only; no real story yet; frontmatter parsing disabled temporarily. |
-| 3 Story components | NOT STARTED | Need StoryLayout, ImageGrid, VideoEmbed, Figure. |
-| 4 Map refactor | NOT STARTED | Awaiting metadata index + story layout. |
-| 5 Batch conversion | NOT STARTED | Blocked by frontmatter schema & tooling. |
-| 6 Cleanup & hardening | NOT STARTED | Styled-jsx still present; no content linting. |
-| 7 Enhancements | NOT STARTED | Deferred intentionally. |
+| 2 MDX infra | PARTIAL → NEAR COMPLETE | Frontmatter schema + validation + dynamic fetch path in place; duplicate parsing path remains. |
+| 3 Story components | PARTIAL | Core media (Figure, ImageGrid, VideoEmbed, Separator, heading/link overrides) done; Callout/Lightbox pending. |
+| 4 Map refactor | PARTIAL | Query-param shallow routing, focus restore, basic shrink animation; motion polish + keyboard nav pending. |
+| 5 Batch conversion | NOT STARTED | Only pilot subset converted; bulk script & remaining stories outstanding. |
+| 6 Cleanup & hardening | STARTED | Navbar + map/sidebar in Tailwind; legacy table/grid CSS & duplicate frontmatter parse remain. |
+| 7 Enhancements | NOT STARTED | Prefetch partially (neighbor cache); anchor UI, dark mode, keyboard marker cycling not begun. |
 
 ### Completed Artifacts
 - Tailwind config/theme + typography plugin.
@@ -436,18 +436,18 @@ Tailwind + base MDX wiring completed. Advanced story components, frontmatter-dri
 - Draft vs published frontmatter usage.
 
 ---
-End Status Check v0.1.0
+End Status Check (superseded earlier v0.1.0 table — preserved historically above; current state reflected here.)
 
 The audit below summarizes current status vs original objectives. (See Timeline above for incremental history.)
 
 ### Implementation Matrix vs Objectives
-| Objective | Status (Actual) | Notes / Gaps |
-|-----------|-----------------|--------------|
-| 1. Rich MDX story content | PARTIAL | Multiple pilot MDX stories render (ayse, ayse-og, test-demo). Remaining legacy stories need conversion & component refactors. |
-| 2. Tailwind design system replacing styled-jsx | IMPROVING | Navbar fully migrated. Map/layout + sidebar + legacy table/grid CSS still pending conversion. |
-| 3. Polished map → story transition | PARTIAL (routing + focus) | Shallow routing + basic focus mgmt done; animation layer & motion polish not yet implemented. |
-| 4. Unified asset handling & optimization | PARTIAL / RISK | Pilot asset path decided; only ayse assets moved. Others still under `static/img`; references need updating post-move. |
-| 5. Authoring ergonomics (schema, lint, preview) | PARTIAL | Lint + schema + MDX scope stable; still no draft preview mode; duplicate frontmatter parsing remains (minor). |
+| Objective | Current Status | Notes / Gaps |
+|-----------|----------------|--------------|
+| 1. Rich MDX story content | PARTIAL | Core components shipped; majority of legacy markdown still unconverted. Need batch conversion + auxiliary components (Callout, Lightbox). |
+| 2. Tailwind design system replacing styled-jsx | IMPROVING | Major surfaces migrated (navbar, map/sidebar). Residual global table/grid CSS & any remaining styled‑jsx to remove post-conversion. |
+| 3. Polished map → story transition | PARTIAL | Query-driven shallow routing, focus management, base animation present; framer-motion polish + reduced-motion & keyboard traversal outstanding. |
+| 4. Unified asset handling & optimization | PARTIAL | Canonical `/stories/<id>/` path adopted for pilots; must verify all remaining stories’ assets migrated before removing legacy CSS assumptions. Optimization (Next <Image>) pending. |
+| 5. Authoring ergonomics (schema, lint, preview) | PARTIAL | Zod schema + build/lint validation working; no preview mode; duplicate frontmatter parse path to unify. |
 
 ### Current Phase Progress (Audited)
 | Phase | Planned Outcome | Actual Status | Key Work Remaining |
@@ -462,11 +462,11 @@ The audit below summarizes current status vs original objectives. (See Timeline 
 
 ### Key Discrepancies Identified
 1. Legacy markdown pipeline still present (expected until batch conversion phase).
-2. Asset paths only partially migrated (most still under `static/img/*`).
-3. Mixed styling approaches remain (styled-jsx for map/sidebar, Tailwind elsewhere).
-4. Frontmatter parsing logic duplicated (acceptable short-term; unify after deciding on Contentlayer).
-5. Animation polish & keyboard marker navigation not implemented yet.
-6. Image optimization (Next `<Image>`) not uniformly applied to all existing inline references.
+2. Asset migration appears complete for pilot set; must audit completeness before declaring milestone.
+3. Mixed styling: global table/grid CSS persists until story conversion removes `<table>` usage.
+4. Frontmatter parsing duplicated (regex + MDX export) — unify soon.
+5. Map transition missing advanced animation choreography + reduced-motion branch + keyboard marker cycling.
+6. Image optimization (Next `<Image>`) not yet implemented; current `<img>` usage limits performance.
 
 ### Recommended Immediate Actions (Week 1)
 1. Standardize asset location: move required story images from `static/img/*` to `public/stories/<id>/...` (or keep `public/img/<id>`), update references, then enforce in lint script.
@@ -495,14 +495,14 @@ The audit below summarizes current status vs original objectives. (See Timeline 
 End Reality Check Audit
 
 ### Current Architecture Snapshot (Reference)
-| Concern | Implementation |
-|---------|----------------|
-| Content Sources | Hybrid: `static/md/*.md` + `src/content/stories/*.mdx` |
-| Frontmatter Validation | Zod schema + lint script (build route still regex parses) |
-| Rendering (MDX) | `next-mdx-remote` serialization in page + API responses |
-| Components | `StoryLayout`, `Figure`, `ImageGrid`, `VideoEmbed`, `Separator`, heading/link overrides |
-| Styling | Tailwind + typography; legacy styled-jsx & global CSS still present |
-| Map → Story | CSS shrink + sidebar; no shallow routing or focus mgmt yet |
+| Concern | Implementation (Updated) |
+|---------|-------------------------|
+| Content Sources | Hybrid: legacy markdown + `src/content/stories/*.mdx` (pilot subset converted) |
+| Frontmatter Validation | Zod schema via lint + build script; duplicate parse path awaiting unification |
+| Rendering (MDX) | API-driven `MDXRemote` + component map; neighbor prefetch cache in sidebar |
+| Components | Core media + heading/link overrides; auxiliary (Callout, Lightbox) pending |
+| Styling | Tailwind utilities across major surfaces; legacy table/grid CSS remains until conversion complete |
+| Map → Story | Query-param shallow routing + focus restore + basic shrink animation |
 
 ### Residual / Optional Hardening
 1. Autolink heading anchors UI.
@@ -523,6 +523,34 @@ End Reality Check Audit
 3. Convert additional stories (goal: 3–5) & refine schema.
 4. Unify frontmatter parsing (drop regex duplication).
 5. Begin Tailwind refactor of navbar & map styled-jsx.
+
+### v0.6.0 (2025-09-14T23:59Z) – Map Shallow Routing & Component Consolidation
+Additions:
+- Query-param based shallow routing (`/?id=`) replaces direct `/stories/[id]` rendering for interactive panel.
+- Focus management + Escape key handling + panel heading autofocus implemented.
+- Sidebar caching with neighbor prefetch to reduce latency for sequential story viewing.
+- Tailwind refactor of map/sidebar layout; removal of large styled-jsx blocks in those areas.
+- Expanded media components (Figure, ImageGrid variants, VideoEmbed provider detection) and heading/link customization with slug generation.
+
+Improvements:
+- Reduced initial payload by deferring story content fetch.
+- Standardized asset path for pilot stories enabling upcoming image optimization work.
+
+Outstanding:
+- Full batch conversion of remaining markdown stories.
+- Frontmatter unification (remove regex parse route code & rely solely on MDX export or adopt Contentlayer).
+- Motion choreography (framer-motion) & reduced-motion safe path.
+- Keyboard marker traversal (arrow keys) & heading anchor UI.
+- Next `<Image>` adoption & blur placeholder heuristic.
+
+Next Focus (Proposed):
+1. Batch convert 5–10 additional stories + remove table-based grids.
+2. Add lint rule: disallow `<table>` in MDX story body.
+3. Implement frontmatter unification & delete duplicate parse utility where unused.
+4. Introduce `StoryImage` wrapper migration path to Next `<Image>`.
+5. Add keyboard navigation & reduced-motion fallback for map transitions.
+
+---
 
 ---
 ## 21. Notes & Technical Decisions

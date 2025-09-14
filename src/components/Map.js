@@ -4,6 +4,7 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import { fromLonLat, transformExtent } from 'ol/proj';
+import { boundingExtent } from 'ol/extent';
 import { easeOut } from 'ol/easing';
 import { Feature } from 'ol';
 import { Point } from 'ol/geom';
@@ -24,6 +25,7 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
   const mapInstance = useRef(null);
   const clusterSourceRef = useRef(null);
   const hoverCardRef = useRef(null);
+  const hoverDataRef = useRef({ story: null, pixel: null });
   const [draftMode, setDraftMode] = useState(false);
   const hoverTimeoutRef = useRef(null);
 
@@ -46,13 +48,13 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
       ],
       view: new View({
         center: fromLonLat([-98.5795, 39.8283]),
-        zoom: 2.8, // Zoomed out to show full US, Canada, and Mexico
+        zoom: 2.8,
         extent: GLOBAL_EXTENT,
         minZoom: 1,
-        maxZoom: 15, // Increased max zoom for better detail
+        maxZoom: 15,
         constrainOnlyCenter: false,
-        zoomFactor: 3, // Much faster zoom with mouse wheel
-        zoomDuration: 150, // Faster zoom animations
+        zoomFactor: 2, // slightly gentler wheel increments
+        zoomDuration: 260, // smoother wheel animation
       }),
       controls: [
         // Add zoom controls for easier navigation
@@ -76,12 +78,16 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
       if (feature) {
         const features = feature.get('features');
         if (features && features.length > 1) {
-          // This is a cluster - zoom in to expand it
-          const extent = clusterSourceRef.current.getExtent();
-          initialMap.getView().fit(extent, {
-            duration: 150, // Ultra fast cluster expansion
-            padding: [50, 50, 50, 50],
-            maxZoom: 10,
+          // Cluster: compute tight extent of contained stories & zoom in (never outward)
+          const coords = features.map(f => f.getGeometry().getCoordinates());
+          const tightExtent = boundingExtent(coords);
+          const view = initialMap.getView();
+          const currentResolution = view.getResolution();
+          // Fit with padding; cap resulting zoom so we don't jump too close on large clusters
+          view.fit(tightExtent, {
+            duration: 420,
+            padding: [60, 60, 60, 60],
+            maxZoom: Math.min(view.getZoom() + 4, 11)
           });
         } else if (features && features.length === 1) {
           // Single feature in cluster - handle as normal
@@ -112,22 +118,23 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
       const view = initialMap.getView();
       const zoom = view.getZoom();
       view.animate({
-        zoom: zoom + 2, // Zoom in by 2 levels on double-click
+        zoom: zoom + 2,
         center: event.coordinate,
-        duration: 200, // Very fast double-click zoom
+        duration: 380,
         easing: easeOut
       });
     });
 
-    // Change cursor + hover card (draft aware)
+    // Change cursor + collect hover data (draft aware); we render card via React for richer content
     initialMap.on('pointermove', (event) => {
       const feature = initialMap.forEachFeatureAtPixel(event.pixel, (feature) => feature);
       let story = null;
       if (feature) {
         const features = feature.get('features');
         if (features && features.length === 1) story = features[0].get('story');
-        else if (!features) story = feature.get('story');
+        else if (!features && feature.get('story')) story = feature.get('story');
       }
+      if (!hoverCardRef.current) return; // not mounted yet
       if (story) {
         const isDraft = (story.status && story.status.toLowerCase() === 'draft') || story.draft === true;
         const isUnderConstruction = !story.title || !story.name ||
@@ -135,23 +142,43 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
           story.contentHtml?.includes('This story is coming soon');
         const suppressClick = isUnderConstruction || (isDraft && !draftMode);
         mapRef.current.style.cursor = suppressClick ? 'not-allowed' : 'pointer';
-        if (hoverCardRef.current) {
-          const pixel = event.pixel;
-            const [x, y] = pixel;
-            hoverCardRef.current.style.display = 'block';
-            hoverCardRef.current.style.left = `${x + 12}px`;
-            hoverCardRef.current.style.top = `${y + 12}px`;
-            hoverCardRef.current.innerHTML = `<div class="hover-card-inner ${isDraft ? 'opacity-70' : ''}">
-              <div class="font-semibold text-sm mb-0.5">${story.title || story.name || story.id}${isDraft ? ' (Draft)' : ''}</div>
-              ${story.subtitle ? `<div class=\"text-[11px] text-neutral-600 leading-snug\">${story.subtitle}</div>` : ''}
-            </div>`;
-        }
+        hoverDataRef.current.story = story;
+        hoverDataRef.current.pixel = event.pixel;
+        // Position & populate (React fallback if we later switch to state)
+        const [x, y] = event.pixel;
+        const cardEl = hoverCardRef.current;
+        cardEl.style.display = 'block';
+        cardEl.style.left = `${x + 14}px`;
+        cardEl.style.top = `${y + 14}px`;
+        // Basic sanitization: escape angle brackets in excerpt (strip HTML tags for preview)
+        const excerpt = (story.excerpt || story.subtitle || '')
+          .replace(/<[^>]*>/g, '')
+          .slice(0, 140);
+        const hero = story.hero && story.hero.startsWith('/') ? story.hero : null;
+        cardEl.innerHTML = `
+          <div class="w-72 max-w-sm bg-white/95 backdrop-blur border border-neutral-300 shadow-xl rounded-xl p-4 pointer-events-none ${isDraft ? 'opacity-70' : ''}">
+            <div class="flex gap-4">
+              ${hero ? `<div class='flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden bg-neutral-200 ring-1 ring-neutral-300'><img src='${hero}' alt='' class='object-cover w-full h-full'/></div>` : ''}
+              <div class="min-w-0">
+                <div class="font-semibold text-[14px] leading-snug text-neutral-900 mb-1 line-clamp-2 tracking-tight">${(story.title || story.name || story.id)}</div>
+                ${excerpt ? `<div class='text-[12px] leading-snug text-neutral-600 line-clamp-4'>${excerpt}</div>` : ''}
+              </div>
+            </div>
+          </div>`;
       } else {
         mapRef.current.style.cursor = '';
-        if (hoverCardRef.current) hoverCardRef.current.style.display = 'none';
+        hoverDataRef.current.story = null;
+        if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+        // Delay hide slightly to reduce flicker between tightly spaced markers
+        hoverTimeoutRef.current = setTimeout(() => {
+          if (hoverCardRef.current) hoverCardRef.current.style.display = 'none';
+        }, 80);
       }
     });
-    initialMap.on('pointerout', () => { if (hoverCardRef.current) hoverCardRef.current.style.display = 'none'; });
+    initialMap.on('pointerout', () => {
+      if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+      if (hoverCardRef.current) hoverCardRef.current.style.display = 'none';
+    });
 
     // Add keyboard shortcuts for faster navigation
     document.addEventListener('keydown', (event) => {
@@ -164,18 +191,12 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
         case '+':
         case '=':
           event.preventDefault();
-          view.animate({
-            zoom: zoom + 2,
-            duration: 150
-          });
+          view.animate({ zoom: zoom + 1, duration: 320, easing: easeOut });
           break;
         case '-':
         case '_':
           event.preventDefault();
-          view.animate({
-            zoom: zoom - 2,
-            duration: 150
-          });
+          view.animate({ zoom: zoom - 1, duration: 320, easing: easeOut });
           break;
         case '0':
           event.preventDefault();
@@ -183,7 +204,8 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
           view.animate({
             center: fromLonLat([-98.5795, 39.8283]),
             zoom: 2.8,
-            duration: 300
+            duration: 450,
+            easing: easeOut
           });
           break;
       }
@@ -298,14 +320,14 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
     mapInstance.current.addLayer(clusterLayer);
   }, [stories]);
 
-  // Zoom to story when zoomToStory changes (ultra fast now)
+  // Zoom to story when zoomToStory changes (smoothed)
   useEffect(() => {
     if (mapInstance.current && zoomToStory && zoomToStory.coordinates) {
       const coords = fromLonLat(zoomToStory.coordinates);
       mapInstance.current.getView().animate({
         center: coords,
         zoom: 7,
-        duration: 200, // Ultra fast - reduced to 200ms
+        duration: 420,
         easing: easeOut
       }, () => {
         if (onZoomComplete) onZoomComplete();
@@ -321,7 +343,37 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
     mapInstance.current.getView().setZoom(2.8);
   }, [resetSignal]);
 
+  // Fit initial extent to all stories if none selected & on first marker load
+  useEffect(() => {
+    if (!mapInstance.current) return;
+    if (!stories || stories.length === 0) return;
+    // Compute extent of all coordinates
+    const coords = stories.filter(s => Array.isArray(s.coordinates)).map(s => fromLonLat(s.coordinates));
+    if (coords.length < 2) return; // skip if only one story; default view fine
+    const ext = boundingExtent(coords);
+    const view = mapInstance.current.getView();
+    // Only auto-fit if we're still at initial zoom (heuristic to avoid surprising user after interaction)
+    if (Math.abs(view.getZoom() - 2.8) < 0.01) {
+      view.fit(ext, { padding: [80, 80, 80, 80], duration: 500, maxZoom: 9, easing: easeOut });
+    }
+  }, [stories]);
+
   return (
-    <div ref={mapRef} style={{ width: '100%', height: '100%' }} />
+    <div ref={mapRef} style={{ width: '100%', height: '100%', position: 'relative' }}>
+      {/* Hover preview card (DOM-managed for performance; content set directly) */}
+      <div
+        ref={hoverCardRef}
+        role="presentation"
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: 0,
+            left: 0,
+          transform: 'translate3d(0,0,0)',
+          zIndex: 1000,
+          display: 'none',
+        }}
+      />
+    </div>
   );
 } 

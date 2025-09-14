@@ -10,7 +10,9 @@
 const fs = require('fs');
 const path = require('path');
 const { StoryFrontmatterSchema } = require('../src/lib/mdx/schema');
+const { parseFrontmatterFromFile } = require('../src/lib/mdx/parseFrontmatter');
 const STORIES_DIR = path.join(process.cwd(), 'src/content/stories');
+const PUBLIC_STORIES_DIR = path.join(process.cwd(), 'public', 'stories');
 const IMG_ROOTS = [
   path.join(process.cwd(), 'static'),
   path.join(process.cwd(), 'public')
@@ -41,11 +43,10 @@ function fileExists(relPath) {
   return candidates.some(p => fs.existsSync(p));
 }
 
-function extractFrontmatter(raw) {
-  const match = /^---\n([\s\S]*?)\n---/m.exec(raw);
-  if (!match) return {};
-  const yaml = require('js-yaml');
-  try { return yaml.load(match[1]) || {}; } catch { return {}; }
+// Frontmatter now parsed via central helper (avoid divergence)
+function extractFrontmatterFromFile(fullPath) {
+  const { frontmatter } = parseFrontmatterFromFile(fullPath, { coerceId: true });
+  return frontmatter || {};
 }
 
 function extractImageLikeRefs(raw) {
@@ -72,14 +73,29 @@ function detectLegacyStaticRefs(raw) {
 }
 
 function main() {
+  const args = process.argv.slice(2);
+  // Support --max-warn <n> or --max-warn=n
+  let maxWarn = null;
+  args.forEach((a, idx) => {
+    if (a.startsWith('--max-warn=')) {
+      const v = parseInt(a.split('=')[1], 10); if (!isNaN(v)) maxWarn = v;
+    } else if (a === '--max-warn') {
+      const next = args[idx + 1];
+      if (next && !next.startsWith('--')) { const v = parseInt(next, 10); if (!isNaN(v)) maxWarn = v; }
+    }
+  });
+
   const files = listMdxFiles();
   let errorCount = 0;
+  let warnCount = 0;
   const report = [];
+  // Track per-story referenced image basenames for unused detection
+  const referencedImagesByStory = new Map();
 
   for (const file of files) {
     const full = path.join(STORIES_DIR, file);
     const raw = fs.readFileSync(full, 'utf8');
-    const fm = extractFrontmatter(raw);
+    const fm = extractFrontmatterFromFile(full);
     fm.id = fm.id || file.replace(/\.mdx$/, '');
     const parsed = StoryFrontmatterSchema.safeParse(fm);
     if (!parsed.success) {
@@ -90,6 +106,7 @@ function main() {
     // Soft warnings (do not increment errorCount)
     if (!fm.coordinates) {
       report.push({ file, severity: 'warn', type: 'missing-coordinates', message: 'No coordinates set (map pin disabled).' });
+      warnCount++;
     }
     if (!fm.hero) {
       const isDraft = fm.status === 'draft';
@@ -97,11 +114,13 @@ function main() {
         report.push({ file, severity: 'info', type: 'missing-hero', message: 'Draft without hero (allowed).' });
       } else {
         report.push({ file, severity: 'warn', type: 'missing-hero', message: 'No hero image set.' });
+        warnCount++;
       }
     } else {
       // Hero present; require heroAlt unless draft
       if (fm.status !== 'draft' && !fm.heroAlt) {
-        report.push({ file, severity: 'warn', type: 'missing-hero-alt', message: 'Hero image missing alt text (heroAlt).'});
+        report.push({ file, severity: 'warn', type: 'missing-hero-alt', message: 'Hero image missing alt text (heroAlt).' });
+        warnCount++;
       } else if (fm.heroAlt && fm.heroAlt.length < 5) {
         report.push({ file, severity: 'info', type: 'short-hero-alt', message: 'heroAlt is very short; consider more descriptive alt text.'});
       }
@@ -122,13 +141,43 @@ function main() {
         errorCount++;
         report.push({ file, severity: 'error', type: 'missing-image-ref', path: img });
       }
+      // Track referenced image basename when path is /stories/<id>/...
+      const storyPrefix = `/stories/${fm.id}/`;
+      if (img.startsWith(storyPrefix)) {
+        const base = path.basename(img);
+        if (!referencedImagesByStory.has(fm.id)) referencedImagesByStory.set(fm.id, new Set());
+        referencedImagesByStory.get(fm.id).add(base);
+      }
     });
 
     // Legacy /static/img path usage (enforce migration to /stories/<id>/)
     const legacyRefs = detectLegacyStaticRefs(raw);
     legacyRefs.forEach(ref => {
-      // ref like '/static/img/ayse/' -> we surface suggestion
       report.push({ file, severity: 'warn', type: 'legacy-static-path', legacyPrefix: ref, suggestion: ref.replace('/static/img/', '/stories/') });
+      warnCount++;
+    });
+
+    // Raw <img> tag detection (enforce Figure usage)
+    if (/<img\s/i.test(raw)) {
+      // Ignore if it appears to be inside code blocks (simple heuristic not implemented here).
+      report.push({ file, severity: 'error', type: 'raw-img-tag', message: 'Raw <img> tag detected; use <Figure> or <StoryImage>.' });
+      errorCount++;
+    }
+  }
+
+  // Unused image detection (warning): list images in /public/stories/<id>/ not referenced
+  if (fs.existsSync(PUBLIC_STORIES_DIR)) {
+    const storyDirs = fs.readdirSync(PUBLIC_STORIES_DIR).filter(d => fs.statSync(path.join(PUBLIC_STORIES_DIR, d)).isDirectory());
+    storyDirs.forEach(storyId => {
+      const dir = path.join(PUBLIC_STORIES_DIR, storyId);
+      const filesInDir = fs.readdirSync(dir).filter(f => !f.startsWith('.') && fs.statSync(path.join(dir, f)).isFile());
+      const referenced = referencedImagesByStory.get(storyId) || new Set();
+      filesInDir.forEach(imgFile => {
+        if (!referenced.has(imgFile)) {
+          report.push({ file: `${storyId}.mdx`, severity: 'warn', type: 'unused-image', path: `/stories/${storyId}/${imgFile}` });
+          warnCount++;
+        }
+      });
     });
   }
 
@@ -142,7 +191,11 @@ function main() {
     console.log('Content Lint: No issues found.');
   }
 
-  console.log(`Checked ${files.length} MDX files. Errors: ${errorCount}`);
+  console.log(`Checked ${files.length} MDX files. Errors: ${errorCount} Warnings: ${warnCount}${maxWarn !== null ? ` (max-warn=${maxWarn})` : ''}`);
+  if (maxWarn !== null && warnCount > maxWarn && errorCount === 0) {
+    console.error(`Exceeded maximum warnings threshold (${warnCount} > ${maxWarn}).`);
+    errorCount = 1; // promote to non-zero exit to gate merge
+  }
   process.exit(errorCount > 0 ? 1 : 0);
 }
 

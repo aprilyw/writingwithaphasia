@@ -1,5 +1,7 @@
 :root {
   --font-family-primary: 'TASA Orbiter', sans-serif;
+  /* Unified maximum readable line length for narrative/story text (approx 68ch ≈ ~900px at base). */
+  --story-measure: 68ch;
 }
 
 html,
@@ -43,10 +45,7 @@ a:hover {
   color: #3498db;
 }
 
-/* Ensure external links open in new tab */
-a[href^="http"] {
-  target: _blank;
-}
+/* Note: Opening external links in new tab should be handled in markup (rel+target), not via CSS */
 
 * {
   box-sizing: border-box;
@@ -55,6 +54,11 @@ a[href^="http"] {
 img {
   max-width: 100%;
   height: auto;
+}
+
+/* Shared readable width constraint for story prose (applied to both map sidebar + standalone pages). */
+.story-readable {
+  max-width: var(--story-measure);
 }
 
 /* Custom styling for asterisk page breaks */
@@ -144,8 +148,8 @@ img {
 }
 
 /* Photo grid styling for consistent sizing and caption wrapping */
-.story-content table img,
-.content table img {
+/* Legacy table-based photo grid styles (will be deprecated). Scope under .legacy-grid to avoid stretching modern Figure images */
+.legacy-grid table img {
   width: 100%;
   height: 300px;
   object-fit: cover;
@@ -155,8 +159,7 @@ img {
 }
 
 /* Caption styling with proper wrapping */
-.story-content table em,
-.content table em {
+.legacy-grid table em {
   display: block;
   font-style: italic;
   color: #666;
@@ -170,15 +173,13 @@ img {
 }
 
 /* Table styling for photo grids */
-.story-content table,
-.content table {
+.legacy-grid table {
   width: 100%;
   border-collapse: collapse;
   margin: 2rem 0;
 }
 
-.story-content td,
-.content td {
+.legacy-grid td {
   padding: 0.5rem;
   vertical-align: bottom;
   width: 50%;
@@ -186,13 +187,10 @@ img {
 
 /* Responsive design for mobile */
 @media (max-width: 768px) {
-  .story-content table img,
-  .content table img {
+  .legacy-grid table img {
     height: 200px;
   }
-  
-  .story-content td,
-  .content td {
+  .legacy-grid td {
     display: block;
     width: 100%;
     margin-bottom: 1rem;
@@ -200,8 +198,7 @@ img {
 }
 
 /* Top-align captions for specific photo grids */
-.story-content table:nth-of-type(2) td,
-.content table:nth-of-type(2) td {
+.legacy-grid table:nth-of-type(2) td {
   vertical-align: top;
 }
 

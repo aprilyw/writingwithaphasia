@@ -71,6 +71,29 @@ export default function StoryMap({ stories, mdxMeta }) {
         e.preventDefault();
         handleCloseSidebar();
       }
+      // Navigation shortcuts only when panel open
+      if (!selectedStory) return;
+      const publishedStories = stories.filter(s => {
+        const isDraft = (s.status && s.status.toLowerCase() === 'draft') || s.draft === true;
+        return !isDraft; // skip drafts in keyboard cycle (consistent with index default)
+      });
+      if (publishedStories.length === 0) return;
+      const currentIndex = publishedStories.findIndex(s => s.id === selectedStory.id);
+      if (currentIndex === -1) return;
+      const prev = () => publishedStories[(currentIndex - 1 + publishedStories.length) % publishedStories.length];
+      const next = () => publishedStories[(currentIndex + 1) % publishedStories.length];
+      let target = null;
+      if (e.key === '[' || e.key === 'ArrowLeft') { target = prev(); }
+      else if (e.key === ']' || e.key === 'ArrowRight') { target = next(); }
+      if (target && target.id !== selectedStory.id) {
+        e.preventDefault();
+        setZoomToStory(target);
+        if (zoomTimeout.current) clearTimeout(zoomTimeout.current);
+        zoomTimeout.current = setTimeout(() => {
+          setSelectedStory(target);
+          router.push({ pathname: '/', query: { id: target.id } }, undefined, { shallow: true });
+        }, 320);
+      }
     }
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -115,7 +138,8 @@ export default function StoryMap({ stories, mdxMeta }) {
             className="space-y-4 bg-white px-6 py-4 rounded-lg shadow-xl border-2 border-[#3a2c2a] text-center font-semibold text-[#3a2c2a] text-[1.1rem] pointer-events-auto"
             style={{ fontFamily: getFontFamilyVar() }}
           >
-            <div>Click a red pin to view its story</div>
+            <div>Click a red pin to view a published story</div>
+            <div className="text-[11px] text-neutral-600 mt-2">Keyboard: [ / ] or ← / → to switch stories • Esc to close</div>
             <div className="text-left">
               <strong className="block mb-1">Story Index</strong>
               <ul className="list-disc pl-5 max-h-64 overflow-auto text-sm">
@@ -143,17 +167,12 @@ export default function StoryMap({ stories, mdxMeta }) {
               <div className="mt-3 text-[11px] text-neutral-600 leading-snug border-t pt-2">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="inline-block w-3 h-3 rounded-full" style={{ background:'#ff6b6b' }} />
-                  <span>Published story</span>
-                </div>
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="inline-block w-3 h-3 rounded-full" style={{ background:'#6B7280' }} />
-                  <span>Draft (shown on map, not clickable)</span>
+                  <span>Published</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="inline-block w-3 h-3 rounded-full" style={{ background:'#9CA3AF' }} />
-                  <span>Under construction / incomplete</span>
+                  <span className="inline-block w-3 h-3 rounded-full" style={{ background:'#6B7280' }} />
+                  <span>Draft</span>
                 </div>
-                <div className="mt-1 italic text-neutral-500">Append <code>?draft=1</code> to URL for internal draft interaction.</div>
               </div>
             </div>
           </div>

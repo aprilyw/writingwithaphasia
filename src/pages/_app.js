@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import '../styles/tailwind.css';
 import { MDXComponentsProvider } from '../components/mdx/MDXComponents';
+import { GalleryProvider } from '../components/mdx/GalleryContext';
+import GalleryModal from '../components/mdx/GalleryModal';
 import Link from 'next/link';
 import Head from 'next/head';
 import { fonts } from '../styles/fonts';
@@ -12,6 +14,7 @@ export default function App({ Component, pageProps }) {
   const isHome = router.pathname === '/';
   return (
     <MDXComponentsProvider>
+      <GalleryProvider>
       <>
         {/* Accessible, responsive Tailwind navbar */}
         <nav aria-label="Main" className="w-full border-b border-neutral-300 bg-slate-50/90 backdrop-blur supports-[backdrop-filter]:bg-slate-50/60">
@@ -36,7 +39,9 @@ export default function App({ Component, pageProps }) {
         <Head>
           <link href={fonts.googleFontsUrl} rel="stylesheet" />
         </Head>
+        <GalleryModal />
       </>
+      </GalleryProvider>
     </MDXComponentsProvider>
   );
 }

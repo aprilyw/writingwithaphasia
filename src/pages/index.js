@@ -15,11 +15,23 @@ export async function getStaticProps() {
     console.error('[build] MDX frontmatter validation error:\n', e.message);
     throw e; // Let Next.js fail the build
   }
-  // Merge: prefer MDX meta where ids overlap
-  const mdxMetaMap = new Map(mdxMeta.filter(r => !r.error).map(m => [m.id, m]));
-  const merged = allStoriesData.map(s => mdxMetaMap.get(s.id) ? { ...s, ...mdxMetaMap.get(s.id) } : s);
-  // Add any pure-MDX stories that do not exist in legacy markdown
-  mdxMeta.forEach(m => { if (!merged.find(x => x.id === m.id)) merged.push(m); });
+  // Merge: prefer MDX meta where ids overlap; then dedupe explicitly
+  const mdxMetaValid = mdxMeta.filter(r => !r.error);
+  const mdxMetaMap = new Map(mdxMetaValid.map(m => [m.id, m]));
+  const mergedInitial = allStoriesData.map(s => mdxMetaMap.get(s.id) ? { ...s, ...mdxMetaMap.get(s.id) } : s);
+  mdxMetaValid.forEach(m => { if (!mergedInitial.find(x => x.id === m.id)) mergedInitial.push(m); });
+  // Dedupe by id (last in wins -> ensures MDX overrides legacy)
+  const dedupMap = new Map();
+  mergedInitial.forEach(item => { dedupMap.set(item.id, item); });
+  let merged = Array.from(dedupMap.values());
+  // Stable sort: published first (date desc if available), drafts last
+  merged = merged.sort((a,b)=>{
+    const ad = (a.status === 'draft');
+    const bd = (b.status === 'draft');
+    if (ad !== bd) return ad ? 1 : -1;
+    if (a.date && b.date) return a.date > b.date ? -1 : 1;
+    return (a.title || a.name || a.id).localeCompare(b.title || b.name || b.id);
+  });
   return {
     props: {
       stories: merged,
