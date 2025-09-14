@@ -1,12 +1,15 @@
 // pages/_app.js
 import '../styles/global.css';
+import '../styles/tailwind.css';
+import { MDXComponentsProvider } from '../components/mdx/MDXComponents';
 import Link from 'next/link';
 import Head from 'next/head';
 import { fonts, getFontFamilyVar } from '../styles/fonts';
 
 export default function App({ Component, pageProps }) {
   return (
-    <>
+    <MDXComponentsProvider>
+      <>
       <nav className="navbar">
         <div className="navbar-inner">
           <div className="navbar-title">Living With Aphasia: An Anthology</div>
@@ -100,6 +103,7 @@ export default function App({ Component, pageProps }) {
           }
         }
       `}</style>
-    </>
+      </>
+    </MDXComponentsProvider>
   );
 }
