@@ -4,7 +4,7 @@ import '../styles/tailwind.css';
 import { MDXComponentsProvider } from '../components/mdx/MDXComponents';
 import Link from 'next/link';
 import Head from 'next/head';
-import { fonts, getFontFamilyVar } from '../styles/fonts';
+import { fonts } from '../styles/fonts';
 import { useRouter } from 'next/router';
 
 export default function App({ Component, pageProps }) {
@@ -13,109 +13,29 @@ export default function App({ Component, pageProps }) {
   return (
     <MDXComponentsProvider>
       <>
-        <nav className="navbar">
-          <div className="navbar-inner">
-            <div className="navbar-title">Living With Aphasia: An Anthology</div>
-            <div className="navbar-links">
-              <Link href="/" legacyBehavior>
-                <a>Home</a>
-              </Link>
-              <Link href="/about">About</Link>
-              <Link href="/resources">Resources</Link>
+        {/* Accessible, responsive Tailwind navbar */}
+        <nav aria-label="Main" className="w-full border-b border-neutral-300 bg-slate-50/90 backdrop-blur supports-[backdrop-filter]:bg-slate-50/60">
+          <div className="mx-6 md:mx-8 flex flex-col md:flex-row md:items-end md:justify-start gap-2 md:gap-0 py-4">
+            <div className="text-[1.35rem] md:text-[2.1rem] font-semibold text-[#3a2c2a] tracking-[0.01em] leading-tight select-none">
+              Living With Aphasia: <span className="whitespace-nowrap">An Anthology</span>
+            </div>
+            <div className="flex gap-6 md:ml-auto uppercase tracking-[0.18em] font-semibold text-[0.8rem] md:text-[1.05rem]">
+              <Link href="/" className="px-1 py-1 rounded transition-colors hover:text-sky-700 hover:bg-sky-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-600 focus-visible:outline-offset-2">Home</Link>
+              <Link href="/about" className="px-1 py-1 rounded transition-colors hover:text-sky-700 hover:bg-sky-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-600 focus-visible:outline-offset-2">About</Link>
+              <Link href="/resources" className="px-1 py-1 rounded transition-colors hover:text-sky-700 hover:bg-sky-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-600 focus-visible:outline-offset-2">Resources</Link>
             </div>
           </div>
         </nav>
         {isHome ? (
           <Component {...pageProps} />
         ) : (
-          <main className="site-main-wrapper">
+          <main className="max-w-[1000px] mx-auto px-4 md:px-6 py-10 md:py-12 min-h-[calc(100vh-70px)]"> 
             <Component {...pageProps} />
           </main>
         )}
         <Head>
           <link href={fonts.googleFontsUrl} rel="stylesheet" />
         </Head>
-      <style jsx global>{`
-        .site-main-wrapper {
-          max-width: 1000px;
-          margin: 0 auto;
-          padding: 2.5rem 1.5rem 4rem;
-          font-family: ${getFontFamilyVar()};
-          min-height: calc(100vh - 70px);
-        }
-        .navbar {
-          width: 100vw;
-          background: #f7fafc;
-          border-bottom: 1.5px solid #bcbcbc;
-          padding: 1.2rem 0 0.7rem 0;
-          font-family: ${getFontFamilyVar()};
-        }
-        .navbar-inner {
-          margin: 0 2rem;
-          display: flex;
-          align-items: bottom;
-          justify-content: flex-start;
-          width: calc(100% - 4rem);
-        }
-        .navbar-title {
-          font-family: ${getFontFamilyVar()};
-          font-size: 2.1rem;
-          font-weight: 600;
-          color: #3a2c2a;
-          letter-spacing: 0.01em;
-          margin-left: 0;
-          text-decoration: none;
-          line-height: 1.2;
-        }
-        .navbar-links {
-          display: flex;
-          gap: 2.2rem;
-          border-bottom: none;
-          padding-bottom: 0;
-          margin-left: auto;
-          justify-content: flex-start;
-          font-family: ${getFontFamilyVar()};
-          align-items: bottom;
-          height: 100%;
-        }
-        .navbar-links a, .navbar-links :global(a) {
-          color: #3a2c2a;
-          text-decoration: none;
-          font-family: ${getFontFamilyVar()};
-          font-size: 1.08rem;
-          font-weight: 600;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          padding: 0.5rem 0.2rem;
-          transition: color 0.2s, background-color 0.2s;
-          border-radius: 4px;
-          display: flex;
-          align-items: center;
-          height: 100%;
-        }
-        .navbar-links a:hover, .navbar-links :global(a:hover) {
-          color: #217dbb;
-          background-color: rgba(33, 125, 187, 0.1);
-        }
-        @media (max-width: 700px) {
-          .navbar-inner {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.7rem;
-          }
-          .navbar-title {
-            font-size: 1.2rem;
-          }
-          .navbar-links {
-            gap: 1.1rem;
-            font-size: 0.98rem;
-            margin-left: 0;
-            width: 100%;
-            border-bottom: none;
-            padding-bottom: 0;
-          }
-        }
-        `}</style>
       </>
     </MDXComponentsProvider>
   );

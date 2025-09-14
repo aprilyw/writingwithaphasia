@@ -1,6 +1,6 @@
 # MDX + Tailwind Migration Strategy
 Date: 2025-09-14
-Status: Draft
+Status: Working Draft (Chronologically Organized)
 Owner: (assign)
 
 ## 0. Objectives
@@ -207,7 +207,7 @@ Captions via `<Figure>` component: wraps image and caption with consistent spaci
 | Image Payload | Use Next `<Image>` with width/height or responsive `sizes` attribute. |
 | Interaction Jank | Offload expensive layout recalculations; use transforms for map shrink animation. |
 
-## 11. Migration Phases
+## 11. Migration Phases (Planned)
 | Phase | Scope | Output | Exit Criteria |
 |-------|-------|--------|---------------|
 | 1 | Tooling bootstrap | Tailwind setup, base theme tokens, typography plugin | Build passes, existing pages compile with Tailwind available (no visual overhaul yet). |
@@ -279,9 +279,87 @@ Some paragraph text with a [useful link](https://example.com).
 - Do stories require localization later? (Affects file organization.)
 
 ---
-End of document.
+---
+## 19. Chronological Timeline
 
-## Status Check v0.1.0 (2025-09-14T19:00:00Z)
+This section records actual progress in time order. Earlier fictional / speculative future sections have been removed to avoid confusion. Only verifiable repository state changes are listed.
+
+### v0.1.0 (2025-09-14T19:00Z) – Bootstrap
+Summary:
+- Tailwind configured (`tailwind.config.js`, typography plugin) and imported in `_app.js`.
+- Initial MDX wiring via custom webpack rule + provider mapping.
+- Demo MDX page renders (no real story converted yet).
+Gaps Identified:
+- Frontmatter extraction strategy unstable (plugins temporarily removed pending schema work).
+- No story components (ImageGrid, Figure, VideoEmbed) implemented yet.
+Next Focus (then): add schema + convert first story.
+
+### v0.2.0 (2025-09-14T21:30Z) – Pilot Components (Partial)
+Implemented:
+- Zod frontmatter schema draft (`schema.js`).
+- Custom remark frontmatter export plugin to avoid preset instability.
+- Story media components (`Figure`, `ImageGrid`, `VideoEmbed`), `StoryLayout` scaffold.
+- First real MDX story `ayse.mdx` converted.
+- Metadata index utility (`getStoriesMeta.js`).
+Open Items:
+- Dynamic story route still hybrid / legacy; map not consuming MDX metadata yet.
+- Need validation + lint pass.
+
+### v0.2.1 (2025-09-14T22:15Z) – Hybrid Enablement Note
+Internal checkpoint documenting intent to support both markdown + MDX during transition.
+
+### v0.2.2 (2025-09-14T22:40Z) – Lint & Test Story
+Additions:
+- Test MDX story exercising all components.
+- `scripts/lint-content.js` added with `npm run lint:content` for schema + image existence validation.
+- Homepage now merges legacy markdown data with MDX metadata for a hybrid index.
+Outstanding:
+- Frontmatter parsed twice (webpack export + regex in route) – unify later.
+- Map still CSS-only transitions, no shallow routing.
+
+### v0.3.0 (2025-09-14T23:30Z) – API / On‑Demand Loading
+Additions:
+- API route (or logic) for dynamic sidebar MDX fetch (hybrid loading) – reduces initial payload.
+- Sidebar renders MDX stories via `MDXRemote` mapping; semantic cleanup (no nested figures).
+Still Pending:
+- Shallow routing from markers, focus management, animation choreography.
+- Batch conversion of remaining markdown stories.
+
+### v0.4.0 (2025-09-14T23:59Z) – StoryMap Extraction & MDX Hardening
+Additions:
+- Extracted map + sidebar orchestration into dedicated `StoryMap` component (clean separation for future animation layer).
+- Implemented shallow routing (`router.push('/stories/[id]', undefined, { shallow: true })`) and story auto-open on direct visit; basic focus restoration (heading focus on open, marker focus on close) in place.
+- Converted navbar styling from styled-jsx to Tailwind utilities; removed large legacy CSS block in `_app.js`.
+- Fixed MDX rendering edge cases:
+  - Standardized on remark frontmatter export plugin during both webpack and `next-mdx-remote` serialization paths.
+  - Sanitized legacy HTML comments (`<!-- -->` → `{/* */}`) in stories to prevent MDX parse errors (introduced preprocessing step in `[id].js`).
+  - Added `scope: { frontmatter }` to MDX serialization for reliable variable access in content.
+- Updated Next.js `<Link>` usages to new API (removed nested `<a>` in story page) eliminating runtime navigation error.
+
+Improvements:
+- Reduced duplication / cognitive overhead in `index.js`; logic now centralized, enabling easier animation refactor (Framer Motion integration next).
+- De-risked migration by ensuring hybrid legacy + MDX stories now load consistently in both dedicated route and sidebar dynamic fetch.
+
+Outstanding (Carried Forward):
+- Batch conversion of additional markdown stories to MDX.
+- Animation scaffold (map shrink + panel slide) still CSS-only; will replace with motion primitives.
+- Asset normalization beyond pilot (`ayse`) pending (update hero + inline references after moves).
+
+Notes:
+- Add follow-up lint rule to forbid raw `<!--` sequences in MDX to prevent regression.
+- Consider moving HTML comment sanitization into a small remark plugin (future cleanup).
+
+Next High-Impact Steps:
+1. Introduce animation layer (Framer Motion) with reduced-motion safe fallbacks.
+2. Convert 2–3 more stories and normalize assets (`/public/stories/<id>/`).
+3. Add CI workflow running `npm run lint:content` on PR.
+4. Begin Tailwind refactor of map/container layout styles (remove residual styled-jsx except where needed for OpenLayers specifics).
+
+### Audit (2025-09-14T23:45Z)
+Reality check replaced premature “complete” claims. Only one converted story; legacy markdown pipeline still active. Action plan created for asset normalization, routing, accessibility, and batch conversion.
+
+---
+## 20. Reality Check / Audit (Most Recent)
 
 Periodic migration tracking entry.
 
@@ -330,93 +408,99 @@ Tailwind + base MDX wiring completed. Advanced story components, frontmatter-dri
 ---
 End Status Check v0.1.0
 
-## Status Check v0.2.0 (2025-09-14T21:30:00Z)
+The audit below summarizes current status vs original objectives. (See Timeline above for incremental history.)
 
-### Delta Since v0.1.0
-- Added frontmatter schema (Zod) and custom YAML export remark plugin (replacing failing preset).
-- Implemented media components: `Figure`, `ImageGrid`, `VideoEmbed`.
-- Created `StoryLayout` scaffold.
-- Converted first real story (`ayse.mdx`) with enriched metadata.
-- Added metadata indexing utility (`getStoriesMeta`).
-- Resolved recurring “empty preset” error via custom plugin approach.
+### Implementation Matrix vs Objectives
+| Objective | Status (Actual) | Notes / Gaps |
+|-----------|-----------------|--------------|
+| 1. Rich MDX story content | PARTIAL | Multiple pilot MDX stories render (ayse, ayse-og, test-demo). Remaining legacy stories need conversion & component refactors. |
+| 2. Tailwind design system replacing styled-jsx | IMPROVING | Navbar fully migrated. Map/layout + sidebar + legacy table/grid CSS still pending conversion. |
+| 3. Polished map → story transition | PARTIAL (routing + focus) | Shallow routing + basic focus mgmt done; animation layer & motion polish not yet implemented. |
+| 4. Unified asset handling & optimization | PARTIAL / RISK | Pilot asset path decided; only ayse assets moved. Others still under `static/img`; references need updating post-move. |
+| 5. Authoring ergonomics (schema, lint, preview) | PARTIAL | Lint + schema + MDX scope stable; still no draft preview mode; duplicate frontmatter parsing remains (minor). |
 
-### Updated Phase Progress
-| Phase | Status | Notes |
-|-------|--------|-------|
-| 1 Tooling bootstrap | DONE | Stable. |
-| 2 MDX infra | PARTIAL | Real story converted; dynamic story route still using legacy markdown pipeline. |
-| 3 Story components | PARTIAL | Base layout + core media components present; Callout & advanced heading anchors pending. |
-| 4 Map refactor | NOT STARTED | Requires metadata index integration + MDX story route. |
-| 5 Batch conversion | NOT STARTED | Await scripting & validation tool. |
-| 6 Cleanup & hardening | NOT STARTED | styled-jsx still used; no lint:content script yet. |
-| 7 Enhancements | NOT STARTED | Deferred. |
+### Current Phase Progress (Audited)
+| Phase | Planned Outcome | Actual Status | Key Work Remaining |
+|-------|-----------------|---------------|--------------------|
+| 1 Tooling bootstrap | Tailwind + base MDX enabled | DONE | — |
+| 2 MDX infra | Frontmatter extraction + pilot story | PARTIAL | Consolidate frontmatter usage; decide on Contentlayer adoption. |
+| 3 Story components | Layout + media primitives | PARTIAL | Add Callout, heading anchor UI, lightbox, image placeholders. |
+| 4 Map refactor | Animated panel + shallow routing | PARTIAL | Add motion choreography & reduced-motion handling; refine accessibility. |
+| 5 Batch conversion | All stories in MDX | NOT STARTED | Write conversion script; normalize assets; manual review for complex tables. |
+| 6 Cleanup & hardening | Remove styled-jsx duplication | STARTED | Map/Sidebar & legacy tables still styled-jsx; move to Tailwind utilities. |
+| 7 Enhancements | Prefetch, keyboard nav, dark mode | NOT STARTED | Defer until core migration stable. |
 
-### Completed Artifacts (New This Version)
-- `src/lib/mdx/schema.js`, `remark-frontmatter-export.js`.
-- `src/lib/mdx/getStoriesMeta.js` (initial metadata indexer).
-- `src/components/stories/StoryLayout.js`.
-- `src/components/mdx/{Figure,ImageGrid,VideoEmbed}.js`.
-- `src/content/stories/ayse.mdx`.
+### Key Discrepancies Identified
+1. Legacy markdown pipeline still present (expected until batch conversion phase).
+2. Asset paths only partially migrated (most still under `static/img/*`).
+3. Mixed styling approaches remain (styled-jsx for map/sidebar, Tailwind elsewhere).
+4. Frontmatter parsing logic duplicated (acceptable short-term; unify after deciding on Contentlayer).
+5. Animation polish & keyboard marker navigation not implemented yet.
+6. Image optimization (Next `<Image>`) not uniformly applied to all existing inline references.
 
-### Outstanding Gaps
-1. Replace legacy `/stories/[id].js` markdown rendering with MDX aware loader (import MDX modules & frontmatter).
-2. Expose metadata index to homepage map (static JSON or in-memory during build) and wire coordinates.
-3. Implement validation/diagnostic script: check images exist, coordinates present, required fields.
-4. Begin second & third story conversions to validate repeatability & uncover schema edge cases.
-5. Start map refactor skeleton (`StoryMap` with panel placeholder) before animation polish.
-6. Introduce `lint:content` script (Zod pass + dead image scan) into CI.
+### Recommended Immediate Actions (Week 1)
+1. Standardize asset location: move required story images from `static/img/*` to `public/stories/<id>/...` (or keep `public/img/<id>`), update references, then enforce in lint script.
+2. Enhance frontmatter validation inside build: in `getStaticProps` for `[id].js`, parse with Zod and throw build error on invalid required fields (for early failure).
+3. Replace regex duplicate frontmatter parse with import of exported `frontmatter` (leverage the MDX ESM export produced by `remark-frontmatter-export`).
+4. (DONE) Introduce shallow routing on marker click; ensure deep links open panel with focus.
+5. Add animation scaffold (map shrink + panel motion) with accessibility & reduced-motion support.
+6. (Re-number) Continue Tailwind refactor for map container & sidebar; remove related styled-jsx.
+5. Begin bulk conversion script (dry-run) to turn each `static/md/*.md` into `.mdx` and flag table-based image grids so they can be manually refactored to `<ImageGrid/> + <Figure/>`.
+6. Migrate navbar and index page styled-jsx to Tailwind (incrementally) to reduce dual styling systems.
+7. Add basic focus management: on open focus first heading; on close restore last marker; add `aria-expanded` on map shrink state.
 
-### Risks (Reassessed)
-| Risk | Change | Mitigation |
-|------|--------|------------|
-| Frontmatter regression | Lower | Custom plugin isolates logic. |
-| Inconsistent story layouts | Medium | Enforce `StoryLayout` adoption when migrating each story. |
-| Map refactor scope creep | Unchanged | Implement minimal panel first. |
-| Bulk conversion errors | Emerging | Add dry-run conversion script before Phase 5. |
+### Medium-Term Enhancements
+* Lightbox modal for `Figure` (esc key + focus trap).
+* Automatic slug anchor link buttons for headings (already have ids, need UI affordance + skip link pattern).
+* Optional Contentlayer adoption if type safety & faster metadata aggregation become pressing.
 
-### Immediate Focus Recommendation
-1. MDX dynamic story route replacement.
-2. Hook metadata index into homepage (even without animation) to validate coordinate usage.
-3. Convert 2–3 more stories to pressure test components & layout.
-
-### Pending Decisions (Still Open)
-- Contentlayer adoption (defer until after verifying manual index suffices or build performance suffers).
-- Draft stories support (flip later if editorial workflow demands it).
-
----
-End Status Check v0.2.0
-
-## Status Note (Hybrid Route Enablement) v0.2.1 (2025-09-14T22:15:00Z)
-
-Dynamic story route `/stories/[id]` now supports BOTH:
-1. New MDX stories in `src/content/stories/*.mdx` (preferred moving forward)
-2. Legacy markdown stories in `static/md/*.md` (fallback)
-
-Implementation Highlights:
-- `getStaticPaths` merges ids from both directories (deduped).
-- `getStaticProps` prefers MDX: loads raw file, strips frontmatter (temporary manual parse) then serializes with `next-mdx-remote`.
-- Legacy markdown path still uses existing `getStoryData` utility (no regressions expected).
-- `StoryLayout` wraps MDX content; legacy path retains minimal styled-jsx but will be removed once converted.
-
-Rationale for Manual Frontmatter Parse in `getStaticProps`:
-- Our webpack MDX loader already injects `export const frontmatter` for MDX imported as modules, but here we read files directly to avoid importing uncompiled source (simpler during hybrid phase).
-- Will consolidate on single pipeline (direct ESM import) after all stories are migrated OR introduce Contentlayer.
-
-Next Immediate Steps:
-1. Convert 2–3 additional stories to MDX to validate component coverage.
-2. Expose `getAllStoriesMeta()` output on homepage (map) to begin coordinate-driven marker generation.
-3. Add content lint script (`lint:content`) to validate frontmatter + image references.
-4. Begin skeleton of animated map → panel (`StoryMap`).
-
-Cleanup Follow-up:
-- Remove legacy styled-jsx in `[id].js` once last story converted.
-- Replace manual frontmatter parsing with direct import (or Contentlayer) to eliminate duplicate logic.
-
-Risk Watch:
-- Ensure MDX serialization settings (currently empty plugin arrays) stay aligned with global MDX compilation if new remark/rehype plugins are introduced.
+### Updated Open Questions
+| Topic | Current Leaning | Decision Deadline |
+|-------|-----------------|-------------------|
+| Contentlayer adoption | Defer until after 3–5 story conversions | After Phase 3 completion |
+| Asset folder strategy | Consolidate under `public/` | Before batch conversion |
+| Dark mode tokens | Postpone | After core migration |
 
 ---
-End Status Note v0.2.1
+End Reality Check Audit
+
+### Current Architecture Snapshot (Reference)
+| Concern | Implementation |
+|---------|----------------|
+| Content Sources | Hybrid: `static/md/*.md` + `src/content/stories/*.mdx` |
+| Frontmatter Validation | Zod schema + lint script (build route still regex parses) |
+| Rendering (MDX) | `next-mdx-remote` serialization in page + API responses |
+| Components | `StoryLayout`, `Figure`, `ImageGrid`, `VideoEmbed`, `Separator`, heading/link overrides |
+| Styling | Tailwind + typography; legacy styled-jsx & global CSS still present |
+| Map → Story | CSS shrink + sidebar; no shallow routing or focus mgmt yet |
+
+### Residual / Optional Hardening
+1. Autolink heading anchors UI.
+2. Draft visibility filter.
+3. Centralized image wrapper + ensure all hero images under `public/`.
+4. Keyboard navigation & focus restoration between markers and panel.
+5. CI integration: enforce `npm run lint:content` + (future) stylelint.
+
+### Editorial Workflow (Current)
+1. Add `<slug>.mdx` with required frontmatter.
+2. Run `npm run lint:content` to catch schema & image issues.
+3. Place hero image under decided public path; reference with absolute `/` path.
+4. Use `Figure`, `ImageGrid`, `Video` components instead of tables/inline HTML.
+
+### Immediate Action Backlog (from Audit)
+1. Normalize asset paths.
+2. Shallow routing + accessible focus.
+3. Convert additional stories (goal: 3–5) & refine schema.
+4. Unify frontmatter parsing (drop regex duplication).
+5. Begin Tailwind refactor of navbar & map styled-jsx.
+
+---
+## 21. Notes & Technical Decisions
+**Manual Frontmatter Parse vs MDX Export**: Retained temporarily to avoid coupling build route to loader internals. Will switch to import-based approach or Contentlayer once markdown sources removed.
+
+**Why `next-mdx-remote`**: Provides serialization step compatible with current hybrid fetch approach; can be removed later in favor of native ESM + dynamic import for stories.
+
+**Versioning Strategy**: Tag a milestone only after (a) all stories converted, (b) shallow routing & animation accessible, (c) duplicate parsing removed. Until then remain in pre-1.0 migration phase.
 
 ## Status Check v0.2.2 (2025-09-14T22:40:00Z)
 

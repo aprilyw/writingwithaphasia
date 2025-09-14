@@ -1,37 +1,63 @@
 
-To run development server:
+## Development
+
+Install dependencies and start the dev server:
 ```bash
+npm install
 npm run dev
 ```
 
-This project is populated via markdown-based stories with the following features:
+## Content Model (MDX-Only)
+All stories live as MDX files in `src/content/stories/*.mdx`.
 
-1. **Markdown Processing**:
-   - Stories are stored as markdown files in `static/md/`
-   - Each markdown file has frontmatter with metadata (title, name, coordinates, etc.)
-   - The content supports full markdown formatting
+Required / common frontmatter fields:
+```yaml
+title: "Example Story"
+name: "Full Name"        # optional if title covers it
+location: "City, State"  # optional; displayed if present
+coordinates: [-71.05, 42.36]  # [lon, lat] for map pin (recommended)
+hero: "/static/img/example/hero.jpg"  # optional hero image path
+status: draft | published               # defaults to draft if incomplete
+tags: [recovery, advocacy]
+excerpt: "Short descriptive summary."   # used in listings
+```
 
-2. **Image Handling**:
-   - Images are stored in `static/img/<story-id>/`
-   - Multiple images per story are supported
-   - Images are displayed in a responsive grid
+### Adding a New Story
+1. Create `src/content/stories/<slug>.mdx` with frontmatter.
+2. Add any images under `static/img/<slug>/` (or `public/`).
+3. Use MDX components for structure:
+   - `<Figure src="..." caption="..." />`
+   - `<ImageGrid columns={2}>...</ImageGrid>`
+   - `<VideoEmbed src="https://youtu.be/..." title="..." />`
+   - `<Separator />` for thematic breaks.
+4. Run the content lint:
+```bash
+npm run lint:content
+```
+5. Provide coordinates + hero; then set `status: published`.
 
-3. **Dynamic Pages**:
-   - Each story has its own page at `/stories/[id]`
-   - The map shows all story locations
-   - Clicking a marker shows the story preview in the sidebar
-   - The sidebar has a link to the full story page
+### MDX Components
+The renderer maps semantic components to tailored UI. Plain markdown works, but using components ensures consistent spacing, responsive images, and accessible media.
 
-To add a new story:
+### Linting & Validation
+`npm run lint:content` validates frontmatter (Zod), confirms referenced images exist, and reports warnings for drafts or missing coordinates/hero.
 
-1. Create a markdown file in `static/md/` (e.g., `sherry.md`)
-2. Include the required frontmatter (title, name, coordinates, etc.)
-3. Write the story content using markdown
-4. Create a folder in `static/img/` with the same name (e.g., `static/img/sherry/`)
-5. Add images to that folder
+### Map Integration
+Stories with valid `coordinates` appear as pins on the home page map. Draft stories can still resolve directly by URL but you can extend the code later to filter them out of the map/listings.
 
-The system will automatically:
-- Generate the story page
-- Add the marker to the map
-- Create the preview in the sidebar
-- Display images in a responsive grid
+## Architecture Highlights
+- Next.js + Tailwind CSS (typography plugin for prose styling)
+- MDX serialization via `next-mdx-remote`
+- Frontmatter schema enforcement with Zod
+- Sidebar + API endpoint (`/api/story/[id]`) serve MDX payloads only
+
+## Editorial Workflow Summary
+Create → Lint → Add media & coordinates → Publish → Verify map pin.
+
+## Post-Migration Notes
+- Legacy markdown pipeline and conversion tooling have been removed.
+- All new narrative or media enhancements occur directly in MDX.
+- Consider adding heading slug/anchor support and Next `<Image>` optimization as future improvements.
+
+## License
+(Add license details here if applicable.)

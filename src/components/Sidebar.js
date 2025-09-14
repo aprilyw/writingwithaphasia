@@ -4,7 +4,7 @@ import { getFontFamilyVar } from '../styles/fonts';
 import { MDXRemote } from 'next-mdx-remote';
 import { components as mdxComponents } from './mdx/MDXComponents';
 
-export default function Sidebar({ selectedStory, onClose }) {
+export default function Sidebar({ selectedStory, onClose, headingRef }) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -104,10 +104,16 @@ export default function Sidebar({ selectedStory, onClose }) {
       <div className="content-wrapper">
         <div className="story-content">
           {!loading && storyPayload?.mode === 'legacy' && (
-            <div dangerouslySetInnerHTML={{ __html: storyPayload.legacy.contentHtml }} />
+            <div>
+              <h1 ref={headingRef} tabIndex={-1} style={{outline:'none'}} className="sr-focus-anchor" aria-live="polite">{storyPayload.frontmatter?.title || storyPayload.frontmatter?.name || 'Story'}</h1>
+              <div dangerouslySetInnerHTML={{ __html: storyPayload.legacy.contentHtml }} />
+            </div>
           )}
           {!loading && storyPayload?.mode === 'mdx' && storyPayload.mdxSource && (
-            <MDXRemote {...storyPayload.mdxSource} components={mdxComponents} scope={{ frontmatter: storyPayload.frontmatter }} />
+            <div>
+              <h1 ref={headingRef} tabIndex={-1} style={{outline:'none'}} className="sr-focus-anchor visually-hidden">{storyPayload.frontmatter?.title || storyPayload.frontmatter?.name || 'Story'}</h1>
+              <MDXRemote {...storyPayload.mdxSource} components={mdxComponents} scope={{ frontmatter: storyPayload.frontmatter }} />
+            </div>
           )}
           {loading && (
             <p className="loading-text">Preparing story content…</p>

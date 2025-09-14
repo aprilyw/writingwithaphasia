@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { StoryFrontmatterSchema } = require('./schema');
+const { parseFrontmatterFromFile } = require('./parseFrontmatter');
 
 const STORIES_DIR = path.join(process.cwd(), 'src/content/stories');
 
@@ -11,19 +12,9 @@ function listStoryFiles() {
 
 // Dynamic import of compiled MDX page module to access exported frontmatter.
 function loadFrontmatterFromCompiled(fileBase) {
-  // At build time, Next compiles pages under /src/pages. These content MDX files are not yet pages.
-  // For now we will do a simple static parse by reading the file and extracting the YAML since they aren't compiled as pages.
   const fullPath = path.join(STORIES_DIR, fileBase);
-  const raw = fs.readFileSync(fullPath, 'utf8');
-  const match = /^---\n([\s\S]*?)\n---/m.exec(raw);
-  let yamlData = {};
-  if (match) {
-    // Lightweight YAML parse without full dependency (js-yaml already installed)
-    const yaml = require('js-yaml');
-    yamlData = yaml.load(match[1]) || {};
-  }
-  yamlData.id = yamlData.id || fileBase.replace(/\.mdx$/, '');
-  return yamlData;
+  const { frontmatter } = parseFrontmatterFromFile(fullPath);
+  return frontmatter;
 }
 
 function getAllStoriesMeta() {

@@ -1,10 +1,9 @@
 // API route: /api/story/[id]
-// Returns unified story payload for sidebar consumption (legacy markdown or MDX serialized)
+// Returns MDX story payload for sidebar consumption
 import path from 'path';
 import fs from 'fs';
 import { serialize } from 'next-mdx-remote/serialize';
 import yaml from 'js-yaml';
-import { getStoryData } from '../../../utils/markdown';
 
 export default async function handler(req, res) {
   const { id } = req.query;
@@ -23,9 +22,7 @@ export default async function handler(req, res) {
       const mdxSource = await serialize(content, { mdxOptions: { remarkPlugins: [], rehypePlugins: [] } });
       return res.status(200).json({ mode: 'mdx', id, frontmatter: { id, ...frontmatter }, mdxSource });
     }
-    // Legacy fallback
-    const legacy = await getStoryData(id);
-    return res.status(200).json({ mode: 'legacy', id, legacy });
+    return res.status(404).json({ error: 'Story not found' });
   } catch (err) {
     console.error('Story API error', err);
     return res.status(500).json({ error: 'Failed to load story' });

@@ -29,3 +29,19 @@ Pending:
 - Run `npm install` to fetch new dependencies.
 - Decide on generated output (JIT) build integration (may create a dedicated build step if needed).
 - Convert one real story to MDX after verifying pipeline.
+
+### 2025-09-14 (Audit Addendum 23:50 UTC)
+Previous internal notes (later sections of migration doc) implied a fully completed MDX + Tailwind migration (all legacy markdown removed). Repository audit shows:
+- Legacy markdown pipeline (`src/utils/markdown.js` + `static/md/*.md`) still active and used on homepage.
+- Only one real story converted to MDX (`src/content/stories/ayse.mdx`).
+- Tailwind utilities coexist with significant styled-jsx and bespoke global CSS.
+- Map → story transition partially implemented via CSS (no framer-motion / focus management yet).
+- Hero image path in pilot MDX story references `/static/img/...` (not in `public/`).
+
+Action Items (captured in migration strategy doc):
+1. Standardize asset paths under `public/` and update hero references.
+2. Implement shallow routing + accessible focus when opening a story from the map.
+3. Begin batch MDX conversion with lint script enforcement.
+4. Consolidate frontmatter parsing (remove duplicate regex extraction once pipeline finalized).
+
+This addendum ensures the change log reflects current factual state before further migration steps.
