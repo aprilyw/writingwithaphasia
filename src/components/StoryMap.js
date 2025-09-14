@@ -103,19 +103,30 @@ export default function StoryMap({ stories, mdxMeta }) {
             className="space-y-4 bg-white px-6 py-4 rounded-lg shadow-xl border-2 border-[#3a2c2a] text-center font-semibold text-[#3a2c2a] text-[1.1rem] pointer-events-auto"
             style={{ fontFamily: getFontFamilyVar() }}
           >
-            <div>Click a pin to view its story</div>
+            <div>Click a red pin to view its story</div>
             <div className="text-left">
-              <strong className="block mb-1">Story Index (Hybrid)</strong>
+              <strong className="block mb-1">Story Index</strong>
               <ul className="list-disc pl-5 max-h-64 overflow-auto text-sm">
-                {stories.map((s) => (
+                {stories
+                  .filter(s => {
+                    // Draft detection: status === 'draft' (string) or boolean draft flag
+                    const isDraft = (s.status && s.status.toLowerCase() === 'draft') || s.draft === true;
+                    // Allow override with ?draft=1 in query to display drafts (useful for preview)
+                    if (isDraft && typeof window !== 'undefined') {
+                      const params = new URLSearchParams(window.location.search);
+                      if (params.get('draft') === '1') return true;
+                    }
+                    return !isDraft;
+                  })
+                  .map((s) => (
                   <li key={s.id}>
                     <a href={`/?id=${encodeURIComponent(s.id)}`} className="text-primary hover:text-primaryHover">
                       {s.title || s.name || s.id}
-                      {mdxMeta.find(m => m.id === s.id) && !s.error ? ' (MDX)' : ''}
+                      {/* Removed MDX suffix indicator per request */}
                       {s.error && ' (⚠ meta error)'}
                     </a>
                   </li>
-                ))}
+                  ))}
               </ul>
             </div>
           </div>
