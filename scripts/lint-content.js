@@ -98,6 +98,13 @@ function main() {
       } else {
         report.push({ file, severity: 'warn', type: 'missing-hero', message: 'No hero image set.' });
       }
+    } else {
+      // Hero present; require heroAlt unless draft
+      if (fm.status !== 'draft' && !fm.heroAlt) {
+        report.push({ file, severity: 'warn', type: 'missing-hero-alt', message: 'Hero image missing alt text (heroAlt).'});
+      } else if (fm.heroAlt && fm.heroAlt.length < 5) {
+        report.push({ file, severity: 'info', type: 'short-hero-alt', message: 'heroAlt is very short; consider more descriptive alt text.'});
+      }
     }
     if (fm.status === 'draft') {
       report.push({ file, severity: 'info', type: 'draft-status', message: 'Story marked as draft.' });

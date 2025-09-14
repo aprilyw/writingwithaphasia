@@ -64,6 +64,18 @@ export default function StoryMap({ stories, mdxMeta }) {
     }
   }, [selectedStory]);
 
+  // Escape key closes panel
+  useEffect(() => {
+    function onKey(e) {
+      if (e.key === 'Escape' && selectedStory) {
+        e.preventDefault();
+        handleCloseSidebar();
+      }
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [selectedStory]);
+
   const mapClasses = selectedStory
     ? 'w-[320px] h-[420px] flex-none m-5 rounded-2xl shadow-2xl overflow-hidden relative z-10 transition-all duration-500 ease-[cubic-bezier(0.4,0.14,0.3,1.2)] origin-bottom-left'
     : 'flex-1 h-screen min-w-0 transition-all duration-500 ease-[cubic-bezier(0.4,0.14,0.3,1.2)] origin-center';

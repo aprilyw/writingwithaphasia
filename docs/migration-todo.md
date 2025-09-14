@@ -23,9 +23,9 @@ Source: Derived from `mdx-tailwind-migration.md` audit & timeline.
    - [x] `aria-expanded` & `aria-controls` added between map container and panel. (2025-09-14)
    - [x] Legacy deep link `/stories/[id]` now redirects client-side to `/?id=` for continuity. (2025-09-14)
 3. Frontmatter parsing unification
-   - [~] Zod schema present (`schema.js`) – currently applied via lint script, not yet in build pipeline fail-fast. (2025-09-14)
-   - [ ] Replace manual regex parse in `pages/stories/[id].js` with unified MDX export usage.
-   - [ ] Enable build-time fail on schema errors (currently only CI script). Potential: wrap in `next.config.js` pre-build step.
+   - [x] Zod schema present (`schema.js`) & lint integrated. (2025-09-14)
+   - [x] Build-time fail-fast added (`scripts/validate-content.js` run before `next build`). (2025-09-14)
+   - [ ] Replace manual regex parse in legacy deep link page if still needed (route now just redirects) – verify removal follow-up.
 4. Additional story conversions
    - [ ] Select next 3 markdown stories (criteria: variety of media + geography) for conversion.
    - [ ] Replace any residual non-semantic layouts with `<ImageGrid>` / `<Figure>`.
@@ -41,7 +41,7 @@ Source: Derived from `mdx-tailwind-migration.md` audit & timeline.
 7. Lint & CI
    - [x] Add CI step to run `npm run lint:content`. (2025-09-14)
    - [ ] (Optional) Introduce severity threshold flag (e.g. `--max-warn 5`) to gate merges if hero coverage incomplete.
-   - [ ] Add rule enhancements: missing `heroAlt` once schema extended.
+   - [x] Add rule enhancements: missing `heroAlt` (warn) once schema extended. (2025-09-14)
 
 ---
 ## B. Near-Term (After Week 1 / Phase 3–4 Support)
@@ -52,7 +52,7 @@ Source: Derived from `mdx-tailwind-migration.md` audit & timeline.
    - [ ] Add anchor link UI (hover-visible link icon or hash).
    - [ ] Keyboard skip link to main story content.
 3. Accessibility & UX
-   - [ ] Add Escape key to close panel.
+   - [x] Add Escape key to close panel. (2025-09-14)
    - [ ] Consider arrow key navigation between markers when panel open.
 4. API improvements
    - [ ] Cache headers on story API responses (`s-maxage=60, stale-while-revalidate`).
@@ -123,10 +123,10 @@ All of the following must be true:
 
 ---
 ## G. Fast Reference (Top 5 Next)
-1. Frontmatter parsing unification (replace legacy regex / finalize build-time validation).
-2. Decide demo story retention & hero policy (placeholder vs required for drafts).
-3. Convert next 3 stories to MDX (varied media) & ensure semantic components only.
-4. Image component hardening & raw `<img>` lint rule.
-5. Accessibility & interaction polish (Escape to close, keyboard nav, hero alt enforcement).
+1. Replace remaining manual parse usages (API now unified; confirm no duplicate paths) & remove deprecated markdown copies once verified.
+2. Decide demo story retention & hero placeholder policy; add heroAlt to existing heroes (currently some missing alt text).
+3. Image component hardening & raw `<img>` lint rule + convert any residual tables to `<ImageGrid>`.
+4. Implement arrow key navigation between markers + focus outline improvements.
+5. Unused image detection & excerpt surfacing in map index (improve discoverability).
 
 (Keep this section updated as tasks complete.)
