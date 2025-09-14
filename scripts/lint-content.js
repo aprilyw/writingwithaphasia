@@ -92,7 +92,12 @@ function main() {
       report.push({ file, severity: 'warn', type: 'missing-coordinates', message: 'No coordinates set (map pin disabled).' });
     }
     if (!fm.hero) {
-      report.push({ file, severity: 'warn', type: 'missing-hero', message: 'No hero image set.' });
+      const isDraft = fm.status === 'draft';
+      if (isDraft) {
+        report.push({ file, severity: 'info', type: 'missing-hero', message: 'Draft without hero (allowed).' });
+      } else {
+        report.push({ file, severity: 'warn', type: 'missing-hero', message: 'No hero image set.' });
+      }
     }
     if (fm.status === 'draft') {
       report.push({ file, severity: 'info', type: 'draft-status', message: 'Story marked as draft.' });

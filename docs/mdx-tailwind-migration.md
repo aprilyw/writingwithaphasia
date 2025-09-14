@@ -358,6 +358,36 @@ Next High-Impact Steps:
 ### Audit (2025-09-14T23:45Z)
 Reality check replaced premature “complete” claims. Only one converted story; legacy markdown pipeline still active. Action plan created for asset normalization, routing, accessibility, and batch conversion.
 
+### v0.5.0 (2025-09-15T01:10Z) – Asset Normalization & Lint Hardening
+Additions:
+- Canonical asset path finalized: `public/stories/<id>/` with runtime usage via root-relative `/stories/<id>/...`.
+- Batch migration script executed for early stories (sample set) – all legacy `/static/img/<id>/` references rewritten in MDX.
+- Canonical Ayse story consolidation: removed stub, merged `ayse-og.mdx` into `ayse.mdx` with normalized frontmatter and consistent coordinates.
+- Extended content lint script: surfaces legacy `/static/img/` usage (now zero), enforces hero existence (warn for published only), and validates frontmatter via Zod.
+- Converted demo story image paths to normalized structure.
+
+Improvements:
+- Eliminated risk of mixed asset roots; future optimization (blur placeholders / responsive sizing) now has uniform path assumptions.
+- Lint output reduced to informational hero notices for drafts plus a single published missing-hero warning (`mary.mdx`).
+
+Outstanding:
+- Demo story decision (retain as `demo.mdx` draft or remove pre-launch).
+- Build-time (not just lint-time) schema enforcement still pending.
+- Hero accessibility: need `heroAlt` frontmatter field addition and enforcement.
+- Additional markdown → MDX conversions (only subset converted so far).
+
+Next Focus:
+1. Frontmatter unification (remove regex parse path).
+2. Hero policy + alt text schema extension.
+3. Batch convert next 3 varied stories.
+4. Accessibility polish (Escape to close, keyboard marker nav).
+5. Image optimization plan (lossless compression + eventual Next `<Image>` adoption strategy).
+
+Notes:
+- Introduce unused image detection in lint to catch orphaned assets after edits.
+- Consider adding a build guard script hooking into `prebuild` to fail early on schema errors (mirrors CI).
+
+
 ---
 ## 20. Reality Check / Audit (Most Recent)
 
