@@ -220,14 +220,17 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
         const size = features.length;
         
         if (size === 1) {
-          // Single feature - show as regular pin or gray pin for under construction
+          // Single feature - show as regular pin or gray pin for incomplete stories
           const story = features[0].get('story');
-          const isUnderConstruction = !story.title || !story.name || 
+          
+          // Check status field first, then fall back to existing logic
+          const isIncomplete = story.status === 'incomplete' || 
+            !story.title || !story.name || 
             story.contentHtml?.includes('This page is under construction') ||
             story.contentHtml?.includes('This story is coming soon');
           
-          if (isUnderConstruction) {
-            // Gray pin shape for under construction stories - using a custom drawn pin
+          if (isIncomplete) {
+            // Gray pin shape for incomplete stories - using a custom drawn pin
             return new Style({
               image: new Icon({
                 src: 'data:image/svg+xml;base64,' + btoa(`
@@ -254,10 +257,11 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
           }
         } else {
           // Multiple features - show as cluster with count
-          // Check if all stories in cluster are under construction
-          const allStoriesUnderConstruction = features.every(feature => {
+          // Check if all stories in cluster are incomplete
+          const allStoriesIncomplete = features.every(feature => {
             const story = feature.get('story');
-            return !story.title || !story.name || 
+            return story.status === 'incomplete' ||
+              !story.title || !story.name || 
               story.contentHtml?.includes('This page is under construction') ||
               story.contentHtml?.includes('This story is coming soon');
           });
@@ -266,7 +270,7 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
             image: new Circle({
               radius: Math.min(size * 3 + 10, 25), // Scale radius with count, max 25
               fill: new Fill({
-                color: allStoriesUnderConstruction ? '#9CA3AF' : '#ff6b6b',
+                color: allStoriesIncomplete ? '#9CA3AF' : '#ff6b6b',
               }),
               stroke: new Stroke({
                 color: '#ffffff',

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import { getTrishTipsData } from '../utils/markdown';
+import { getTrishTipsData } from '../utils/mdx';
 
 export async function getStaticProps() {
   let trishTips = null;
@@ -12,36 +12,20 @@ export async function getStaticProps() {
   return { props: { trishTips } };
 }
 
-import Head from 'next/head';
-import { getFontFamilyVar } from '../styles/fonts';
-
-export default function Resources() {
+export default function Resources({ trishTips }) {
   const [activeTab, setActiveTab] = useState('websites');
   const [expanded, setExpanded] = useState(false);
+  
+  // For now, we'll simplify the Trish Tips display since we're using MDX
   let trishTipsContent = null;
   if (trishTips) {
-    const paragraphs = trishTips.contentHtml.split(/<p>|<\/p>/).filter(Boolean);
-    const previewHtml = paragraphs.slice(0, 2).map(p => `<p>${p}</p>`).join('');
-    const restHtml = paragraphs.slice(2).map(p => `<p>${p}</p>`).join('');
     trishTipsContent = (
       <div>
-        <div className="trish-tips-preview" dangerouslySetInnerHTML={{ __html: previewHtml }} />
-        {restHtml && !expanded && (
-          <button className="expand-btn" onClick={() => setExpanded(true)}>
-            Show more ▼
-          </button>
-        )}
-        {expanded && (
-          <>
-            <div className="trish-tips-rest" dangerouslySetInnerHTML={{ __html: restHtml }} />
-            <button className="expand-btn" onClick={() => setExpanded(false)}>
-              Show less ▲
-            </button>
-          </>
-        )}
+        <p>Trish Tips content will be displayed here with MDX rendering in a future update.</p>
       </div>
     );
   }
+  
   return (
     <div className="resources-container">
       <Head>
@@ -106,7 +90,7 @@ export default function Resources() {
           background: #f7fafc;
           border-radius: 16px;
           box-shadow: 0 2px 12px rgba(52,152,219,0.07);
-          font-family: ${getFontFamilyVar()};
+          font-family: 'TASA Orbiter', sans-serif;
         }
         h1 {
           color: #3498db;
