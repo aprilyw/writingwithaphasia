@@ -128,6 +128,21 @@ export default function StoryMap({ stories, mdxMeta }) {
                   </li>
                   ))}
               </ul>
+              <div className="mt-3 text-[11px] text-neutral-600 leading-snug border-t pt-2">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="inline-block w-3 h-3 rounded-full" style={{ background:'#ff6b6b' }} />
+                  <span>Published story</span>
+                </div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="inline-block w-3 h-3 rounded-full" style={{ background:'#6B7280' }} />
+                  <span>Draft (shown on map, not clickable)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="inline-block w-3 h-3 rounded-full" style={{ background:'#9CA3AF' }} />
+                  <span>Under construction / incomplete</span>
+                </div>
+                <div className="mt-1 italic text-neutral-500">Append <code>?draft=1</code> to URL for internal draft interaction.</div>
+              </div>
             </div>
           </div>
         </div>

@@ -23,6 +23,9 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
   const mapRef = useRef();
   const mapInstance = useRef(null);
   const clusterSourceRef = useRef(null);
+  const hoverCardRef = useRef(null);
+  const [draftMode, setDraftMode] = useState(false);
+  const hoverTimeoutRef = useRef(null);
 
   // Only create the map once
   useEffect(() => {
@@ -83,23 +86,23 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
         } else if (features && features.length === 1) {
           // Single feature in cluster - handle as normal
           const story = features[0].get('story');
-          const isUnderConstruction = !story.title || !story.name || 
+          const isDraft = (story.status && story.status.toLowerCase() === 'draft') || story.draft === true;
+          const isUnderConstruction = !story.title || !story.name ||
             story.contentHtml?.includes('This page is under construction') ||
             story.contentHtml?.includes('This story is coming soon');
-          
-          if (!isUnderConstruction) {
+          if (!isUnderConstruction && !(isDraft && !draftMode)) {
             onMarkerClick(story);
           }
         } else {
           // Direct feature (not from cluster) - handle as normal
-          const story = feature.get('story');
-          const isUnderConstruction = !story.title || !story.name || 
-            story.contentHtml?.includes('This page is under construction') ||
-            story.contentHtml?.includes('This story is coming soon');
-          
-          if (!isUnderConstruction) {
-            onMarkerClick(story);
-          }
+            const story = feature.get('story');
+            const isDraft = (story.status && story.status.toLowerCase() === 'draft') || story.draft === true;
+            const isUnderConstruction = !story.title || !story.name ||
+              story.contentHtml?.includes('This page is under construction') ||
+              story.contentHtml?.includes('This story is coming soon');
+            if (!isUnderConstruction && !(isDraft && !draftMode)) {
+              onMarkerClick(story);
+            }
         }
       }
     });
@@ -116,32 +119,39 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
       });
     });
 
-    // Change cursor on hover
+    // Change cursor + hover card (draft aware)
     initialMap.on('pointermove', (event) => {
       const feature = initialMap.forEachFeatureAtPixel(event.pixel, (feature) => feature);
+      let story = null;
       if (feature) {
         const features = feature.get('features');
-        let story = null;
-        
-        if (features && features.length === 1) {
-          story = features[0].get('story');
-        } else if (!features) {
-          story = feature.get('story');
-        }
-        
-        if (story) {
-          const isUnderConstruction = !story.title || !story.name || 
-            story.contentHtml?.includes('This page is under construction') ||
-            story.contentHtml?.includes('This story is coming soon');
-          
-          mapRef.current.style.cursor = isUnderConstruction ? 'not-allowed' : 'pointer';
-        } else {
-          mapRef.current.style.cursor = 'pointer';
+        if (features && features.length === 1) story = features[0].get('story');
+        else if (!features) story = feature.get('story');
+      }
+      if (story) {
+        const isDraft = (story.status && story.status.toLowerCase() === 'draft') || story.draft === true;
+        const isUnderConstruction = !story.title || !story.name ||
+          story.contentHtml?.includes('This page is under construction') ||
+          story.contentHtml?.includes('This story is coming soon');
+        const suppressClick = isUnderConstruction || (isDraft && !draftMode);
+        mapRef.current.style.cursor = suppressClick ? 'not-allowed' : 'pointer';
+        if (hoverCardRef.current) {
+          const pixel = event.pixel;
+            const [x, y] = pixel;
+            hoverCardRef.current.style.display = 'block';
+            hoverCardRef.current.style.left = `${x + 12}px`;
+            hoverCardRef.current.style.top = `${y + 12}px`;
+            hoverCardRef.current.innerHTML = `<div class="hover-card-inner ${isDraft ? 'opacity-70' : ''}">
+              <div class="font-semibold text-sm mb-0.5">${story.title || story.name || story.id}${isDraft ? ' (Draft)' : ''}</div>
+              ${story.subtitle ? `<div class=\"text-[11px] text-neutral-600 leading-snug\">${story.subtitle}</div>` : ''}
+            </div>`;
         }
       } else {
         mapRef.current.style.cursor = '';
+        if (hoverCardRef.current) hoverCardRef.current.style.display = 'none';
       }
     });
+    initialMap.on('pointerout', () => { if (hoverCardRef.current) hoverCardRef.current.style.display = 'none'; });
 
     // Add keyboard shortcuts for faster navigation
     document.addEventListener('keydown', (event) => {
