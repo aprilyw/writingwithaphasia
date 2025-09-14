@@ -1,24 +1,18 @@
 import React from 'react';
 import Image from 'next/image';
 
+// Low-level image building block used by higher-level MDX components.
+// Does NOT wrap in a <figure>; that is handled by Figure to avoid nested figures.
 export function StoryImage(props) {
-  const { src, alt = '', caption, width = 800, height = 600 } = props;
+  const { src, alt = '', width = 800, height = 600, className = '' } = props;
   return (
-    <figure className="my-8">
-      {/* Using next/image for optimization; layout responsive via Tailwind */}
-      <Image
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        className="rounded-xl shadow-sm mx-auto h-auto w-full max-w-[900px] object-cover"
-      />
-      {caption && (
-        <figcaption className="mt-3 text-center text-sm text-grayMid italic px-4 leading-snug">
-          {caption}
-        </figcaption>
-      )}
-    </figure>
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      className={`rounded-xl shadow-sm mx-auto h-auto w-full max-w-[900px] object-cover ${className}`}
+    />
   );
 }
 

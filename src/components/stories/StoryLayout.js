@@ -1,5 +1,5 @@
 import React from 'react';
-import StoryImage from '../mdx/StoryImage';
+import Figure from '../mdx/Figure';
 
 export default function StoryLayout({ frontmatter, children }) {
   const { title, name, location, date, hero, tags } = frontmatter || {};
@@ -23,7 +23,7 @@ export default function StoryLayout({ frontmatter, children }) {
         </div>
         {hero && (
           <div className="mt-8">
-            <StoryImage src={hero} alt={name || title} caption={name || title} priority />
+            <Figure src={hero} alt={name || title} caption={name || title} />
           </div>
         )}
       </header>

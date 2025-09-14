@@ -417,3 +417,109 @@ Risk Watch:
 
 ---
 End Status Note v0.2.1
+
+## Status Check v0.2.2 (2025-09-14T22:40:00Z)
+
+### Additions
+- Created comprehensive test MDX story: `test-demo.mdx` exercising hero image, Figure, ImageGrid, Video, Separator, headings.
+- Homepage (`index.js`) now merges legacy markdown data with MDX frontmatter metadata via `getAllStoriesMeta()` and displays a scrollable hybrid Story Index (labels MDX items and flags metadata errors if any).
+- Added content lint script `scripts/lint-content.js` with npm script `lint:content`:
+  - Validates frontmatter against Zod schema.
+  - Checks existence of `hero` image and inline `<Figure>` / `<img>` src references (basic heuristics).
+  - Produces non‑zero exit code on errors (CI ready).
+
+### Rationale
+- Test story provides a safe playground for styling and component regression before bulk conversion.
+- Early metadata surfacing enables incremental map integration (coordinates already present for MDX stories); next step is wiring markers to MDX coordinates.
+- Lint script reduces risk during batch conversion (Phase 5) and encourages consistent schema usage immediately.
+
+### Next Focus Candidates
+1. Begin converting 2–3 real stories to MDX (choose varied media complexity) to validate tooling at scale.
+2. Refactor map to consume unified metadata (prefer MDX coordinates when available) and render markers accordingly.
+3. Introduce `StoryMap` abstraction + initial panel animation scaffold.
+4. Extend lint script: dead link detection, unused image detection (optional).
+
+### Cleanup / Tech Debt
+- Manual frontmatter parsing duplication (route + lint) to be consolidated after full MDX adoption / potential Contentlayer introduction.
+- Styled-jsx blocks still in map & legacy code; removal pending Tailwind component extraction.
+
+---
+End Status Check v0.2.2
+
+### Note: Frontmatter Access in Serialized MDX (v0.2.2a)
+When using `next-mdx-remote` for hybrid loading we must explicitly supply variables referenced inside MDX via the `scope` prop. The test demo story referenced `{frontmatter.title}` but initial serialization omitted a scope, resulting in empty render. Fix applied:
+
+```
+<MDXRemote {...mdxSource} scope={{ frontmatter }} />
+```
+
+Additionally, component import lines inside MDX (`import Figure from ...`) were removed for the demo because global MDXProvider mapping already supplies those components. Keeping local imports duplicates code and can mask provider mapping issues.
+
+Pending Consolidation: Once all stories are MDX, we can switch from manual serialize + scope to direct ESM imports (leveraging the remark frontmatter export) or adopt Contentlayer for stronger typing.
+
+### Note: MDX v3 Blank Render Issue (v0.2.2b)
+`next-mdx-remote@5` is built against the MDX v2 API. Using `@mdx-js/mdx@3.x` / loader 3.x caused serialized output not to hydrate (pages appeared blank). Resolution: pin MDX packages to 2.3.0.
+
+Pinned versions in `package.json`:
+```
+"@mdx-js/mdx": "2.3.0",
+"@mdx-js/react": "2.3.0",
+"@mdx-js/loader": "2.3.0"
+```
+
+Future: If upgrading to MDX v3, also upgrade to a `next-mdx-remote` version that supports it or remove `next-mdx-remote` in favor of native MDX ESM imports.
+
+---
+## Status Check v0.3.0 (2025-09-14T23:30:00Z)
+
+### Additions
+- Implemented hybrid dynamic sidebar loading via new API route: `GET /api/story/[id]`.
+  - Returns `{ mode: 'mdx', frontmatter, mdxSource }` or `{ mode: 'legacy', legacy: {...} }`.
+  - Enables lightweight marker metadata (id + coordinates) while deferring full story payload fetch until user interaction.
+- Updated `Sidebar` component to:
+  - Display loading + error states.
+  - Render MDX stories with `MDXRemote` + component mapping.
+  - Fallback to legacy `contentHtml` for markdown stories.
+- Modified home `index.js` to pass only minimal story identity (avoids eagerly embedding large HTML into initial bundle / SSG output).
+- Added route-based layout in `_app.js` so non-home pages use a centered content wrapper, eliminating perceived blank area overlay issues.
+- Semantic cleanup: removed nested `<figure>` elements (refactored `StoryImage` vs `Figure`).
+
+### Rationale
+This shifts from eager full-content hydration to on-demand loading, reducing initial page payload and paving the way for smoother map → story transitions without full navigation. MDX stories now appear in the sidebar—closing a major usability gap.
+
+### Phase Progress Snapshot
+| Phase | Status | Notes |
+|-------|--------|-------|
+| 1 Tooling bootstrap | DONE | Stable |
+| 2 MDX infra | PARTIAL | Serialization + API fetch path complete |
+| 3 Story components | PARTIAL | Core media + layout; still need Callout, TOC |
+| 4 Map refactor | STARTED | Functional dynamic fetch; animations & shallow routing pending |
+| 5 Batch conversion | NOT STARTED | Await process & scripts |
+| 6 Cleanup & hardening | IN PROGRESS | Began semantic cleanup; styled-jsx still prevalent |
+| 7 Enhancements | NOT STARTED | Deferred |
+
+### Current Gaps / Next High-Impact Steps
+1. Shallow route updates on marker click (`router.push('/stories/[id]', undefined, { shallow: true })`) for shareable URLs while staying on index.
+2. Animation layer (`StoryMap` container) to shrink map + reveal sidebar smoothly (Framer Motion or CSS transitions).
+3. Convert additional markdown stories to MDX to validate dynamic fetch path at scale.
+4. Extend API error handling (404 for missing story id) & add cache headers (short-term revalidation).
+5. Consolidate duplicated frontmatter parsing (API + page) after final pipeline decision (Contentlayer vs manual ESM import).
+
+### Metrics (Qualitative)
+- Initial home HTML weight reduced (no full legacy story bodies embedded in pageProps for MDX fetch path).
+- User interaction latency: MDX serialization served pre-built (no runtime compile), so sidebar content appears after single network round-trip.
+
+### Risks / Watch List
+| Risk | Impact | Mitigation |
+|------|--------|------------|
+| Duplicate parsing logic | Medium | Unify after map animation phase (introduce shared util). |
+| Large mdxSource in JSON | Medium | Consider compressing or moving to ESM import once all stories converted. |
+| Sidebar layout overflow on media-heavy stories | Low | Add max-height constraints & lazy loading if needed. |
+
+### Immediate Recommendations
+1. Implement shallow routing & map shrink animation (Phase 4).
+2. Convert 2–3 more stories to MDX; run `lint:content` and note discrepancies.
+3. Add a minimal cache layer for `/api/story/[id]` (e.g., `res.setHeader('Cache-Control','s-maxage=60, stale-while-revalidate')`).
+4. Introduce a reusable `<StoryContentShell>` with loading skeleton to polish UX.
+
+---

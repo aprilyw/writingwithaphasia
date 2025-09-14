@@ -1,0 +1,61 @@
+---
+id: test-demo
+title: "Test Demo Story"
+name: "Demo Author"
+location: "Testville, TX"
+coordinates: [-96.7970, 32.7767]
+date: "2025-09-14"
+hero: "/static/img/ayse/AyseInfo.JPEG"
+tags: ["demo", "components"]
+status: published
+excerpt: "A synthetic story to exercise MDX components, images, grids, video, and separators."
+---
+
+{/* Component imports removed: components supplied via global MDXProvider mapping */}
+
+# Test Demo Story (Heading)
+
+This is a test / demo story used to validate the MDX pipeline and component rendering. It intentionally includes a variety of elements.
+
+<Separator />
+
+## Basic Paragraphs
+
+Regular paragraph with a [link to external resource](https://example.com) that should open in a new tab and have proper rel attributes.
+
+Another paragraph referencing an inline image component below.
+
+## Image Figure
+
+<Figure src={frontmatter.hero} alt="Hero Reference" caption="Hero image reused for demo purposes" />
+
+## Image Grid
+
+<ImageGrid columns={2}>
+  <Figure src="/static/img/ayse/Flowers.jpg" alt="Flowers" caption="Flowers" />
+  <Figure src="/static/img/ayse/Dog.JPEG" alt="Dog" caption="Dog" />
+  <Figure src="/static/img/ayse/Now.jpg" alt="Now" caption="Now" />
+  <Figure src="/static/img/ayse/NeverGiveUp.JPEG" alt="Never Give Up" caption="Never Give Up" />
+</ImageGrid>
+
+## Video Embed
+
+<Video src="https://www.youtube.com/watch?v=dQw4w9WgXcQ" title="Sample Video" />
+
+## Headings & Anchors
+
+### Subsection A
+
+Content under subsection A.
+
+### Subsection B
+
+Content under subsection B with more text to ensure slug generation works.
+
+## Separator Again
+
+<Separator />
+
+## Closing Thoughts
+
+This concludes the demo. If you can read this page under `/stories/test-demo` and see all components styled consistently, the integration works.

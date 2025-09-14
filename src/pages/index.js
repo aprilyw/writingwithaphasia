@@ -3,19 +3,27 @@ import { useState, useRef } from 'react';
 import MapComponent from '../components/Map';
 import Sidebar from '../components/Sidebar';
 import { getAllStoriesData } from '../utils/markdown';
+import { getAllStoriesMeta } from '../lib/mdx/getStoriesMeta';
 import Head from 'next/head';
 import { getFontFamilyVar } from '../styles/fonts';
 
 export async function getStaticProps() {
-  const allStoriesData = await getAllStoriesData();
+  const allStoriesData = await getAllStoriesData(); // legacy markdown data
+  const mdxMeta = getAllStoriesMeta(); // new MDX metadata
+  // Merge: prefer MDX meta where ids overlap
+  const mdxMetaMap = new Map(mdxMeta.filter(r => !r.error).map(m => [m.id, m]));
+  const merged = allStoriesData.map(s => mdxMetaMap.get(s.id) ? { ...s, ...mdxMetaMap.get(s.id) } : s);
+  // Add any pure-MDX stories that do not exist in legacy markdown
+  mdxMeta.forEach(m => { if (!merged.find(x => x.id === m.id)) merged.push(m); });
   return {
     props: {
-      stories: allStoriesData
+      stories: merged,
+      mdxMeta
     }
   };
 }
 
-export default function Home({ stories, handleHomeClick }) {
+export default function Home({ stories, mdxMeta, handleHomeClick }) {
   const [selectedStory, setSelectedStory] = useState(null);
   const [zoomToStory, setZoomToStory] = useState(null);
   const [resetMapSignal, setResetMapSignal] = useState(0);
@@ -63,11 +71,11 @@ export default function Home({ stories, handleHomeClick }) {
 
   return (
     <>
-      <div className="container">
+  <div className="container">
         <Head>
           {/* Font now using TASA Orbiter */}
         </Head>
-        <div className={`map-container ${selectedStory ? 'map-shrunk' : ''}`}>
+  <div className={`map-container ${selectedStory ? 'map-shrunk' : ''}`}>
           <MapComponent 
             stories={stories} 
             onMarkerClick={handleMarkerClick} 
@@ -79,17 +87,31 @@ export default function Home({ stories, handleHomeClick }) {
             resetSignal={resetMapSignal}
           />
         </div>
-        <div className={`sidebar-container ${selectedStory ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
-          <Sidebar 
+  <div className={`sidebar-container ${selectedStory ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
+          <Sidebar
             key={selectedStory?.id || 'no-story'}
-            selectedStory={selectedStory} 
+            selectedStory={selectedStory && { id: selectedStory.id }}
             onClose={handleCloseSidebar}
           />
         </div>
         {!selectedStory && (
           <div className="overlay-text">
-            <div className="overlay-content">
-              Click a pin to view its story
+            <div className="overlay-content space-y-4">
+              <div>Click a pin to view its story</div>
+              <div className="text-left">
+                <strong className="block mb-1">Story Index (Hybrid)</strong>
+                <ul className="list-disc pl-5 max-h-64 overflow-auto text-sm">
+                  {stories.map((s) => (
+                    <li key={s.id}>
+                      <a href={`/stories/${s.id}`} className="text-primary hover:text-primaryHover">
+                        {s.title || s.name || s.id}
+                        {mdxMeta.find(m => m.id === s.id) && !s.error ? ' (MDX)' : ''}
+                        {s.error && ' (⚠ meta error)'}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         )}

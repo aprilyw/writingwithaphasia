@@ -5,31 +5,44 @@ import { MDXComponentsProvider } from '../components/mdx/MDXComponents';
 import Link from 'next/link';
 import Head from 'next/head';
 import { fonts, getFontFamilyVar } from '../styles/fonts';
+import { useRouter } from 'next/router';
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter();
+  const isHome = router.pathname === '/';
   return (
     <MDXComponentsProvider>
       <>
-      <nav className="navbar">
-        <div className="navbar-inner">
-          <div className="navbar-title">Living With Aphasia: An Anthology</div>
-          <div className="navbar-links">
-            <Link href="/" legacyBehavior>
-              <a>Home</a>
-            </Link>
-            <Link href="/about">About</Link>
-            <Link href="/resources">Resources</Link>
+        <nav className="navbar">
+          <div className="navbar-inner">
+            <div className="navbar-title">Living With Aphasia: An Anthology</div>
+            <div className="navbar-links">
+              <Link href="/" legacyBehavior>
+                <a>Home</a>
+              </Link>
+              <Link href="/about">About</Link>
+              <Link href="/resources">Resources</Link>
+            </div>
           </div>
-        </div>
-      </nav>
-      <Component {...pageProps} />
-      <Head>
-        <link
-          href={fonts.googleFontsUrl}
-          rel="stylesheet"
-        />
-      </Head>
+        </nav>
+        {isHome ? (
+          <Component {...pageProps} />
+        ) : (
+          <main className="site-main-wrapper">
+            <Component {...pageProps} />
+          </main>
+        )}
+        <Head>
+          <link href={fonts.googleFontsUrl} rel="stylesheet" />
+        </Head>
       <style jsx global>{`
+        .site-main-wrapper {
+          max-width: 1000px;
+          margin: 0 auto;
+          padding: 2.5rem 1.5rem 4rem;
+          font-family: ${getFontFamilyVar()};
+          min-height: calc(100vh - 70px);
+        }
         .navbar {
           width: 100vw;
           background: #f7fafc;
@@ -102,7 +115,7 @@ export default function App({ Component, pageProps }) {
             padding-bottom: 0;
           }
         }
-      `}</style>
+        `}</style>
       </>
     </MDXComponentsProvider>
   );

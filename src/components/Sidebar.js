@@ -1,10 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import ImageModal from './ImageModal';
 import { getFontFamilyVar } from '../styles/fonts';
+import { MDXRemote } from 'next-mdx-remote';
+import { components as mdxComponents } from './mdx/MDXComponents';
 
 export default function Sidebar({ selectedStory, onClose }) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [storyPayload, setStoryPayload] = useState(null);
+
+  // Fetch story when selectedStory changes (selectedStory carries minimal metadata: id)
+  useEffect(() => {
+    if (!selectedStory) {
+      setStoryPayload(null);
+      return;
+    }
+    let cancelled = false;
+    async function load() {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/story/${selectedStory.id}`);
+        const json = await res.json();
+        if (!cancelled) setStoryPayload(json);
+      } catch (e) {
+        if (!cancelled) setStoryPayload({ error: true, message: 'Failed to load story.' });
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+    load();
+    return () => { cancelled = true; };
+  }, [selectedStory]);
 
   // Provide global function for markdown images to call
   useEffect(() => {
@@ -48,11 +75,16 @@ export default function Sidebar({ selectedStory, onClose }) {
           ×
         </button>
       </div>
-
-      {selectedStory.images && selectedStory.images.length > 0 && (
+      {loading && (
+        <div className="loading">Loading story…</div>
+      )}
+      {!loading && storyPayload?.error && (
+        <div className="error">{storyPayload.message || 'Error loading story.'}</div>
+      )}
+      {!loading && storyPayload?.mode === 'legacy' && storyPayload.legacy?.images && storyPayload.legacy.images.length > 0 && (
         <div className="images-container">
           <div className="images-grid">
-            {selectedStory.images.map((image, index) => (
+            {storyPayload.legacy.images.map((image, index) => (
               <figure key={index} className="image-figure">
                 <div className="image-wrapper" onClick={() => {
                   setSelectedImage(image);
@@ -71,7 +103,15 @@ export default function Sidebar({ selectedStory, onClose }) {
 
       <div className="content-wrapper">
         <div className="story-content">
-          <div dangerouslySetInnerHTML={{ __html: selectedStory.contentHtml }} />
+          {!loading && storyPayload?.mode === 'legacy' && (
+            <div dangerouslySetInnerHTML={{ __html: storyPayload.legacy.contentHtml }} />
+          )}
+          {!loading && storyPayload?.mode === 'mdx' && storyPayload.mdxSource && (
+            <MDXRemote {...storyPayload.mdxSource} components={mdxComponents} scope={{ frontmatter: storyPayload.frontmatter }} />
+          )}
+          {loading && (
+            <p className="loading-text">Preparing story content…</p>
+          )}
         </div>
       </div>
 
@@ -94,6 +134,7 @@ export default function Sidebar({ selectedStory, onClose }) {
           position: relative;
           font-family: ${getFontFamilyVar()};
         }
+        .loading, .error, .loading-text { color: #666; font-style: italic; text-align: center; margin: 1rem 0; }
         .header {
           position: relative;
           padding-right: 40px;

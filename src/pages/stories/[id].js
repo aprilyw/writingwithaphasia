@@ -1,5 +1,4 @@
 // pages/stories/[id].js
-import fs from 'fs';
 import path from 'path';
 import { getAllStoryIds, getStoryData } from '../../utils/markdown';
 import StoryLayout from '../../components/stories/StoryLayout';
@@ -7,12 +6,13 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { fonts, getFontFamilyVar } from '../../styles/fonts';
 import { MDXRemote } from 'next-mdx-remote';
+import { components as mdxComponents } from '../../components/mdx/MDXComponents';
 import { serialize } from 'next-mdx-remote/serialize';
 
-// Direct filesystem access to MDX content directory
-const MDX_STORIES_DIR = path.join(process.cwd(), 'src/content/stories');
-
+// Utility: lazy FS access to avoid edge runtime conflicts
 function listMdxIds() {
+  const fs = require('fs');
+  const MDX_STORIES_DIR = path.join(process.cwd(), 'src/content/stories');
   if (!fs.existsSync(MDX_STORIES_DIR)) return [];
   return fs.readdirSync(MDX_STORIES_DIR)
     .filter((f) => f.endsWith('.mdx'))
@@ -33,7 +33,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+  const fs = require('fs');
   const id = params.id;
+  const MDX_STORIES_DIR = path.join(process.cwd(), 'src/content/stories');
   const mdxPath = path.join(MDX_STORIES_DIR, `${id}.mdx`);
   if (fs.existsSync(mdxPath)) {
     const source = fs.readFileSync(mdxPath, 'utf8');
@@ -53,6 +55,10 @@ export async function getStaticProps({ params }) {
         rehypePlugins: []
       }
     });
+    // Debug instrumentation: log compiled MDX size & excerpt
+    if (process.env.NODE_ENV === 'production') {
+      console.log('[MDX serialize]', id, 'keys:', Object.keys(mdxSource || {}), 'compiled length:', mdxSource?.compiledSource?.length);
+    }
     frontmatter.id = frontmatter.id || id;
     return {
       props: {
@@ -86,7 +92,11 @@ export default function Story(props) {
       </nav>
       {mode === 'mdx' ? (
         <StoryLayout frontmatter={props.frontmatter}>
-          <MDXRemote {...props.mdxSource} />
+          <MDXRemote
+            {...props.mdxSource}
+            scope={{ frontmatter: props.frontmatter }}
+            components={mdxComponents}
+          />
         </StoryLayout>
       ) : (
         <article className="legacy-story">
