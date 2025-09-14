@@ -19,7 +19,9 @@ export default async function handler(req, res) {
         frontmatter = yaml.load(fm[1]) || {};
         content = raw.slice(fm[0].length).trimStart();
       }
-      const mdxSource = await serialize(content, { mdxOptions: { remarkPlugins: [], rehypePlugins: [] } });
+  // Sanitize HTML comments to React comments to avoid MDX parse errors
+  const sanitized = content.replace(/<!--([\s\S]*?)-->/g, (_m, inner) => `{/*${inner.trim()}*/}`);
+  const mdxSource = await serialize(sanitized, { mdxOptions: { remarkPlugins: [], rehypePlugins: [] } });
       return res.status(200).json({ mode: 'mdx', id, frontmatter: { id, ...frontmatter }, mdxSource });
     }
     return res.status(404).json({ error: 'Story not found' });

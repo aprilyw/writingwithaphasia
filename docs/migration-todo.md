@@ -15,11 +15,12 @@ Source: Derived from `mdx-tailwind-migration.md` audit & timeline.
    - [x] Decide canonical path: `public/stories/<storyId>/` (legacy `/static/img/<id>/` will be migrated). (2025-09-14) ✓
    - [ ] Move existing hero + inline images for converted MDX stories (start with `ayse`).
    - [ ] Update references in existing MDX (`ayse.mdx`) to `/stories/<id>/...` and adjust lint script to enforce (lint script updated for new path; refs still pending).
-2. Shallow routing & accessibility
-   - [ ] On marker click: `router.push('/stories/[id]', undefined, { shallow: true })`.
-   - [ ] On load: if `router.query.id` present, auto-open panel & focus first heading.
-   - [ ] Implement focus restore to marker on panel close.
-   - [ ] Add `aria-expanded` & `aria-controls` between map container and panel.
+2. Shallow routing & accessibility (UPDATED: now query param based)
+   - [x] On marker click: transition to `/?id=<storyId>` (query param keeps map mounted). (2025-09-14)
+   - [x] On load with `?id=` present: auto-open panel & focus heading. (2025-09-14)
+   - [x] Focus restore to previously focused marker on close. (2025-09-14)
+   - [x] `aria-expanded` & `aria-controls` added between map container and panel. (2025-09-14)
+   - [x] Legacy deep link `/stories/[id]` now redirects client-side to `/?id=` for continuity. (2025-09-14)
 3. Frontmatter parsing unification
    - [ ] Replace manual regex parse in `pages/stories/[id].js` with import of compiled MDX `frontmatter` (or shared util).
    - [ ] Apply Zod validation in build step; fail build on required field errors (title, coordinates for mapped stories).
@@ -29,13 +30,14 @@ Source: Derived from `mdx-tailwind-migration.md` audit & timeline.
    - [ ] Run `npm run lint:content` and resolve issues.
 5. Map / layout refactor foundation
    - [x] Extract current map + sidebar into `StoryMap` component. (2025-09-14) ✓
-   - [ ] Introduce animation scaffold (Framer Motion or improved CSS transitions) without polish.
-   - Note: Added HTML comment sanitization (legacy `<!-- -->` converted to `{/* */}` at build) to unblock MDX compilation errors. (2025-09-14)
+   - [x] Introduce basic animation (CSS/Tailwind transitions & easing) for map shrink/expand; may enhance later. (2025-09-14)
+   - [x] Persistent map: detail view now overlay via query param instead of separate page. (2025-09-14)
+   - Note: Added HTML comment sanitization (legacy `<!-- -->` converted to `{/* */}` at build + API). (2025-09-14)
 6. Tailwind adoption – critical surfaces
    - [x] Port navbar styled-jsx to Tailwind utility classes. (2025-09-14) ✓
-   - [ ] Port home map container layout styling (keeping only animation-specific CSS).
+   - [x] Port home map + sidebar layout (StoryMap) from styled-jsx to Tailwind utilities. (2025-09-14) ✓
 7. Lint & CI
-   - [ ] Add CI step to run `npm run lint:content`.
+   - [x] Add CI step to run `npm run lint:content` (GitHub Actions workflow). (2025-09-14)
    - [ ] (Optional) Fail on warnings above configurable threshold.
 
 ---
@@ -74,7 +76,8 @@ Source: Derived from `mdx-tailwind-migration.md` audit & timeline.
 4. Dark / High-Contrast Theme
    - [ ] Tokenize color palette; add `dark:` variants.
 5. Prefetch & Performance
-   - [ ] Preload MDX bundle on marker hover / focus.
+   - [x] Basic client-side cache of fetched story payloads + neighbor prefetch (Sidebar). (2025-09-14)
+   - [ ] Preload MDX bundle on marker hover / focus (enhanced approach).
    - [ ] Intersection-based lazy mount of heavy media.
 6. Contentlayer Evaluation
    - [ ] Spike: replace manual metadata index with Contentlayer.
@@ -113,10 +116,10 @@ All of the following must be true:
 
 ---
 ## G. Fast Reference (Top 5 Next)
-1. Asset normalization.
-2. Shallow routing + focus management.
-3. Frontmatter parsing unification.
-4. Convert 3 more stories.
-5. Extract `StoryMap` + animation scaffold.
+1. Asset normalization (move images & update MDX refs).
+2. Frontmatter parsing unification (replace legacy regex / finalize Zod validation build step).
+3. Convert 3 additional stories to MDX (exercise new components & image patterns).
+4. Image component hardening (force usage & placeholder strategy).
+5. Enhanced animation polish (optional Framer Motion) & accessibility (Escape to close, keyboard nav).
 
 (Keep this section updated as tasks complete.)

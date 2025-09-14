@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ImageModal from './ImageModal';
 import { getFontFamilyVar } from '../styles/fonts';
 import { MDXRemote } from 'next-mdx-remote';
@@ -9,6 +9,8 @@ export default function Sidebar({ selectedStory, onClose, headingRef }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [storyPayload, setStoryPayload] = useState(null);
+  // Simple in-memory cache for story payloads across selections (lives for app session)
+  const cacheRef = useRef(typeof window !== 'undefined' ? (window.__STORY_CACHE__ ||= new Map()) : new Map());
 
   // Fetch story when selectedStory changes (selectedStory carries minimal metadata: id)
   useEffect(() => {
@@ -18,11 +20,32 @@ export default function Sidebar({ selectedStory, onClose, headingRef }) {
     }
     let cancelled = false;
     async function load() {
+      const id = selectedStory.id;
+      // Serve from cache immediately if present
+      if (cacheRef.current.has(id)) {
+        setStoryPayload(cacheRef.current.get(id));
+        return;
+      }
       setLoading(true);
       try {
-        const res = await fetch(`/api/story/${selectedStory.id}`);
+        const res = await fetch(`/api/story/${id}`);
         const json = await res.json();
-        if (!cancelled) setStoryPayload(json);
+        if (!cancelled) {
+          setStoryPayload(json);
+          cacheRef.current.set(id, json);
+        }
+        // Opportunistic prefetch: try to fetch adjacent IDs from index list in DOM (if any anchor list exists)
+        if (typeof document !== 'undefined') {
+          const links = Array.from(document.querySelectorAll('a[href^="/?id="]'));
+          const ids = links.map(l => decodeURIComponent(l.getAttribute('href').split('=')[1] || '')); // basic extraction
+          const idx = ids.indexOf(id);
+          const neighbors = [ids[idx - 1], ids[idx + 1]].filter(Boolean);
+          neighbors.forEach(nId => {
+            if (!cacheRef.current.has(nId)) {
+              fetch(`/api/story/${nId}`).then(r => r.ok ? r.json() : null).then(d => { if (d) cacheRef.current.set(nId, d); }).catch(()=>{});
+            }
+          });
+        }
       } catch (e) {
         if (!cancelled) setStoryPayload({ error: true, message: 'Failed to load story.' });
       } finally {
@@ -76,7 +99,21 @@ export default function Sidebar({ selectedStory, onClose, headingRef }) {
         </button>
       </div>
       {loading && (
-        <div className="loading">Loading story…</div>
+        <div className="skeleton-wrapper" aria-hidden="true">
+          <div className="skeleton-title shimmer" />
+          <div className="skeleton-meta shimmer" />
+          <div className="skeleton-paragraph">
+            <div className="skeleton-line shimmer" />
+            <div className="skeleton-line shimmer" />
+            <div className="skeleton-line shimmer short" />
+          </div>
+          <div className="skeleton-image shimmer" />
+          <div className="skeleton-paragraph">
+            <div className="skeleton-line shimmer" />
+            <div className="skeleton-line shimmer" />
+            <div className="skeleton-line shimmer short" />
+          </div>
+        </div>
       )}
       {!loading && storyPayload?.error && (
         <div className="error">{storyPayload.message || 'Error loading story.'}</div>
@@ -116,7 +153,7 @@ export default function Sidebar({ selectedStory, onClose, headingRef }) {
             </div>
           )}
           {loading && (
-            <p className="loading-text">Preparing story content…</p>
+            <p className="visually-hidden">Loading story content…</p>
           )}
         </div>
       </div>
@@ -140,7 +177,17 @@ export default function Sidebar({ selectedStory, onClose, headingRef }) {
           position: relative;
           font-family: ${getFontFamilyVar()};
         }
-        .loading, .error, .loading-text { color: #666; font-style: italic; text-align: center; margin: 1rem 0; }
+  .loading, .error, .loading-text { color: #666; font-style: italic; text-align: center; margin: 1rem 0; }
+  .skeleton-wrapper { display:flex; flex-direction:column; gap:1.25rem; padding:0 .25rem 1rem .25rem; }
+  .shimmer { position:relative; overflow:hidden; background: linear-gradient(90deg, #ececec 0px, #f5f5f5 40px, #ececec 80px); background-size:600px 100%; animation: shimmer 1.2s infinite linear; }
+  @keyframes shimmer { 0% { background-position: -200px 0;} 100% { background-position: 400px 0; } }
+  .skeleton-title { height: 2.2rem; border-radius: 8px; width: 70%; margin: 0 auto; }
+  .skeleton-meta { height: .9rem; width: 40%; margin: 0.25rem auto 0; border-radius: 4px; }
+  .skeleton-paragraph { display:flex; flex-direction:column; gap:.6rem; }
+  .skeleton-line { height: .9rem; border-radius:4px; }
+  .skeleton-line.short { width: 60%; }
+  .skeleton-line:not(.short) { width:100%; }
+  .skeleton-image { width:100%; max-width:540px; height:260px; margin: .5rem auto; border-radius:16px; }
         .header {
           position: relative;
           padding-right: 40px;
