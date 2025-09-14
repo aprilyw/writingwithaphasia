@@ -2,6 +2,9 @@ import React from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import StoryImage from './StoryImage';
 import Separator from './Separator';
+import Figure from './Figure';
+import ImageGrid from './ImageGrid';
+import VideoEmbed from './VideoEmbed';
 
 // Heading wrappers for automatic anchor ids (simple slug implementation)
 function slugify(text) {
@@ -39,6 +42,9 @@ export const components = {
   img: (props) => <StoryImage {...props} />,
   StoryImage,
   Separator,
+  Figure,
+  ImageGrid,
+  Video: VideoEmbed,
   h1: H1,
   h2: H2,
   h3: H3,

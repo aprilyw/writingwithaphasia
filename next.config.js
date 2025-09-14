@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
-// MDX custom config (frontmatter plugin temporarily removed for debugging empty preset error)
+const path = require('path');
+const remarkFrontmatterExport = require(path.join(__dirname, 'src/lib/mdx/remark-frontmatter-export.js'));
 
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx'],
   reactStrictMode: true,
   experimental: {},
   webpack: (config, { defaultLoaders }) => {
-    // MDX pipeline: run source through Next's babel, then MDX with remark plugins.
     config.module.rules.push({
       test: /\.mdx?$/,
       use: [
@@ -14,7 +14,7 @@ const nextConfig = {
         {
           loader: require.resolve('@mdx-js/loader'),
           options: {
-            remarkPlugins: [],
+            remarkPlugins: [remarkFrontmatterExport],
             rehypePlugins: []
           }
         }

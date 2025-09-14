@@ -329,3 +329,59 @@ Tailwind + base MDX wiring completed. Advanced story components, frontmatter-dri
 
 ---
 End Status Check v0.1.0
+
+## Status Check v0.2.0 (2025-09-14T21:30:00Z)
+
+### Delta Since v0.1.0
+- Added frontmatter schema (Zod) and custom YAML export remark plugin (replacing failing preset).
+- Implemented media components: `Figure`, `ImageGrid`, `VideoEmbed`.
+- Created `StoryLayout` scaffold.
+- Converted first real story (`ayse.mdx`) with enriched metadata.
+- Added metadata indexing utility (`getStoriesMeta`).
+- Resolved recurring “empty preset” error via custom plugin approach.
+
+### Updated Phase Progress
+| Phase | Status | Notes |
+|-------|--------|-------|
+| 1 Tooling bootstrap | DONE | Stable. |
+| 2 MDX infra | PARTIAL | Real story converted; dynamic story route still using legacy markdown pipeline. |
+| 3 Story components | PARTIAL | Base layout + core media components present; Callout & advanced heading anchors pending. |
+| 4 Map refactor | NOT STARTED | Requires metadata index integration + MDX story route. |
+| 5 Batch conversion | NOT STARTED | Await scripting & validation tool. |
+| 6 Cleanup & hardening | NOT STARTED | styled-jsx still used; no lint:content script yet. |
+| 7 Enhancements | NOT STARTED | Deferred. |
+
+### Completed Artifacts (New This Version)
+- `src/lib/mdx/schema.js`, `remark-frontmatter-export.js`.
+- `src/lib/mdx/getStoriesMeta.js` (initial metadata indexer).
+- `src/components/stories/StoryLayout.js`.
+- `src/components/mdx/{Figure,ImageGrid,VideoEmbed}.js`.
+- `src/content/stories/ayse.mdx`.
+
+### Outstanding Gaps
+1. Replace legacy `/stories/[id].js` markdown rendering with MDX aware loader (import MDX modules & frontmatter).
+2. Expose metadata index to homepage map (static JSON or in-memory during build) and wire coordinates.
+3. Implement validation/diagnostic script: check images exist, coordinates present, required fields.
+4. Begin second & third story conversions to validate repeatability & uncover schema edge cases.
+5. Start map refactor skeleton (`StoryMap` with panel placeholder) before animation polish.
+6. Introduce `lint:content` script (Zod pass + dead image scan) into CI.
+
+### Risks (Reassessed)
+| Risk | Change | Mitigation |
+|------|--------|------------|
+| Frontmatter regression | Lower | Custom plugin isolates logic. |
+| Inconsistent story layouts | Medium | Enforce `StoryLayout` adoption when migrating each story. |
+| Map refactor scope creep | Unchanged | Implement minimal panel first. |
+| Bulk conversion errors | Emerging | Add dry-run conversion script before Phase 5. |
+
+### Immediate Focus Recommendation
+1. MDX dynamic story route replacement.
+2. Hook metadata index into homepage (even without animation) to validate coordinate usage.
+3. Convert 2–3 more stories to pressure test components & layout.
+
+### Pending Decisions (Still Open)
+- Contentlayer adoption (defer until after verifying manual index suffices or build performance suffers).
+- Draft stories support (flip later if editorial workflow demands it).
+
+---
+End Status Check v0.2.0

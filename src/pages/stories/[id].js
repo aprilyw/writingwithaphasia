@@ -1,5 +1,6 @@
 // pages/stories/[id].js
 import { getAllStoryIds, getStoryData } from '../../utils/markdown';
+import StoryLayout from '../../components/stories/StoryLayout';
 import Link from 'next/link';
 import Head from 'next/head';
 import { fonts, getFontFamilyVar } from '../../styles/fonts';
@@ -38,17 +39,8 @@ export default function Story({ storyData }) {
       
       <article className="story">
         <h1>{storyData.name || storyData.title}</h1>
-        
         <div className="content">
           <div dangerouslySetInnerHTML={{ __html: storyData.contentHtml }} />
-        </div>
-
-        <div className="images-grid">
-          {storyData.images && storyData.images.map((image, index) => (
-            <div key={index} className="image-wrapper">
-              <img src={image} alt={`Image ${index + 1} from ${storyData.name || storyData.title}`} />
-            </div>
-          ))}
         </div>
       </article>
 
