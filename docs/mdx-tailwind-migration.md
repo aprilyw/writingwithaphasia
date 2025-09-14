@@ -356,7 +356,7 @@ Next High-Impact Steps:
 4. Begin Tailwind refactor of map/container layout styles (remove residual styled-jsx except where needed for OpenLayers specifics).
 
 ### Audit (2025-09-14T23:45Z)
-Reality check replaced premature “complete” claims. Only one converted story; legacy markdown pipeline still active. Action plan created for asset normalization, routing, accessibility, and batch conversion.
+Reality check replaced premature “complete” claims. Only one converted story; (earlier state) legacy markdown pipeline was still active. Action plan created for asset normalization, routing, accessibility, and batch conversion. (Update Sept 14 2025: legacy pipeline fully removed; homepage now consumes only MDX frontmatter, and legacy loader deleted.)
 
 ### v0.5.0 (2025-09-15T01:10Z) – Asset Normalization & Lint Hardening
 Additions:
@@ -461,7 +461,7 @@ The audit below summarizes current status vs original objectives. (See Timeline 
 | 7 Enhancements | Prefetch, keyboard nav, dark mode | NOT STARTED | Defer until core migration stable. |
 
 ### Key Discrepancies Identified
-1. Legacy markdown pipeline still present (expected until batch conversion phase).
+1. Legacy markdown pipeline (previously present) now retired; `index.js` aggregates only MDX meta.
 2. Asset migration appears complete for pilot set; must audit completeness before declaring milestone.
 3. Mixed styling: global table/grid CSS persists until story conversion removes `<table>` usage.
 4. Frontmatter parsing duplicated (regex + MDX export) — unify soon.

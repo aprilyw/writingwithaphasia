@@ -1,14 +1,20 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import { getTrishTipsData } from '../utils/markdown';
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
 import { getFontFamilyVar } from '../styles/fonts';
 
 export async function getStaticProps() {
+  // Load MDX source for Trish Tips (frontmatter + raw body) and do minimal HTML segmentation for preview.
+  const tipsPath = path.join(process.cwd(), 'src/content/stories', 'trish-tips.mdx');
   let trishTips = null;
-  try {
-    trishTips = await getTrishTipsData();
-  } catch (e) {
-    trishTips = null;
+  if (fs.existsSync(tipsPath)) {
+    const raw = fs.readFileSync(tipsPath, 'utf8');
+    const { data, content } = matter(raw);
+    // Simple paragraph split for preview (avoid full MDX compile cost here)
+    const paragraphs = content.split(/\n\n+/).map(p => p.trim()).filter(Boolean);
+    trishTips = { frontmatter: data, paragraphs };
   }
   return { props: { trishTips } };
 }
@@ -18,23 +24,22 @@ export default function Resources({ trishTips }) {
   const [expanded, setExpanded] = useState(false);
   let trishTipsContent = null;
   if (trishTips) {
-    const paragraphs = trishTips.contentHtml.split(/<p>|<\/p>/).filter(Boolean);
-    const previewHtml = paragraphs.slice(0, 2).map(p => `<p>${p}</p>`).join('');
-    const restHtml = paragraphs.slice(2).map(p => `<p>${p}</p>`).join('');
+    const preview = trishTips.paragraphs.slice(0,2);
+    const rest = trishTips.paragraphs.slice(2);
     trishTipsContent = (
       <div>
-        <div className="trish-tips-preview" dangerouslySetInnerHTML={{ __html: previewHtml }} />
-        {restHtml && !expanded && (
-          <button className="expand-btn" onClick={() => setExpanded(true)}>
-            Show more ▼
-          </button>
+        <div className="trish-tips-preview">
+          {preview.map((p,i)=>(<p key={i}>{p}</p>))}
+        </div>
+        {rest.length > 0 && !expanded && (
+          <button className="expand-btn" onClick={() => setExpanded(true)}>Show more ▼</button>
         )}
         {expanded && (
           <>
-            <div className="trish-tips-rest" dangerouslySetInnerHTML={{ __html: restHtml }} />
-            <button className="expand-btn" onClick={() => setExpanded(false)}>
-              Show less ▲
-            </button>
+            <div className="trish-tips-rest">
+              {rest.map((p,i)=>(<p key={i}>{p}</p>))}
+            </div>
+            <button className="expand-btn" onClick={() => setExpanded(false)}>Show less ▲</button>
           </>
         )}
       </div>

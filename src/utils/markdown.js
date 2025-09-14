@@ -1,3 +1,6 @@
+// DEPRECATED: Legacy markdown loader (static/md). Retained temporarily for reference.
+// This module should not be imported by active pages now that MDX migration is complete.
+// In production, we throw if any of its exports are invoked to surface lingering references.
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -8,7 +11,14 @@ import remarkGfm from 'remark-gfm';
 const storiesDirectory = path.join(process.cwd(), 'static/md');
 const imagesDirectory = path.join(process.cwd(), 'static/images');
 
+function guard() {
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('Legacy markdown loader invoked after MDX migration. Remove references to src/utils/markdown.js');
+  }
+}
+
 export async function getStoryData(id) {
+  guard();
   const fullPath = path.join(storiesDirectory, `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
@@ -111,6 +121,7 @@ export async function getStoryData(id) {
 }
 
 export function getAllStoryIds() {
+  guard();
   const fileNames = fs.readdirSync(storiesDirectory);
   return fileNames.map(fileName => {
     return {
@@ -122,6 +133,7 @@ export function getAllStoryIds() {
 }
 
 export async function getAllStoriesData() {
+  guard();
   const fileNames = fs.readdirSync(storiesDirectory);
   const allStoriesData = await Promise.all(fileNames.map(async fileName => {
     const id = fileName.replace(/\.md$/, '');
@@ -132,6 +144,7 @@ export async function getAllStoriesData() {
 }
 
 export async function getTrishTipsData() {
+  guard();
   const fullPath = path.join(process.cwd(), 'static/articles', 'trish-tips.md');
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);

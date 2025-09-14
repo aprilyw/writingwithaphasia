@@ -225,13 +225,21 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
     });
     
     // Add new markers
-    const markers = stories.map(story => {
-      const feature = new Feature({
-        geometry: new Point(fromLonLat(story.coordinates)),
-        story: story,
-      });
-      return feature;
-    });
+    const markers = stories
+      .filter(story => Array.isArray(story.coordinates) && story.coordinates.length === 2 && story.coordinates.every(n => typeof n === 'number'))
+      .map(story => {
+        try {
+          const feature = new Feature({
+            geometry: new Point(fromLonLat(story.coordinates)),
+            story: story,
+          });
+          return feature;
+        } catch (e) {
+          // Silently skip invalid coordinate
+          return null;
+        }
+      })
+      .filter(Boolean);
     
     const vectorSource = new VectorSource({ features: markers });
     
@@ -251,20 +259,24 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
         const features = feature.get('features');
         const size = features.length;
         
+        if (size === 0) {
+          return null; // nothing to render
+        }
         if (size === 1) {
-          // Single feature - show as regular pin or gray pin for under construction
+          // Single feature - show as regular pin or gray pin for under construction / draft
           const story = features[0].get('story');
-          const isUnderConstruction = !story.title || !story.name || 
+          const isUnderConstruction = !story.title || !story.name ||
             story.contentHtml?.includes('This page is under construction') ||
             story.contentHtml?.includes('This story is coming soon');
-          
-          if (isUnderConstruction) {
-            // Gray pin shape for under construction stories - using a custom drawn pin
+          const isDraft = (story.status && story.status.toLowerCase() === 'draft') || story.draft === true;
+
+          if (isUnderConstruction || isDraft) {
+            // Gray pin for draft or under construction
             return new Style({
               image: new Icon({
                 src: 'data:image/svg+xml;base64,' + btoa(`
                   <svg height="200px" width="200px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                    <path style="fill:#9CA3AF;stroke:#ffffff;stroke-width:3;" d="M87.084,192c-0.456-5.272-0.688-10.6-0.688-16C86.404,78.8,162.34,0,256.004,0s169.6,78.8,169.6,176
+                    <path style="fill:#6B7280;stroke:#ffffff;stroke-width:3;" d="M87.084,192c-0.456-5.272-0.688-10.6-0.688-16C86.404,78.8,162.34,0,256.004,0s169.6,78.8,169.6,176
                     c0,5.392-0.232,10.728-0.688,16h0.688c0,96.184-169.6,320-169.6,320s-169.6-223.288-169.6-320H87.084z M256.004,224
                     c36.392,1.024,66.744-27.608,67.84-64c-1.096-36.392-31.448-65.024-67.84-64c-36.392-1.024-66.744,27.608-67.84,64
                     C189.26,196.392,219.612,225.024,256.004,224z"/>
@@ -274,42 +286,41 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
                 anchor: [0.5, 1],
               }),
             });
-          } else {
-            // Regular red pin for completed stories
-            return new Style({
-              image: new Icon({
-                src: '/static/svg/location-pin-2965.svg',
-                scale: 0.2,
-                anchor: [0.5, 1], // Anchor at bottom center of the pin
-              }),
-            });
           }
+          // Published story pin (blue)
+          return new Style({
+            image: new Icon({
+              src: 'data:image/svg+xml;base64,' + btoa(`\n                <svg height="200px" width="200px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">\n                  <path style="fill:#496586;stroke:#ffffff;stroke-width:3;" d="M87.084,192c-0.456-5.272-0.688-10.6-0.688-16C86.404,78.8,162.34,0,256.004,0s169.6,78.8,169.6,176\n                  c0,5.392-0.232,10.728-0.688,16h0.688c0,96.184-169.6,320-169.6,320s-169.6-223.288-169.6-320H87.084z M256.004,224\n                  c36.392,1.024,66.744-27.608,67.84-64c-1.096-36.392-31.448-65.024-67.84-64c-36.392-1.024-66.744,27.608-67.84,64\n                  C189.26,196.392,219.612,225.024,256.004,224z"/>\n                </svg>\n              `),
+              scale: 0.2,
+              anchor: [0.5, 1],
+            }),
+          });
         } else {
           // Multiple features - show as cluster with count
-          // Check if all stories in cluster are under construction
-          const allStoriesUnderConstruction = features.every(feature => {
-            const story = feature.get('story');
-            return !story.title || !story.name || 
+          // Check if all stories in cluster are under construction or draft
+          const clusterInfo = features.map(f => f.get('story'));
+          const allNonPublished = clusterInfo.every(story => {
+            const isUnderConstruction = !story.title || !story.name ||
               story.contentHtml?.includes('This page is under construction') ||
               story.contentHtml?.includes('This story is coming soon');
+            const isDraft = (story.status && story.status.toLowerCase() === 'draft') || story.draft === true;
+            return isUnderConstruction || isDraft;
           });
-          
+          const anyDraft = clusterInfo.some(story => (story.status && story.status.toLowerCase() === 'draft') || story.draft === true);
+          const anyUnderConstruction = clusterInfo.some(story => !story.title || !story.name || story.contentHtml?.includes('This page is under construction') || story.contentHtml?.includes('This story is coming soon'));
+          let fillColor = '#496586'; // default published cluster color (primary blue)
+          if (allNonPublished) fillColor = '#6B7280'; // all draft/under-construction
+          else if (anyDraft || anyUnderConstruction) fillColor = '#3d546f'; // mixed cluster (darker blue tint)
+
           return new Style({
             image: new Circle({
-              radius: Math.min(size * 3 + 10, 25), // Scale radius with count, max 25
-              fill: new Fill({
-                color: allStoriesUnderConstruction ? '#9CA3AF' : '#ff6b6b',
-              }),
-              stroke: new Stroke({
-                color: '#ffffff',
-                width: 2,
-              }),
+              radius: Math.min(size * 3 + 10, 25),
+              fill: new Fill({ color: fillColor }),
+              stroke: new Stroke({ color: '#ffffff', width: 2 }),
             }),
             text: new Text({
               text: size.toString(),
-              fill: new Fill({
-                color: '#ffffff',
-              }),
+              fill: new Fill({ color: '#ffffff' }),
               font: 'bold 14px Arial',
             }),
           });

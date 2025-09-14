@@ -32,7 +32,7 @@ Pending:
 
 ### 2025-09-14 (Audit Addendum 23:50 UTC)
 Previous internal notes (later sections of migration doc) implied a fully completed MDX + Tailwind migration (all legacy markdown removed). Repository audit shows:
-- Legacy markdown pipeline (`src/utils/markdown.js` + `static/md/*.md`) still active and used on homepage.
+- Legacy markdown pipeline removed from homepage aggregation (Sept 14 2025). MDX-only source of truth; legacy loader subsequently deleted after Trish Tips migration.
 - Only one real story converted to MDX (`src/content/stories/ayse.mdx`).
 - Tailwind utilities coexist with significant styled-jsx and bespoke global CSS.
 - Map → story transition partially implemented via CSS (no framer-motion / focus management yet).

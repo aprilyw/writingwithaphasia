@@ -143,30 +143,39 @@ export default function StoryMap({ stories, mdxMeta }) {
             <div className="text-left">
               <strong className="block mb-1">Story Index</strong>
               <ul className="list-disc pl-5 max-h-64 overflow-auto text-sm">
-                {stories
-                  .filter(s => {
-                    // Draft detection: status === 'draft' (string) or boolean draft flag
-                    const isDraft = (s.status && s.status.toLowerCase() === 'draft') || s.draft === true;
-                    // Allow override with ?draft=1 in query to display drafts (useful for preview)
-                    if (isDraft && typeof window !== 'undefined') {
-                      const params = new URLSearchParams(window.location.search);
-                      if (params.get('draft') === '1') return true;
-                    }
-                    return !isDraft;
-                  })
-                  .map((s) => (
-                  <li key={s.id}>
-                    <a href={`/?id=${encodeURIComponent(s.id)}`} className="text-primary hover:text-primaryHover">
-                      {s.title || s.name || s.id}
-                      {/* Removed MDX suffix indicator per request */}
-                      {s.error && ' (⚠ meta error)'}
-                    </a>
-                  </li>
-                  ))}
+                {stories.map((s) => {
+                  const isDraft = (s.status && s.status.toLowerCase() === 'draft') || s.draft === true;
+                  // Hide drafts unless ?draft=1 supplied
+                  if (isDraft && typeof window !== 'undefined') {
+                    const params = new URLSearchParams(window.location.search);
+                    if (params.get('draft') !== '1') return null;
+                  } else if (isDraft) {
+                    // On server render hide drafts
+                    return null;
+                  }
+                  return (
+                    <li key={s.id}>
+                      <a
+                        href={`/?id=${encodeURIComponent(s.id)}`}
+                        className={
+                          'hover:text-primaryHover ' +
+                          (isDraft ? 'text-neutral-500 line-through italic opacity-70 pointer-events-none cursor-default' : 'text-primary')
+                        }
+                        aria-disabled={isDraft ? 'true' : undefined}
+                        tabIndex={isDraft ? -1 : undefined}
+                        title={isDraft ? 'Draft story (not yet published)' : undefined}
+                      >
+                        {s.title || s.name || s.id}
+                        {isDraft && <span className="ml-2 text-[10px] uppercase tracking-wide bg-neutral-300 text-neutral-700 px-1.5 py-0.5 rounded">Draft</span>}
+                        {s.error && ' (⚠ meta error)'}
+                      </a>
+                    </li>
+                  );
+                })}
               </ul>
               <div className="mt-3 text-[11px] text-neutral-600 leading-snug border-t pt-2">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="inline-block w-3 h-3 rounded-full" style={{ background:'#ff6b6b' }} />
+                  <span className="inline-block w-3 h-3 rounded-full" style={{ background:'#496586' }} />
                   <span>Published</span>
                 </div>
                 <div className="flex items-center gap-2">

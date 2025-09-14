@@ -2,6 +2,11 @@
   --font-family-primary: 'TASA Orbiter', sans-serif;
   /* Unified maximum readable line length for narrative/story text (approx 68ch ≈ ~900px at base). */
   --story-measure: 68ch;
+  --color-primary: #496586;
+  --color-primary-hover: #3d546f;
+  --color-bg: #f0f0f0;
+  --color-ink: #3c3830;
+  --color-accent: #9eb2ca;
 }
 
 html,
@@ -11,6 +16,8 @@ body {
   font-family: var(--font-family-primary);
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
+  background: var(--color-bg);
+  color: var(--color-ink);
 }
 
 /* Hide scrollbars for WebKit browsers (Chrome, Safari, Edge) */
@@ -36,13 +43,13 @@ body::-webkit-scrollbar {
 
 /* Global link styling - blue and underlined */
 a {
-  color: #217dbb;
+  color: var(--color-primary);
   text-decoration: underline;
   transition: color 0.2s ease;
 }
 
 a:hover {
-  color: #3498db;
+  color: var(--color-primary-hover);
 }
 
 /* Note: Opening external links in new tab should be handled in markup (rel+target), not via CSS */
@@ -56,54 +63,42 @@ img {
   height: auto;
 }
 
+/* Fallback centering for standalone images not wrapped by Figure (defensive) */
+.story-content img:not([data-gallery-item]),
+.content img:not([data-gallery-item]),
+.prose > img,
+.prose p > img:only-child {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ensure figure button wrapper cannot shrink content weirdly */
+figure > div > button > img, figure > button > img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+figure { text-align: center; }
+
 /* Shared readable width constraint for story prose (applied to both map sidebar + standalone pages). */
 .story-readable {
   max-width: var(--story-measure);
 }
 
 /* Custom styling for asterisk page breaks */
+/* Standard horizontal rule used for '***' syntax in MDX (simple subtle break). */
 .story-content hr,
 .content hr {
-  border: none;
-  height: auto;
-  margin: 2.5em 0;
-  text-align: center;
-  background: none;
-  position: relative;
+  border: 0;
+  height: 1px;
+  margin: 2.75em auto;
+  width: 65%;
+  background: linear-gradient(to right, transparent, #ccc, transparent);
 }
 
-.story-content hr::before,
-.content hr::before {
-  content: "*     *     *     *     *";
-  font-size: 1.2em;
-  color: #666;
-  letter-spacing: 0.1em;
-  font-weight: 300;
-  display: block;
-  text-align: center;
-  line-height: 1;
-}
-
-/* Alternative styling for a more decorative look */
-.story-content hr.decorative,
-.content hr.decorative {
-  border: none;
-  height: auto;
-  margin: 3em 0;
-  text-align: center;
-  background: none;
-}
-
-.story-content hr.decorative::before,
-.content hr.decorative::before {
-  content: "✧     ✧     ✧     ✧     ✧";
-  font-size: 1.1em;
-  color: #888;
-  letter-spacing: 0.15em;
-  display: block;
-  text-align: center;
-  line-height: 1;
-}
+/* Legacy decorative variants removed in favor of explicit <Separator /> component */
 
 /* Custom zoom controls styling */
 .custom-zoom-controls {
@@ -128,7 +123,7 @@ img {
 
 .custom-zoom-controls button:hover {
   background: #f5f5f5;
-  color: #217dbb;
+  color: #496586;
 }
 
 .custom-zoom-controls button:active {

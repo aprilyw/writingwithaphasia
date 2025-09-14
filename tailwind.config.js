@@ -10,15 +10,16 @@ module.exports = {
         sans: ['TASA Orbiter', 'ui-sans-serif', 'system-ui']
       },
       colors: {
-        primary: '#217dbb',
-        primaryHover: '#3498db',
-        brandDark: '#3a2c2a',
-        brandInk: '#2c3e50',
-        accent: '#ff6b6b',
+        // Updated palette (blue primary)
+        primary: '#496586',
+        primaryHover: '#3d546f',
+        brandDark: '#3c3830',
+        brandInk: '#3c3830',
+        accent: '#9EB2CA',
         grayMid: '#666666',
-        surface: '#ffffff',
-        surfaceAlt: '#f7fafc',
-        surfaceMuted: '#f8f9fa'
+        surface: '#f0f0f0',
+        surfaceAlt: '#ffffff',
+        surfaceMuted: '#e8e8e8'
       },
       boxShadow: {
         sm: '0 2px 4px rgba(0,0,0,0.1)',

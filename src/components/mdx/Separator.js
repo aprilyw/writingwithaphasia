@@ -1,11 +1,17 @@
 import React from 'react';
 
-export function Separator({ decorative = false }) {
+// Accessible decorative section break of five spaced asterisks.
+// Usage: <Separator /> in MDX. '***' in raw MDX still produces a normal hr (simple break).
+export function Separator({ decorative = false, className = '' }) {
   return (
-    <hr
+    <div
+      role="separator"
+      aria-label={decorative ? undefined : 'Section break'}
       aria-hidden={decorative}
-      className="my-12 border-none relative text-center before:content-['*_*_*_*_*'] before:tracking-[0.35em] before:text-grayMid before:font-light before:inline-block before:text-lg"
-    />
+      className={`my-12 flex w-full items-center justify-center ${className}`}
+    >
+      <span aria-hidden="true" className="select-none font-light tracking-[0.4em] text-grayMid text-lg">* * * * *</span>
+    </div>
   );
 }
 

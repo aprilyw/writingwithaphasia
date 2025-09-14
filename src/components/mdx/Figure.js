@@ -22,18 +22,20 @@ export default function Figure({ src, alt = '', caption, className = '', noOuter
           ? 'w-full max-w-[1250px]'
           : maxWidth;
   return (
-    <figure className={`${noOuterSpacing ? '' : 'my-10'} ${sizeClamp} w-full px-2 sm:px-0 ${alignClass} ${className}`}>
-      <button
-        type="button"
-        onClick={() => clickable && gallery.open(src)}
-        className={`group relative block focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-600 rounded-xl overflow-hidden`}
-        aria-label={alt || caption || 'View image'}
-      >
-  <StoryImage src={src} alt={alt} fit={fit} position={position} {...rest} className="group-hover:brightness-[1.05] transition duration-200" />
-        {clickable && (
-          <span className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition" />
-        )}
-      </button>
+    <figure className={`${noOuterSpacing ? '' : 'my-10'} ${sizeClamp} w-full ${alignClass} ${className} flex flex-col items-center`}>      
+      <div className="w-full flex justify-center">
+        <button
+          type="button"
+          onClick={() => clickable && gallery.open(src)}
+          className={`group relative block w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-600 rounded-xl overflow-hidden`}
+          aria-label={alt || caption || 'View image'}
+        >
+          <StoryImage src={src} alt={alt} fit={fit} position={position} {...rest} className="group-hover:brightness-[1.05] transition duration-200" />
+          {clickable && (
+            <span className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition" />
+          )}
+        </button>
+      </div>
       {!noOuterSpacing && caption && (
         <figcaption className="mt-4 text-center text-sm text-grayMid italic leading-snug px-2 md:px-4 max-w-[92%] mx-auto">{caption}</figcaption>
       )}
