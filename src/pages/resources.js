@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useState } from 'react';
 import { getTrishTipsData } from '../utils/markdown';
+import { getFontFamilyVar } from '../styles/fonts';
 
 export async function getStaticProps() {
   let trishTips = null;
@@ -12,10 +13,7 @@ export async function getStaticProps() {
   return { props: { trishTips } };
 }
 
-import Head from 'next/head';
-import { getFontFamilyVar } from '../styles/fonts';
-
-export default function Resources() {
+export default function Resources({ trishTips }) {
   const [activeTab, setActiveTab] = useState('websites');
   const [expanded, setExpanded] = useState(false);
   let trishTipsContent = null;
