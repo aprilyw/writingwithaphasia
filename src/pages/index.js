@@ -7,7 +7,14 @@ import StoryMap from '../components/StoryMap';
 
 export async function getStaticProps() {
   const allStoriesData = await getAllStoriesData(); // legacy markdown data
-  const mdxMeta = getAllStoriesMeta(); // new MDX metadata
+  let mdxMeta;
+  try {
+    mdxMeta = getAllStoriesMeta({ strict: process.env.NODE_ENV === 'production' });
+  } catch (e) {
+    // Surface build-time failure with clear message
+    console.error('[build] MDX frontmatter validation error:\n', e.message);
+    throw e; // Let Next.js fail the build
+  }
   // Merge: prefer MDX meta where ids overlap
   const mdxMetaMap = new Map(mdxMeta.filter(r => !r.error).map(m => [m.id, m]));
   const merged = allStoriesData.map(s => mdxMetaMap.get(s.id) ? { ...s, ...mdxMetaMap.get(s.id) } : s);

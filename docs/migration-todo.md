@@ -13,8 +13,9 @@ Source: Derived from `mdx-tailwind-migration.md` audit & timeline.
 ## A. Immediate (Week 1 Focus)
 1. Asset normalization
    - [x] Decide canonical path: `public/stories/<storyId>/` (legacy `/static/img/<id>/` will be migrated). (2025-09-14) ✓
-   - [ ] Move existing hero + inline images for converted MDX stories (start with `ayse`).
-   - [ ] Update references in existing MDX (`ayse.mdx`) to `/stories/<id>/...` and adjust lint script to enforce (lint script updated for new path; refs still pending).
+   - [x] Move existing hero + inline images for converted MDX stories (start with `ayse`). (2025-09-14) ✓ All ayse images present under `public/stories/ayse/`.
+   - [x] Update references in existing MDX (`ayse.mdx`) to `/stories/<id>/...` and adjust lint script to enforce (2025-09-14) ✓ `ayse.mdx` now uses normalized hero path; no legacy refs.
+   - [x] Batch migrated images & rewrote paths for `brian`, `mary`, `sherry`, `trish` (2025-09-14) via `scripts/migrate-static-images.js` ✓
 2. Shallow routing & accessibility (UPDATED: now query param based)
    - [x] On marker click: transition to `/?id=<storyId>` (query param keeps map mounted). (2025-09-14)
    - [x] On load with `?id=` present: auto-open panel & focus heading. (2025-09-14)

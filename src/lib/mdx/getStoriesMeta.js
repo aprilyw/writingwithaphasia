@@ -17,15 +17,19 @@ function loadFrontmatterFromCompiled(fileBase) {
   return frontmatter;
 }
 
-function getAllStoriesMeta() {
+function getAllStoriesMeta(options = {}) {
+  const { strict = false } = options;
   const files = listStoryFiles();
   const records = [];
+  const errors = [];
   for (const file of files) {
     const fm = loadFrontmatterFromCompiled(file);
     const parseResult = StoryFrontmatterSchema.safeParse(fm);
     if (!parseResult.success) {
       // Collect error messages but continue.
-      records.push({ id: fm.id || file, error: parseResult.error.flatten() });
+      const err = { id: fm.id || file.replace(/\.mdx$/, ''), error: parseResult.error.flatten() };
+      records.push(err);
+      errors.push(err);
       continue;
     }
     records.push({ ...parseResult.data });
@@ -36,6 +40,10 @@ function getAllStoriesMeta() {
     if (a.date && b.date) return a.date > b.date ? -1 : 1;
     return (a.title || '').localeCompare(b.title || '');
   });
+  if (strict && errors.length) {
+    const summary = errors.map(e => `${e.id}: ${Object.values(e.error.fieldErrors).flat().join('; ')}`).join('\n');
+    throw new Error(`Frontmatter validation failed for ${errors.length} file(s):\n${summary}`);
+  }
   return records;
 }
 

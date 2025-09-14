@@ -3,17 +3,20 @@ id: "brian"
 title: "Brian's Story"
 name: "Brian Bassett"
 location: "Boston, Massachusetts"
-date: "7-22-2025"
+date: "2025-07-22"
 coordinates: [-71.0565,42.3555]
 status: "draft"
 excerpt: "On the day when I had a stroke, the lights went off. Two months later, the lights came back."
+hero: "/stories/brian/Spaulding.jpg"
 ---
 
 import ImageGrid from '../../components/mdx/ImageGrid';
+import Figure from '../../components/mdx/Figure';
+import StoryImage from '../../components/mdx/StoryImage';
 
 
 
-<!-- TODO: Add hero image path (relative or /static/img/...) -->
+{/* Hero image now defined in frontmatter */}
 
 On the day when I had a stroke, the lights went off. Two months later, the lights came back. 
 
@@ -41,22 +44,30 @@ The stroke happened on Sunday, May 3. It was completely out of the blue. Before 
 
 I had a stroke on the airplane. My wife tells me that when we got back to Boston, we went on the ambulance from Logan Airport to Massachusetts General Hospital. I was unconscious in the airplane and I was unconscious for about a week.
 
-<Figure src="/static/img/brian/Spaulding.jpg" caption="Spaulding" />
+<Figure src="/stories/brian/Spaulding.jpg" caption="Spaulding" />
 *I was transferred from Massachusetts General Hospital to Spaulding Rehabilitation Hospital. Here, I am building Legos with my younger son, Hughie, who was six at the time (June 2015).*
 
 In the hospital, the doctors found that my brain had been swelling. It had swollen so much that it was putting too much pressure on my skull. The doctors decided that I should have a major surgery on Monday morning. The surgery was to remove part of my skull. The surgery was a success; my brain would shrink now that part of my skull was removed.
 
 Because part of my skull was now missing, it was really important that I wore a helmet 24 hours a day, 7 days a week. It was dangerous if I was not wearing my helmet. (I wore it for six weeks before my second major surgery to replace the part of my skull that the doctors had initially removed.)
 
-<Figure src="/static/img/brian/Helmet.jpg" caption="Helmet" />
+<Figure src="/stories/brian/Helmet.jpg" caption="Helmet" />
 *This is what my helmet looked like. I am with my older son, Henry, who was fourteen at the time.*
 
 Now I had another problem after the first major surgery:  I was mute.  After I woke up, I was assigned a speech therapist. The speech therapist would ask me simple questions. My problem was not understanding what the speech therapist asked me; it was that I was mute. I could understand what the speech therapist was asking but I could not respond.
 
-|  |  |
-|--|--|
-| <img src="/static/img/brian/before.jpg" alt="Brian before shaving" style="width: 300px; height: 300px; object-fit: cover;" />  | <img src="/static/img/brian/after%20shave.jpg" alt="Brian after shaving" style="width: 300px; height: 300px; object-fit: cover;" />  |
-| *I shave every day. Right after my stroke though, I could not shave, so my beard grew out (July 13th, 2015).* | *A photo from the same day, after I had my beard shaved (later on July 13th, 2015).* |
+<div className="my-8">
+	<div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+		<figure className="text-center">
+			<StoryImage src="/stories/brian/before.jpg" alt="Brian before shaving" width={300} height={300} className="object-cover rounded-lg mx-auto w-full h-auto max-w-[300px]" />
+			<figcaption className="mt-2 text-sm text-grayMid italic">I shave every day. Right after my stroke though, I could not shave, so my beard grew out (July 13th, 2015).</figcaption>
+		</figure>
+		<figure className="text-center">
+			<StoryImage src="/stories/brian/aftershave.jpg" alt="Brian after shaving" width={300} height={300} className="object-cover rounded-lg mx-auto w-full h-auto max-w-[300px]" />
+			<figcaption className="mt-2 text-sm text-grayMid italic">A photo from the same day, after I had my beard shaved (later on July 13th, 2015).</figcaption>
+		</figure>
+	</div>
+</div>
 
 
 <Separator />
@@ -72,7 +83,7 @@ I was silent with Hughie in his room. Then, all of a sudden, I talked. I did not
 
 I had many, many basic questions about what happened. To answer my questions, Hughie got a piece of paper and he wrote:  May 1, May 2, May 3, May 4. He circled May 3 and said, “You had a stroke on May 3.” 
 
-<Figure src="/static/img/brian/IceCream.jpg" caption="IceCream" />
+<Figure src="/stories/brian/IceCream.jpg" caption="IceCream" />
 *Me and Hughie getting ice cream in Beacon Hill after my stroke. It was really nice.*
 
 After Hughie and I talked for about half an hour, I met my older son Henry. We went to the park and I had another conversation with Henry for around half an hour. When Henry and I returned, my wife was there waiting. 
@@ -89,10 +100,10 @@ When I had a conversation with Sarah, she told me that I had a stroke, and I als
 
 The main focus was speech therapy.  I worked with my speech therapist for five problems: speaking, listening, reading, writing and prosody (intonation, tone, stress and rhythm). My speech therapist and I worked for three years and eventually, I improved a lot. 
 
-<Figure src="/static/img/brian/Bike.jpg" caption="Bike" />
+<Figure src="/stories/brian/Bike.jpg" caption="Bike" />
 *I also did physical therapy at Spaulding in Charlestown. Here, you can see my beard and my helmet!*
 
-<Figure src="/static/img/brian/Golf.jpg" caption="Golf" />
+<Figure src="/stories/brian/Golf.jpg" caption="Golf" />
 *I also golfed at Spaulding (still with my beard and helmet).*
 
 The other new thing I did was to take an afternoon nap for two hours, from 4:00 to 6:00pm.  After I woke up, my family would eat dinner. I would wash the dishes and then go back to sleep at 11:00pm. 
@@ -146,7 +157,7 @@ Finally, I am grateful for my wife, Sarah, and for my two sons, Henry and Hughie
 
 Thank you very much!
 
-<Figure src="/static/img/brian/B4.jpg" caption="B4" />
+<Figure src="/stories/brian/B4.jpg" caption="B4" />
 *My wife, Sarah, and my two sons, Henry and Hughie.*
 
 <!-- UPGRADED_IMAGE_FORMAT -->

@@ -60,6 +60,17 @@ function extractImageLikeRefs(raw) {
   return Array.from(results);
 }
 
+function detectLegacyStaticRefs(raw) {
+  // Capture any literal /static/img/... occurrences (not limited to img tags)
+  const legacyPattern = /\/static\/img\/[A-Za-z0-9_-]+\//g;
+  const matches = new Set();
+  let m;
+  while ((m = legacyPattern.exec(raw))) {
+    matches.add(m[0]);
+  }
+  return Array.from(matches);
+}
+
 function main() {
   const files = listMdxFiles();
   let errorCount = 0;
@@ -99,6 +110,13 @@ function main() {
         errorCount++;
         report.push({ file, severity: 'error', type: 'missing-image-ref', path: img });
       }
+    });
+
+    // Legacy /static/img path usage (enforce migration to /stories/<id>/)
+    const legacyRefs = detectLegacyStaticRefs(raw);
+    legacyRefs.forEach(ref => {
+      // ref like '/static/img/ayse/' -> we surface suggestion
+      report.push({ file, severity: 'warn', type: 'legacy-static-path', legacyPrefix: ref, suggestion: ref.replace('/static/img/', '/stories/') });
     });
   }
 
