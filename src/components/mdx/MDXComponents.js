@@ -6,8 +6,19 @@ import Figure from './Figure';
 import ImageGrid from './ImageGrid';
 import VideoEmbed from './VideoEmbed';
 
-// Heading wrappers for automatic anchor ids (simple slug implementation)
-function slugify(text) {
+// Heading wrappers for automatic anchor ids with resilient text extraction
+function extractText(node) {
+  if (node == null) return '';
+  if (typeof node === 'string' || typeof node === 'number') return String(node);
+  if (Array.isArray(node)) return node.map(extractText).join(' ');
+  if (typeof node === 'object' && node.props && node.props.children) {
+    return extractText(node.props.children);
+  }
+  return '';
+}
+
+function slugify(node) {
+  const text = extractText(node);
   return text
     .toString()
     .toLowerCase()
@@ -16,17 +27,17 @@ function slugify(text) {
     .replace(/\s+/g, '-');
 }
 
-const H1 = (props) => {
-  const id = slugify(props.children);
-  return <h1 id={id} className="text-3xl font-semibold text-brandInk mb-6 text-center" {...props} />;
+const H1 = ({ children, ...rest }) => {
+  const id = slugify(children);
+  return <h1 id={id} className="text-3xl font-semibold text-brandInk mb-6 text-center" {...rest}>{children}</h1>;
 };
-const H2 = (props) => {
-  const id = slugify(props.children);
-  return <h2 id={id} className="text-2xl font-semibold text-brandInk mt-10 mb-4" {...props} />;
+const H2 = ({ children, ...rest }) => {
+  const id = slugify(children);
+  return <h2 id={id} className="text-2xl font-semibold text-brandInk mt-10 mb-4" {...rest}>{children}</h2>;
 };
-const H3 = (props) => {
-  const id = slugify(props.children);
-  return <h3 id={id} className="text-xl font-semibold text-brandInk mt-8 mb-3" {...props} />;
+const H3 = ({ children, ...rest }) => {
+  const id = slugify(children);
+  return <h3 id={id} className="text-xl font-semibold text-brandInk mt-8 mb-3" {...rest}>{children}</h3>;
 };
 
 const Anchor = (props) => (

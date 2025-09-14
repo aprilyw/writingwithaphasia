@@ -385,3 +385,35 @@ End Status Check v0.1.0
 
 ---
 End Status Check v0.2.0
+
+## Status Note (Hybrid Route Enablement) v0.2.1 (2025-09-14T22:15:00Z)
+
+Dynamic story route `/stories/[id]` now supports BOTH:
+1. New MDX stories in `src/content/stories/*.mdx` (preferred moving forward)
+2. Legacy markdown stories in `static/md/*.md` (fallback)
+
+Implementation Highlights:
+- `getStaticPaths` merges ids from both directories (deduped).
+- `getStaticProps` prefers MDX: loads raw file, strips frontmatter (temporary manual parse) then serializes with `next-mdx-remote`.
+- Legacy markdown path still uses existing `getStoryData` utility (no regressions expected).
+- `StoryLayout` wraps MDX content; legacy path retains minimal styled-jsx but will be removed once converted.
+
+Rationale for Manual Frontmatter Parse in `getStaticProps`:
+- Our webpack MDX loader already injects `export const frontmatter` for MDX imported as modules, but here we read files directly to avoid importing uncompiled source (simpler during hybrid phase).
+- Will consolidate on single pipeline (direct ESM import) after all stories are migrated OR introduce Contentlayer.
+
+Next Immediate Steps:
+1. Convert 2–3 additional stories to MDX to validate component coverage.
+2. Expose `getAllStoriesMeta()` output on homepage (map) to begin coordinate-driven marker generation.
+3. Add content lint script (`lint:content`) to validate frontmatter + image references.
+4. Begin skeleton of animated map → panel (`StoryMap`).
+
+Cleanup Follow-up:
+- Remove legacy styled-jsx in `[id].js` once last story converted.
+- Replace manual frontmatter parsing with direct import (or Contentlayer) to eliminate duplicate logic.
+
+Risk Watch:
+- Ensure MDX serialization settings (currently empty plugin arrays) stay aligned with global MDX compilation if new remark/rehype plugins are introduced.
+
+---
+End Status Note v0.2.1

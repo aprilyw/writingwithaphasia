@@ -1,139 +1,103 @@
 // pages/stories/[id].js
+import fs from 'fs';
+import path from 'path';
 import { getAllStoryIds, getStoryData } from '../../utils/markdown';
 import StoryLayout from '../../components/stories/StoryLayout';
 import Link from 'next/link';
 import Head from 'next/head';
 import { fonts, getFontFamilyVar } from '../../styles/fonts';
+import { MDXRemote } from 'next-mdx-remote';
+import { serialize } from 'next-mdx-remote/serialize';
+
+// Direct filesystem access to MDX content directory
+const MDX_STORIES_DIR = path.join(process.cwd(), 'src/content/stories');
+
+function listMdxIds() {
+  if (!fs.existsSync(MDX_STORIES_DIR)) return [];
+  return fs.readdirSync(MDX_STORIES_DIR)
+    .filter((f) => f.endsWith('.mdx'))
+    .map((f) => f.replace(/\.mdx$/, ''));
+}
 
 export async function getStaticPaths() {
-  const paths = getAllStoryIds();
+  // Legacy markdown ids
+  const legacy = getAllStoryIds().map((p) => p.params.id);
+  // New MDX ids
+  const mdxIds = listMdxIds();
+  // Merge unique
+  const all = Array.from(new Set([...legacy, ...mdxIds]));
   return {
-    paths,
+    paths: all.map((id) => ({ params: { id } })),
     fallback: false
   };
 }
 
 export async function getStaticProps({ params }) {
-  const storyData = await getStoryData(params.id);
+  const id = params.id;
+  const mdxPath = path.join(MDX_STORIES_DIR, `${id}.mdx`);
+  if (fs.existsSync(mdxPath)) {
+    const source = fs.readFileSync(mdxPath, 'utf8');
+    // Extract frontmatter manually so we can pass it easily; reuse simple regex, rely on our remark plugin during webpack for real pages.
+    // Here we want serialized MDX at build time for static generation.
+    const matterMatch = /^---\n([\s\S]*?)\n---/m.exec(source);
+    let frontmatter = {};
+    let content = source;
+    if (matterMatch) {
+      const yaml = require('js-yaml');
+      frontmatter = yaml.load(matterMatch[1]) || {};
+      content = source.slice(matterMatch[0].length).trimStart();
+    }
+    const mdxSource = await serialize(content, {
+      mdxOptions: {
+        remarkPlugins: [],
+        rehypePlugins: []
+      }
+    });
+    frontmatter.id = frontmatter.id || id;
+    return {
+      props: {
+        mode: 'mdx',
+        frontmatter,
+        mdxSource
+      }
+    };
+  }
+  // Fallback to legacy markdown pipeline
+  const storyData = await getStoryData(id);
   return {
     props: {
+      mode: 'legacy',
       storyData
     }
   };
 }
 
-export default function Story({ storyData }) {
+export default function Story(props) {
+  const { mode } = props;
   return (
     <div className="container">
       <Head>
-        <link
-          href={fonts.googleFontsUrl}
-          rel="stylesheet"
-        />
+        <link href={fonts.googleFontsUrl} rel="stylesheet" />
       </Head>
-      <nav className="nav">
+      <nav className="nav mb-6">
         <Link href="/">
-          <a>← Back to Map</a>
+          <a className="text-primary hover:text-primaryHover">← Back to Map</a>
         </Link>
       </nav>
-      
-      <article className="story">
-        <h1>{storyData.name || storyData.title}</h1>
-        <div className="content">
-          <div dangerouslySetInnerHTML={{ __html: storyData.contentHtml }} />
-        </div>
-      </article>
-
+      {mode === 'mdx' ? (
+        <StoryLayout frontmatter={props.frontmatter}>
+          <MDXRemote {...props.mdxSource} />
+        </StoryLayout>
+      ) : (
+        <article className="legacy-story">
+          <h1>{props.storyData.name || props.storyData.title}</h1>
+          <div className="content" dangerouslySetInnerHTML={{ __html: props.storyData.contentHtml }} />
+        </article>
+      )}
       <style jsx>{`
-        .container {
-          max-width: 800px;
-          margin: 0 auto;
-          padding: 2rem;
-        }
-        .nav {
-          margin-bottom: 2rem;
-        }
-        .nav a {
-          color: #3498db;
-          text-decoration: none;
-          font-size: 1.1rem;
-        }
-        .nav a:hover {
-          text-decoration: underline;
-        }
-        .story h1 {
-          font-family: ${getFontFamilyVar()};
-          color: #2c3e50;
-          font-size: 2.7rem;
-          font-weight: 700;
-          margin-bottom: 1.5rem;
-          border-bottom: 2.5px solid #bcbcbc;
-          padding-bottom: 0.5rem;
-          letter-spacing: 0.01em;
-          line-height: 1.15;
-          text-align: left;
-        }
-        .content {
-          font-size: 1.1rem;
-          line-height: 1.7;
-          color: #333;
-        }
-        .content :global(p) {
-          margin: 1.5em 0;
-        }
-        .content :global(a) {
-          color: #217dbb;
-          text-decoration: underline;
-          transition: color 0.2s ease;
-        }
-        .content :global(a:hover) {
-          color: #3498db;
-        }
-        .content :global(hr) {
-          border: none;
-          height: auto;
-          margin: 2.5em 0;
-          text-align: center;
-          background: none;
-          position: relative;
-        }
-        
-        .content :global(hr)::before {
-          content: "*     *     *     *     *";
-          font-size: 1.2em;
-          color: #666;
-          letter-spacing: 0.1em;
-          font-weight: 300;
-          display: block;
-          text-align: center;
-          line-height: 1;
-        }
-        /* External links are handled by markdown processing */
-        .images-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 1.5rem;
-          margin-top: 2rem;
-        }
-        .image-wrapper {
-          position: relative;
-          padding-top: 75%;
-          overflow: hidden;
-          border-radius: 12px;
-          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-          transition: transform 0.2s;
-        }
-        .image-wrapper:hover {
-          transform: scale(1.02);
-        }
-        .image-wrapper img {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
+        .container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .legacy-story h1 { font-family: ${getFontFamilyVar()}; font-size: 2.5rem; font-weight: 700; margin-bottom: 1.5rem; }
+        .legacy-story .content :global(p) { margin: 1.25em 0; }
       `}</style>
     </div>
   );
