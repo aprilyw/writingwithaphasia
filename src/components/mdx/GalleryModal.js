@@ -113,7 +113,7 @@ export default function GalleryModal() {
           <button
             key={img.id}
             onClick={() => setIndex && setIndex(i)}
-            className={`h-12 w-12 overflow-hidden rounded ${i === currentIndex ? 'ring-2 ring-sky-400' : 'ring-1 ring-white/10'} hover:ring-sky-300 transition`}
+            className={`h-12 w-12 overflow-hidden rounded ${i === currentIndex ? 'ring-2 ring-[var(--color-accent-rust)]' : 'ring-1 ring-white/10'} hover:ring-[var(--color-accent-warm)] transition`}
             aria-label={`Go to image ${i + 1}`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}

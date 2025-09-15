@@ -224,3 +224,44 @@ Recommendation: Define a typographic scale (base 16px → 1.125 modular) and map
 
 ---
 Prepared automatically by audit script (conceptual). Update as refactors proceed.
+
+## 2025 Q3 Palette Adoption
+
+New core palette introduced (added to Tailwind config + CSS variables):
+
+| Name | Hex | CSS Variable | Tailwind Key | Intended Semantic Usage |
+|------|-----|--------------|--------------|-------------------------|
+| Ink | `#3C494B` | `--color-ink-strong` | `ink` | Primary headings, high-emphasis text, active tab state |
+| Rust | `#A14100` | `--color-accent-rust` | `rust` | Primary action buttons, key interactive accents, focus ring alt |
+| Sunrise | `#FE8E3D` | `--color-accent-warm` | `sunrise` | Hover state for Rust buttons, subtle highlight backgrounds, badges |
+| Mist | `#D8E7EA` | `--color-surface-mist` | `mist` | Soft panels / resource containers / neutral section backgrounds |
+
+Adoption Strategy:
+1. Dual-run period where old `--color-primary`/`--color-primary-hover` remain for stories until tokens updated.
+2. New components should prefer the refreshed palette (Ink for text, Rust for primary actions, Sunrise for hover states, Mist for subtle panels) unless maintaining story visual continuity.
+3. When replacing legacy blues (#217dbb / #3498db), map: base link → Rust, hover → Sunrise. Avoid recoloring historical imagery callouts unless contrast fails.
+4. Perform accessibility contrast verification before applying Sunrise as foreground on Mist (meets >4.5:1 for text at 14px+ bold or 18px normal only if contrast passes; otherwise default to Ink).
+
+Refactoring Checklist (in progress):
+- [x] Globals: Added CSS variables & link color swap
+- [x] Resources page: migrated container, links, buttons, and active tabs
+- [ ] Navbar: migrate title and link hover to palette
+- [ ] Buttons (if any scattered styled-jsx): align to Rust/Sunrise
+- [ ] StoryMap overlays: replace `#3a2c2a` with Ink token
+- [ ] ImageModal / overlays: evaluate Rust or neutral for actions
+- [ ] Remove obsolete `--color-primary*` after full migration
+
+Tailwind Usage Examples:
+```
+<h1 className="text-ink">Heading</h1>
+<button className="bg-rust hover:bg-sunrise text-white px-4 py-2 rounded-md">Action</button>
+<div className="bg-mist p-6 rounded-xl shadow-sm">Panel</div>
+```
+
+CSS Variable Fallback Example (styled-jsx):
+```
+button.callout { background: var(--color-accent-rust); }
+button.callout:hover { background: var(--color-accent-warm); }
+```
+
+Do not introduce raw hex values for these tones going forward—always reference token names for easier future theming.

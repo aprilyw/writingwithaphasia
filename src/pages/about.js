@@ -67,14 +67,14 @@ export default function About() {
           max-width: 800px;
           margin: 2rem auto;
           padding: 2rem;
-          background: #f7fafc;
+          background: var(--color-surface-mist, #D8E7EA);
           border-radius: 16px;
-          box-shadow: 0 2px 12px rgba(52,152,219,0.07);
+          box-shadow: 0 2px 12px rgba(60,73,75,0.08);
           font-family: ${getFontFamilyVar()};
         }
         
         h1 {
-          color: #2c3e50;
+          color: #3C3830;
           font-size: 2.5rem;
           margin-bottom: 1.5rem;
           text-align: center;
@@ -82,14 +82,14 @@ export default function About() {
         }
         
         h2 {
-          color: #3498db;
+          color: #3C3830;
           font-size: 1.8rem;
           margin: 1.5rem 0 0.8rem 0;
           font-weight: 600;
         }
         
         h3 {
-          color: #2c3e50;
+          color: #3C3830;
           font-size: 1.2rem;
           margin: 1rem 0 0.3rem 0;
           font-weight: 600;
@@ -101,14 +101,14 @@ export default function About() {
         
         p {
           font-size: 1.1rem;
-          color: #2c3e50;
+          color: #3C3830;
           line-height: 1.6;
           margin-bottom: 0.8rem;
         }
         
         ol {
           font-size: 1.1rem;
-          color: #2c3e50;
+          color: #3C3830;
           line-height: 1.6;
           padding-left: 1.5rem;
         }
@@ -119,7 +119,7 @@ export default function About() {
         
         ul {
           font-size: 1.1rem;
-          color: #2c3e50;
+          color: #3C3830;
           line-height: 1.6;
           padding-left: 1.5rem;
         }
@@ -138,7 +138,7 @@ export default function About() {
         
         .faq-item h3 {
           margin-top: 0;
-          color: #3498db;
+          color: #3C3830;
         }
         
         .faq-item p {
@@ -146,18 +146,18 @@ export default function About() {
         }
         
         a {
-          color: #3498db;
+          color: var(--color-accent-rust);
           text-decoration: underline;
         }
         
         a:hover {
-          color: #2980b9;
+          color: var(--color-accent-warm);
         }
         
         strong {
-          color: #2c3e50;
+          color: #3C3830;
         }
       `}</style>
     </div>
   );
-} 
+}

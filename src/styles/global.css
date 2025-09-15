@@ -1,9 +1,7 @@
 :root {
   --font-family-primary: 'TASA Orbiter', sans-serif;
-  /* Unified maximum readable line length for narrative/story text (approx 68ch ≈ ~900px at base). */
   --story-measure: 68ch;
-  --color-primary: #496586;
-  --color-primary-hover: #3d546f;
+  /* Fallbacks (generated palette overrides these) */
   --color-bg: #f0f0f0;
   --color-ink: #3c3830;
   --color-accent: #9eb2ca;
@@ -42,14 +40,15 @@ body::-webkit-scrollbar {
 }
 
 /* Global link styling - blue and underlined */
+/* Global link styling updated to warm palette */
 a {
-  color: var(--color-primary);
+  color: var(--color-accent-rust);
   text-decoration: underline;
   transition: color 0.2s ease;
 }
 
 a:hover {
-  color: var(--color-primary-hover);
+  color: var(--color-accent-warm);
 }
 
 /* Note: Opening external links in new tab should be handled in markup (rel+target), not via CSS */
@@ -123,7 +122,7 @@ figure { text-align: center; }
 
 .custom-zoom-controls button:hover {
   background: #f5f5f5;
-  color: #496586;
+  color: var(--color-accent-rust);
 }
 
 .custom-zoom-controls button:active {

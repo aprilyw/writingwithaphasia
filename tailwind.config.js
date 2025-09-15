@@ -1,3 +1,6 @@
+const { getActivePalette } = require('./src/design/getActivePalette');
+const active = getActivePalette();
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -10,16 +13,22 @@ module.exports = {
         sans: ['TASA Orbiter', 'ui-sans-serif', 'system-ui']
       },
       colors: {
-        // Updated palette (blue primary)
-        primary: '#496586',
-        primaryHover: '#3d546f',
-        brandDark: '#3c3830',
-        brandInk: '#3c3830',
-        accent: '#9EB2CA',
+        // Legacy references kept for transitional compatibility (could deprecate)
+        brandInk: active.ink || active.inkStrong,
+        brandDark: active.ink || active.inkStrong,
         grayMid: '#666666',
-        surface: '#f0f0f0',
-        surfaceAlt: '#ffffff',
-        surfaceMuted: '#e8e8e8'
+        surfaceMuted: '#e8e8e8',
+        // Semantic palette tokens
+        ink: active.inkStrong,
+        inkBody: active.ink,
+        accent: active.accent,
+        accentHover: active.accentHover || active.accent,
+        accentActive: active.accentActive || active.accentHover || active.accent,
+        highlight: active.highlight,
+        surface: active.surface,
+        surfaceAlt: active.surfaceAlt,
+        mist: active.surfaceMist,
+        focus: active.focus || active.accent
       },
       boxShadow: {
         sm: '0 2px 4px rgba(0,0,0,0.1)',

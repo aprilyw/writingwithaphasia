@@ -27,7 +27,7 @@ export default function Figure({ src, alt = '', caption, className = '', noOuter
         <button
           type="button"
           onClick={() => clickable && gallery.open(src)}
-          className={`group relative block w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-600 rounded-xl overflow-hidden`}
+          className={`group relative block w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-accent-rust)] rounded-xl overflow-hidden`}
           aria-label={alt || caption || 'View image'}
         >
           <StoryImage src={src} alt={alt} fit={fit} position={position} {...rest} className="group-hover:brightness-[1.05] transition duration-200" />

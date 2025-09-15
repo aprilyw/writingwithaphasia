@@ -20,7 +20,7 @@ import ZoomSlider from 'ol/control/ZoomSlider';
 // Global extent - allow panning worldwide
 const GLOBAL_EXTENT = transformExtent([-180.0, -85.0, 180.0, 85.0], 'EPSG:4326', 'EPSG:3857');
 
-export default function MapComponent({ stories, onMarkerClick, selectedStory, zoomToStory, onZoomComplete, resetSignal }) {
+export default function MapComponent({ stories, onMarkerClick, selectedStory, zoomToStory, onZoomComplete, resetSignal, wheelZoomActive = true, resizeSignal = 0 }) {
   const mapRef = useRef();
   const mapInstance = useRef(null);
   const clusterSourceRef = useRef(null);
@@ -44,7 +44,7 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
               '© <a href="https://carto.com/attributions">CARTO</a>'
             ]
           })
-        }),
+        })
       ],
       view: new View({
         center: fromLonLat([-98.5795, 39.8283]),
@@ -113,7 +113,24 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
       }
     });
 
-    // Add double-click zoom for faster navigation
+    // Gate wheel zoom if disabled (prevent accidental page scroll capture)
+    if (!wheelZoomActive) {
+      // OpenLayers listens for wheel events internally; easiest is to intercept with CSS pointer-events layer or listener
+      // Here we add a capture listener to prevent default when not active.
+      const wheelHandler = (e) => {
+        if (!wheelZoomActive) {
+          // Let page scroll continue naturally by not preventing default if meta/ctrl (user trying pinch/zoom gesture).
+          if (!e.ctrlKey) {
+            // Prevent OpenLayers from handling zoom; allow parent page scroll.
+            // We stop propagation so OL doesn't see it.
+            e.stopPropagation();
+          }
+        }
+      };
+      mapRef.current.addEventListener('wheel', wheelHandler, { passive: true, capture: true });
+    }
+
+    // Add double-click zoom for faster navigation (still allowed even when wheel zoom gated)
     initialMap.on('dblclick', (event) => {
       const view = initialMap.getView();
       const zoom = view.getZoom();
@@ -214,6 +231,16 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
     return () => initialMap.setTarget(undefined);
   }, []);
 
+  // Trigger map size recalculation when container layout changes (e.g., expand/collapse or sidebar open)
+  useEffect(() => {
+    if (!mapInstance.current) return;
+    // Delay to allow CSS transitions to settle for smoother re-render of tiles
+    const id = setTimeout(() => {
+      try { mapInstance.current.updateSize(); } catch {}
+    }, 300);
+    return () => clearTimeout(id);
+  }, [resizeSignal]);
+
   // Update markers when stories change
   useEffect(() => {
     if (!mapInstance.current) return;
@@ -290,7 +317,7 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
           // Published story pin (blue)
           return new Style({
             image: new Icon({
-              src: 'data:image/svg+xml;base64,' + btoa(`\n                <svg height="200px" width="200px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">\n                  <path style="fill:#496586;stroke:#ffffff;stroke-width:3;" d="M87.084,192c-0.456-5.272-0.688-10.6-0.688-16C86.404,78.8,162.34,0,256.004,0s169.6,78.8,169.6,176\n                  c0,5.392-0.232,10.728-0.688,16h0.688c0,96.184-169.6,320-169.6,320s-169.6-223.288-169.6-320H87.084z M256.004,224\n                  c36.392,1.024,66.744-27.608,67.84-64c-1.096-36.392-31.448-65.024-67.84-64c-36.392-1.024-66.744,27.608-67.84,64\n                  C189.26,196.392,219.612,225.024,256.004,224z"/>\n                </svg>\n              `),
+              src: 'data:image/svg+xml;base64,' + btoa(`\n                <svg height="200px" width="200px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">\n                  <path style="fill:#F7CD6A;stroke:#ffffff;stroke-width:3;" d="M87.084,192c-0.456-5.272-0.688-10.6-0.688-16C86.404,78.8,162.34,0,256.004,0s169.6,78.8,169.6,176\n                  c0,5.392-0.232,10.728-0.688,16h0.688c0,96.184-169.6,320-169.6,320s-169.6-223.288-169.6-320H87.084z M256.004,224\n                  c36.392,1.024,66.744-27.608,67.84-64c-1.096-36.392-31.448-65.024-67.84-64c-36.392-1.024-66.744,27.608-67.84,64\n                  C189.26,196.392,219.612,225.024,256.004,224z"/>\n                </svg>\n              `),
               scale: 0.2,
               anchor: [0.5, 1],
             }),
@@ -308,9 +335,9 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
           });
           const anyDraft = clusterInfo.some(story => (story.status && story.status.toLowerCase() === 'draft') || story.draft === true);
           const anyUnderConstruction = clusterInfo.some(story => !story.title || !story.name || story.contentHtml?.includes('This page is under construction') || story.contentHtml?.includes('This story is coming soon'));
-          let fillColor = '#496586'; // default published cluster color (primary blue)
+          let fillColor = '#F7CD6A'; // default published cluster color (brand accent - gold)
           if (allNonPublished) fillColor = '#6B7280'; // all draft/under-construction
-          else if (anyDraft || anyUnderConstruction) fillColor = '#3d546f'; // mixed cluster (darker blue tint)
+          else if (anyDraft || anyUnderConstruction) fillColor = '#FE8E3D'; // mixed cluster (sunrise highlight)
 
           return new Style({
             image: new Circle({

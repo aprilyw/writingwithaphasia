@@ -106,13 +106,13 @@ export default function Resources({ trishTips }) {
           max-width: 700px;
           margin: 3rem auto;
           padding: 2rem;
-          background: #f7fafc;
+          background: var(--color-surface-mist);
           border-radius: 16px;
-          box-shadow: 0 2px 12px rgba(52,152,219,0.07);
+          box-shadow: 0 2px 12px rgba(60,73,75,0.07);
           font-family: ${getFontFamilyVar()};
         }
         h1 {
-          color: #3498db;
+          color: #3C3830;
           font-size: 2.3rem;
           margin-bottom: 1.5rem;
         }
@@ -130,11 +130,11 @@ export default function Resources({ trishTips }) {
           font-size: 1.08rem;
         }
         a {
-          color: #217dbb;
+          color: var(--color-accent-rust);
           text-decoration: underline;
         }
         a:hover {
-          color: #3498db;
+          color: var(--color-accent-warm);
         }
         .tabs {
           display: flex;
@@ -146,20 +146,20 @@ export default function Resources({ trishTips }) {
           border: none;
           font-size: 1.08rem;
           font-weight: 600;
-          color: #217dbb;
+          color: #3C3830;
           padding: 0.5rem 1.2rem;
           border-bottom: 2px solid transparent;
           cursor: pointer;
           transition: border-bottom 0.2s, color 0.2s;
         }
         .tab.active {
-          color: #3a2c2a;
-          border-bottom: 2px solid #3a2c2a;
+          color: var(--color-ink-strong);
+          border-bottom: 2px solid var(--color-ink-strong);
         }
         .expand-btn {
           margin-bottom: 1.2rem;
-          background: #eaf2fa;
-          color: #217dbb;
+          background: var(--color-accent-warm);
+          color: #fff;
           border: none;
           border-radius: 6px;
           padding: 0.5rem 1.2rem;
@@ -169,8 +169,8 @@ export default function Resources({ trishTips }) {
           transition: background 0.2s, color 0.2s;
         }
         .expand-btn:hover {
-          background: #d4e6f7;
-          color: #145a8a;
+          background: var(--color-accent-rust);
+          color: #fff;
         }
         .trish-tips-preview {
           margin-bottom: 0.5rem;
@@ -180,13 +180,13 @@ export default function Resources({ trishTips }) {
         }
         .trish-tips-preview :global(a),
         .trish-tips-rest :global(a) {
-          color: #217dbb;
+          color: var(--color-accent-rust);
           text-decoration: underline;
           transition: color 0.2s ease;
         }
         .trish-tips-preview :global(a:hover),
         .trish-tips-rest :global(a:hover) {
-          color: #3498db;
+          color: var(--color-accent-warm);
         }
         /* External links are handled by markdown processing */
       `}</style>

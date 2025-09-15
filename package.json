@@ -10,7 +10,10 @@
   "lint:content": "node scripts/lint-content.js",
   "verify:mdx-migration": "node scripts/verify-mdx-migration.js",
   "upgrade:images": "node scripts/upgrade-images-to-figure.js",
-  "migrate:static-images": "node scripts/migrate-static-images.js"
+  "migrate:static-images": "node scripts/migrate-static-images.js",
+  "palette": "node scripts/generate-palette.js",
+  "palette:altWarm": "PALETTE=altWarm node scripts/generate-palette.js",
+  "palette:highContrast": "PALETTE=highContrast node scripts/generate-palette.js"
   },
   "dependencies": {
     "@mdx-js/mdx": "2.3.0",
