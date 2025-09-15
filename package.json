@@ -17,6 +17,7 @@
     "@mdx-js/react": "2.3.0",
     "clsx": "^2.1.1",
     "js-yaml": "^4.1.0",
+    "gray-matter": "^4.0.3",
     "next": "latest",
     "next-mdx-remote": "^5.0.0",
     "ol": "^10.4.0",
