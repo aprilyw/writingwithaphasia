@@ -28,6 +28,9 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
   const hoverDataRef = useRef({ story: null, pixel: null });
   const [draftMode, setDraftMode] = useState(false);
   const hoverTimeoutRef = useRef(null);
+  const wheelHandlerRef = useRef(null);
+  const keydownHandlerRef = useRef(null);
+  const initialFitPerformedRef = useRef(false);
 
   // Only create the map once
   useEffect(() => {
@@ -115,18 +118,14 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
 
     // Gate wheel zoom if disabled (prevent accidental page scroll capture)
     if (!wheelZoomActive) {
-      // OpenLayers listens for wheel events internally; easiest is to intercept with CSS pointer-events layer or listener
-      // Here we add a capture listener to prevent default when not active.
       const wheelHandler = (e) => {
-        if (!wheelZoomActive) {
-          // Let page scroll continue naturally by not preventing default if meta/ctrl (user trying pinch/zoom gesture).
-          if (!e.ctrlKey) {
-            // Prevent OpenLayers from handling zoom; allow parent page scroll.
-            // We stop propagation so OL doesn't see it.
-            e.stopPropagation();
-          }
+        // If map container gone (during navigation), allow event to bubble normally
+        if (!mapRef.current) return;
+        if (!wheelZoomActive && !e.ctrlKey) {
+          e.stopPropagation();
         }
       };
+      wheelHandlerRef.current = wheelHandler;
       mapRef.current.addEventListener('wheel', wheelHandler, { passive: true, capture: true });
     }
 
@@ -198,12 +197,11 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
     });
 
     // Add keyboard shortcuts for faster navigation
-    document.addEventListener('keydown', (event) => {
+    const keydownHandler = (event) => {
+      if (!mapRef.current) return; // page navigated away
       if (!mapRef.current.contains(document.activeElement)) return;
-      
       const view = initialMap.getView();
       const zoom = view.getZoom();
-      
       switch(event.key) {
         case '+':
         case '=':
@@ -213,11 +211,10 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
         case '-':
         case '_':
           event.preventDefault();
-          view.animate({ zoom: zoom - 1, duration: 320, easing: easeOut });
+            view.animate({ zoom: zoom - 1, duration: 320, easing: easeOut });
           break;
         case '0':
           event.preventDefault();
-          // Reset to initial view
           view.animate({
             center: fromLonLat([-98.5795, 39.8283]),
             zoom: 2.8,
@@ -226,9 +223,20 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
           });
           break;
       }
-    });
+    };
+    keydownHandlerRef.current = keydownHandler;
+    document.addEventListener('keydown', keydownHandler);
 
-    return () => initialMap.setTarget(undefined);
+    return () => {
+      try { initialMap.setTarget(undefined); } catch {}
+      if (wheelHandlerRef.current && mapRef.current) {
+        try { mapRef.current.removeEventListener('wheel', wheelHandlerRef.current, { capture: true }); } catch {}
+      }
+      if (keydownHandlerRef.current) {
+        document.removeEventListener('keydown', keydownHandlerRef.current);
+      }
+      mapInstance.current = null; // allow fresh mount on route return
+    };
   }, []);
 
   // Trigger map size recalculation when container layout changes (e.g., expand/collapse or sidebar open)
@@ -381,19 +389,23 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
     mapInstance.current.getView().setZoom(2.8);
   }, [resetSignal]);
 
-  // Fit initial extent to all stories if none selected & on first marker load
+  // One-time initial fit to show all markers (even if default zoom changed) after markers present
   useEffect(() => {
     if (!mapInstance.current) return;
+    if (initialFitPerformedRef.current) return;
     if (!stories || stories.length === 0) return;
-    // Compute extent of all coordinates
-    const coords = stories.filter(s => Array.isArray(s.coordinates)).map(s => fromLonLat(s.coordinates));
-    if (coords.length < 2) return; // skip if only one story; default view fine
+    const coords = stories.filter(s => Array.isArray(s.coordinates) && s.coordinates.length === 2).map(s => fromLonLat(s.coordinates));
+    if (coords.length < 2) { // single marker: just center on it
+      if (coords.length === 1) {
+        mapInstance.current.getView().animate({ center: coords[0], zoom: 4.5, duration: 400, easing: easeOut });
+      }
+      initialFitPerformedRef.current = true;
+      return;
+    }
     const ext = boundingExtent(coords);
     const view = mapInstance.current.getView();
-    // Only auto-fit if we're still at initial zoom (heuristic to avoid surprising user after interaction)
-    if (Math.abs(view.getZoom() - 2.8) < 0.01) {
-      view.fit(ext, { padding: [80, 80, 80, 80], duration: 500, maxZoom: 9, easing: easeOut });
-    }
+    view.fit(ext, { padding: [80, 80, 80, 80], duration: 600, maxZoom: 7.5, easing: easeOut });
+    initialFitPerformedRef.current = true;
   }, [stories]);
 
   return (

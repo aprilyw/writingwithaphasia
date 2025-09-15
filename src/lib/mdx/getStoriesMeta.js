@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { StoryFrontmatterSchema } = require('./schema');
+const { normalizeDateString } = require('./normalizeDateString');
 const { parseFrontmatterFromFile } = require('./parseFrontmatter');
 
 const STORIES_DIR = path.join(process.cwd(), 'src/content/stories');
@@ -32,12 +33,23 @@ function getAllStoriesMeta(options = {}) {
       errors.push(err);
       continue;
     }
-    records.push({ ...parseResult.data });
+    const meta = { ...parseResult.data };
+    if (meta.date) {
+      const normalized = normalizeDateString(meta.date);
+      if (normalized) {
+        if (normalized !== meta.date) meta.dateOriginal = meta.date; // preserve original for potential audits
+        meta.date = normalized; // canonical ISO date string
+      } else {
+        meta.dateOriginal = meta.date;
+        delete meta.date; // remove unusable date
+      }
+    }
+    records.push(meta);
   }
   // If date present, sort descending, else by title.
   records.sort((a, b) => {
     if (a.error || b.error) return 0;
-    if (a.date && b.date) return a.date > b.date ? -1 : 1;
+    if (a.date && b.date) return a.date > b.date ? -1 : 1; // ISO strings compare lexicographically
     return (a.title || '').localeCompare(b.title || '');
   });
   if (strict && errors.length) {
