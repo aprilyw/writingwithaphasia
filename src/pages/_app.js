@@ -24,9 +24,9 @@ export default function App({ Component, pageProps }) {
               Living With Aphasia: <span className="whitespace-nowrap">An Anthology</span>
             </div>
             <div className="flex gap-6 md:ml-auto uppercase tracking-[0.18em] font-semibold text-[0.8rem] md:text-[1.05rem]">
-              <Link href="/" className="px-1 py-1 rounded transition-colors text-[var(--color-ink-strong)] hover:text-[var(--color-accent-rust)] hover:bg-[color:oklch(0.95_0.02_20)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-accent-rust)] focus-visible:outline-offset-2">Home</Link>
-              <Link href="/about" className="px-1 py-1 rounded transition-colors text-[var(--color-ink-strong)] hover:text-[var(--color-accent-rust)] hover:bg-[color:oklch(0.95_0.02_20)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-accent-rust)] focus-visible:outline-offset-2">About</Link>
-              <Link href="/resources" className="px-1 py-1 rounded transition-colors text-[var(--color-ink-strong)] hover:text-[var(--color-accent-rust)] hover:bg-[color:oklch(0.95_0.02_20)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-accent-rust)] focus-visible:outline-offset-2">Resources</Link>
+              <Link href="/" className="px-1 py-1 rounded transition-colors text-[var(--color-ink-strong)] hover:text-[#38506b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#496586] focus-visible:outline-offset-2">Home</Link>
+              <Link href="/about" className="px-1 py-1 rounded transition-colors text-[var(--color-ink-strong)] hover:text-[#38506b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#496586] focus-visible:outline-offset-2">About</Link>
+              <Link href="/resources" className="px-1 py-1 rounded transition-colors text-[var(--color-ink-strong)] hover:text-[#38506b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#496586] focus-visible:outline-offset-2">Resources</Link>
             </div>
           </div>
         </nav>

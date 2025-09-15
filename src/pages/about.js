@@ -64,98 +64,56 @@ export default function About() {
 
       <style jsx>{`
         .about-container {
-          max-width: 800px;
-          margin: 2rem auto;
-          padding: 2rem;
-          background: var(--color-surface-mist, #D8E7EA);
-          border-radius: 16px;
-          box-shadow: 0 2px 12px rgba(60,73,75,0.08);
+          max-width: 880px;
+          margin: 0 auto;
+          padding: 3rem 2.25rem 4rem;
+          background: #ffffff; /* removed blue background */
+          border-radius: 28px;
+          border: 1px solid rgba(0,0,0,0.06);
+          box-shadow: 0 4px 28px -4px rgba(0,0,0,0.06), 0 2px 8px -2px rgba(0,0,0,0.04);
           font-family: ${getFontFamilyVar()};
         }
-        
         h1 {
-          color: #3C3830;
-          font-size: 2.5rem;
-          margin-bottom: 1.5rem;
+          color: #2f2b24;
+          font-size: clamp(2.2rem, 4vw, 2.9rem);
+          margin: 0 0 2rem;
           text-align: center;
           font-weight: 700;
+          letter-spacing: -0.5px;
         }
-        
         h2 {
-          color: #3C3830;
-          font-size: 1.8rem;
-          margin: 1.5rem 0 0.8rem 0;
+          color: #2f2b24;
+            font-size: clamp(1.5rem, 2.2vw, 1.9rem);
+          margin: 2.5rem 0 1rem;
           font-weight: 600;
         }
-        
         h3 {
-          color: #3C3830;
-          font-size: 1.2rem;
-          margin: 1rem 0 0.3rem 0;
+          color: #2f2b24;
+          font-size: 1.1rem;
+          margin: 1.1rem 0 0.35rem;
           font-weight: 600;
+          letter-spacing: 0.25px;
         }
-        
-        section {
-          margin-bottom: 2rem;
-        }
-        
-        p {
-          font-size: 1.1rem;
-          color: #3C3830;
-          line-height: 1.6;
-          margin-bottom: 0.8rem;
-        }
-        
-        ol {
-          font-size: 1.1rem;
-          color: #3C3830;
-          line-height: 1.6;
-          padding-left: 1.5rem;
-        }
-        
-        ol li {
-          margin-bottom: 0.8rem;
-        }
-        
-        ul {
-          font-size: 1.1rem;
-          color: #3C3830;
-          line-height: 1.6;
-          padding-left: 1.5rem;
-        }
-        
-        ul li {
-          margin-bottom: 0.3rem;
-        }
-        
+        section { margin-bottom: 2.2rem; }
+        p, ol, ul { font-size: 1.04rem; line-height: 1.65; color: #463f35; }
+        p { margin: 0 0 0.9rem; }
+        ol, ul { padding-left: 1.35rem; }
+        ol li, ul li { margin-bottom: 0.6rem; }
         .faq-item {
-          margin-bottom: 1.5rem;
-          padding: 1.2rem;
-          background: white;
-          border-radius: 8px;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          margin-bottom: 1.4rem;
+          padding: 1.05rem 1.15rem 1rem;
+          background: linear-gradient(180deg,#ffffff,#fafafa);
+          border: 1px solid rgba(0,0,0,0.05);
+          border-radius: 14px;
         }
-        
-        .faq-item h3 {
-          margin-top: 0;
-          color: #3C3830;
-        }
-        
-        .faq-item p {
-          margin-bottom: 0;
-        }
-        
-        a {
-          color: var(--color-accent-rust);
-          text-decoration: underline;
-        }
-        
-        a:hover {
-          color: var(--color-accent-warm);
-        }
-        
-        strong {
-          color: #3C3830;
+        .faq-item h3 { margin-top: 0; }
+        .faq-item p { margin: 0; }
+        a { color: #496586; text-decoration: underline; text-underline-offset: 3px; }
+        a:hover { color: #38506b; }
+        strong { color: #2f2b24; font-weight: 600; }
+        @media (max-width: 640px) {
+          .about-container { padding: 2.5rem 1.25rem 3rem; border-radius: 22px; }
+          h1 { margin-bottom: 1.6rem; }
         }
       `}</style>
     </div>

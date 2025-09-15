@@ -55,7 +55,7 @@ export default function Home({ stories, mdxMeta }) {
             Explore published stories by location. Click a gold pin to open a story panel.{' '}
             <a
               href="#stories"
-              className="underline decoration-dotted underline-offset-4 font-medium text-primary hover:text-primaryHover focus:outline-none focus:ring-2 focus:ring-primary/40 rounded px-0.5"
+              className="underline decoration-dotted underline-offset-4 font-medium text-primary hover:text-primaryHover focus:outline-none focus:ring-2 focus:ring-primary/40 rounded px-0.5 inline-block md:whitespace-nowrap"
             >See full list of stories</a>.
           </p>
           <div className="rounded-2xl bg-neutral-100/70 ring-1 ring-neutral-300 shadow-inner p-2">
