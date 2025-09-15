@@ -53,17 +53,17 @@ export default function Home({ stories, mdxMeta }) {
           </h1>
           <p className="max-w-2xl text-neutral-700 text-sm sm:text-base mb-6 leading-relaxed">
             Explore published stories by location. Click a gold pin to open a story panel.{' '}
-            <button
-              onClick={openIndex}
+            <a
+              href="#stories"
               className="underline decoration-dotted underline-offset-4 font-medium text-primary hover:text-primaryHover focus:outline-none focus:ring-2 focus:ring-primary/40 rounded px-0.5"
-            >See full list of stories</button>.
+            >See full list of stories</a>.
           </p>
           <div className="rounded-2xl bg-neutral-100/70 ring-1 ring-neutral-300 shadow-inner p-2">
             <StoryMap ref={storyMapRef} stories={stories} mdxMeta={mdxMeta} embedded />
           </div>
         </section>
 
-        <section aria-labelledby="stories-heading" className="pt-2">
+  <section id="stories" aria-labelledby="stories-heading" className="pt-2 scroll-mt-24">
           <div className="flex items-center justify-between mb-4">
             <h2 id="stories-heading" className="text-xl sm:text-2xl font-semibold tracking-tight text-neutral-800">
               Stories

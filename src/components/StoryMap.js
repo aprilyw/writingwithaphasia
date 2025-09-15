@@ -134,16 +134,16 @@ const StoryMap = ({ stories, mdxMeta, embedded = false }, ref) => {
         ? 'pointer-events-none opacity-0 absolute top-0 right-0 w-full md:w-[50%] h-full overflow-hidden transition-all duration-300'
         : 'flex-0 min-w-0 max-w-0 overflow-hidden opacity-0 transition-all duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]');
 
-  // Legend + story index (collapsible panel) - appears via floating button in embedded mode
+  // Legend (collapsible panel) - appears via floating button in embedded mode (index removed)
   const LegendPanel = embedded && legendOpen && (
     <div
       id="legend-panel"
       className="absolute bottom-20 left-3 z-40 w-72 sm:w-80 bg-white/95 backdrop-blur rounded-xl shadow-2xl ring-1 ring-neutral-300 p-4 flex flex-col max-h-[70vh]"
       role="dialog"
-      aria-label="Map legend and story index"
+      aria-label="Map legend"
     >
       <div className="flex items-start justify-between mb-2">
-        <h2 className="text-sm font-semibold tracking-tight text-neutral-800" style={{ fontFamily: getFontFamilyVar() }}>Legend & Index</h2>
+        <h2 className="text-sm font-semibold tracking-tight text-neutral-800" style={{ fontFamily: getFontFamilyVar() }}>Legend</h2>
         <button
           type="button"
           onClick={() => setLegendOpen(false)}
@@ -151,49 +151,12 @@ const StoryMap = ({ stories, mdxMeta, embedded = false }, ref) => {
           aria-label="Close legend"
         >✕</button>
       </div>
-      <p className="text-[11px] text-neutral-600 leading-snug mb-3">Click a gold pin to open its story. Use [ / ] or arrow keys to cycle when a story is open.</p>
+      <p className="text-[11px] text-neutral-600 leading-snug mb-1">Click a gold pin to open its story. Use [ / ] or arrow keys to cycle when a story is open.</p>
       <div className="flex items-center gap-3 text-[11px] mb-3">
         <div className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded-full" style={{ background:'#F7CD6A' }} /> <span className="text-neutral-700">Published</span></div>
         <div className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded-full" style={{ background:'#6B7280' }} /> <span className="text-neutral-700">Draft</span></div>
       </div>
-      <div className="border-t pt-2 -mx-2 px-2 flex-1 overflow-auto" aria-label="Story index">
-        <ul className="space-y-2 text-[13px] leading-tight">
-          {stories.map((s) => {
-            const isDraft = (s.status && s.status.toLowerCase() === 'draft') || s.draft === true;
-            if (isDraft && typeof window !== 'undefined') {
-              const params = new URLSearchParams(window.location.search);
-              if (params.get('draft') !== '1') return null;
-            } else if (isDraft) {
-              return null;
-            }
-            const title = s.title || s.name || s.id;
-            // Basic preview: first ~110 chars of description or summary field if present
-            let preview = '';
-            if (s.description) preview = s.description;
-            else if (s.summary) preview = s.summary;
-            if (preview.length > 140) preview = preview.slice(0, 137).trimEnd() + '…';
-            return (
-              <li key={s.id} className="group">
-                <a
-                  href={`/?id=${encodeURIComponent(s.id)}`}
-                  className={'block font-medium hover:text-primaryHover ' + (isDraft ? 'text-neutral-500 line-through italic opacity-70 pointer-events-none cursor-default' : 'text-primary')}
-                  aria-disabled={isDraft ? 'true' : undefined}
-                  tabIndex={isDraft ? -1 : undefined}
-                  title={title}
-                >
-                  {title}
-                  {isDraft && <span className="ml-2 text-[9px] uppercase tracking-wide bg-neutral-300 text-neutral-700 px-1 py-0.5 rounded">Draft</span>}
-                  {s.error && ' (⚠ meta error)'}
-                </a>
-                {preview && (
-                  <p className="mt-0.5 text-[11px] text-neutral-600 line-clamp-3 pr-2 group-hover:text-neutral-700 transition-colors">{preview}</p>
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      <div className="mt-2 flex justify-end">
+      <div className="mt-auto pt-1 flex justify-end border-t border-neutral-200">
         <button
           type="button"
           onClick={() => setLegendOpen(false)}
@@ -246,7 +209,7 @@ const StoryMap = ({ stories, mdxMeta, embedded = false }, ref) => {
               aria-expanded={legendOpen ? 'true' : 'false'}
               aria-controls="legend-panel"
               className="px-3 py-1.5 rounded-md text-[12px] font-medium bg-white/90 backdrop-blur border border-neutral-300 shadow hover:border-neutral-400 hover:bg-white transition"
-            >{legendOpen ? 'Hide' : 'Show'} Index</button>
+            >{legendOpen ? 'Hide' : 'Show'} Legend</button>
           </div>
           {selectedStory && (
             <button
