@@ -31,6 +31,8 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
   const wheelHandlerRef = useRef(null);
   const keydownHandlerRef = useRef(null);
   const initialFitPerformedRef = useRef(false);
+  const clusterPopupRef = useRef(null);
+  const [clusterPopup, setClusterPopup] = useState(null); // { stories: [], position: { x, y } }
 
   // Only create the map once
   useEffect(() => {
@@ -51,7 +53,7 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
       ],
       view: new View({
         center: fromLonLat([-98.5795, 39.8283]),
-        zoom: 2.8,
+        zoom: 4.2,
         extent: GLOBAL_EXTENT,
         minZoom: 1,
         maxZoom: 15,
@@ -75,25 +77,24 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
 
     mapInstance.current = initialMap;
 
-    // Handle click events
+    // Handle click events - simplified for clicking stories and zoom
     initialMap.on('click', (event) => {
       const feature = initialMap.forEachFeatureAtPixel(event.pixel, (feature) => feature);
       if (feature) {
         const features = feature.get('features');
         if (features && features.length > 1) {
-          // Cluster: compute tight extent of contained stories & zoom in (never outward)
+          // Cluster with multiple stories - zoom in to separate them
           const coords = features.map(f => f.getGeometry().getCoordinates());
           const tightExtent = boundingExtent(coords);
           const view = initialMap.getView();
-          const currentResolution = view.getResolution();
-          // Fit with padding; cap resulting zoom so we don't jump too close on large clusters
+          const currentZoom = view.getZoom();
           view.fit(tightExtent, {
             duration: 420,
-            padding: [60, 60, 60, 60],
-            maxZoom: Math.min(view.getZoom() + 4, 11)
+            padding: [80, 80, 80, 80],
+            maxZoom: Math.min(currentZoom + 4, 11)
           });
         } else if (features && features.length === 1) {
-          // Single feature in cluster - handle as normal
+          // Single feature in cluster - open the story
           const story = features[0].get('story');
           const isDraft = (story.status && story.status.toLowerCase() === 'draft') || story.draft === true;
           const isUnderConstruction = !story.title || !story.name ||
@@ -103,15 +104,15 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
             onMarkerClick(story);
           }
         } else {
-          // Direct feature (not from cluster) - handle as normal
-            const story = feature.get('story');
-            const isDraft = (story.status && story.status.toLowerCase() === 'draft') || story.draft === true;
-            const isUnderConstruction = !story.title || !story.name ||
-              story.contentHtml?.includes('This page is under construction') ||
-              story.contentHtml?.includes('This story is coming soon');
-            if (!isUnderConstruction && !(isDraft && !draftMode)) {
-              onMarkerClick(story);
-            }
+          // Direct feature (not from cluster) - open the story
+          const story = feature.get('story');
+          const isDraft = (story.status && story.status.toLowerCase() === 'draft') || story.draft === true;
+          const isUnderConstruction = !story.title || !story.name ||
+            story.contentHtml?.includes('This page is under construction') ||
+            story.contentHtml?.includes('This story is coming soon');
+          if (!isUnderConstruction && !(isDraft && !draftMode)) {
+            onMarkerClick(story);
+          }
         }
       }
     });
@@ -141,59 +142,113 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
       });
     });
 
-    // Change cursor + collect hover data (draft aware); we render card via React for richer content
+    // Change cursor + show hover card for single stories OR cluster popup for multiple stories
     initialMap.on('pointermove', (event) => {
       const feature = initialMap.forEachFeatureAtPixel(event.pixel, (feature) => feature);
-      let story = null;
+      
       if (feature) {
         const features = feature.get('features');
+        
+        // Check if this is a cluster with multiple stories
+        if (features && features.length > 1) {
+          // Multiple stories - show cluster popup
+          mapRef.current.style.cursor = 'pointer';
+          
+          // Hide single story hover card
+          if (hoverCardRef.current) hoverCardRef.current.style.display = 'none';
+          
+          // Clear any pending hide timeout
+          if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+          
+          // Filter to only published stories (unless in draft mode)
+          const allStories = features.map(f => f.get('story'));
+          const clusterStories = allStories
+            .filter(story => {
+              if (draftMode) return true; // Show all in draft mode
+              const isDraft = (story.status && story.status.toLowerCase() === 'draft') || story.draft === true;
+              const isUnderConstruction = !story.title || !story.name ||
+                story.contentHtml?.includes('This page is under construction') ||
+                story.contentHtml?.includes('This story is coming soon');
+              return !isDraft && !isUnderConstruction; // Only published stories
+            })
+            .sort((a, b) => {
+              // Sort alphabetically by name
+              return (a.name || a.title || '').localeCompare(b.name || b.title || '');
+            });
+          
+          // Only show popup if there are published stories to display
+          if (clusterStories.length > 0) {
+            setClusterPopup({
+              stories: clusterStories,
+              position: { x: event.pixel[0], y: event.pixel[1] }
+            });
+          } else {
+            // No published stories - hide popup
+            setClusterPopup(null);
+          }
+          return;
+        }
+        
+        // Single story - show regular hover card
+        let story = null;
         if (features && features.length === 1) story = features[0].get('story');
         else if (!features && feature.get('story')) story = feature.get('story');
-      }
-      if (!hoverCardRef.current) return; // not mounted yet
-      if (story) {
-        const isDraft = (story.status && story.status.toLowerCase() === 'draft') || story.draft === true;
-        const isUnderConstruction = !story.title || !story.name ||
-          story.contentHtml?.includes('This page is under construction') ||
-          story.contentHtml?.includes('This story is coming soon');
-        const suppressClick = isUnderConstruction || (isDraft && !draftMode);
-        mapRef.current.style.cursor = suppressClick ? 'not-allowed' : 'pointer';
-        hoverDataRef.current.story = story;
-        hoverDataRef.current.pixel = event.pixel;
-        // Position & populate (React fallback if we later switch to state)
-        const [x, y] = event.pixel;
-        const cardEl = hoverCardRef.current;
-        cardEl.style.display = 'block';
-        cardEl.style.left = `${x + 14}px`;
-        cardEl.style.top = `${y + 14}px`;
-        // Basic sanitization: escape angle brackets in excerpt (strip HTML tags for preview)
-        const excerpt = (story.excerpt || story.subtitle || '')
-          .replace(/<[^>]*>/g, '')
-          .slice(0, 140);
-        const hero = story.hero && story.hero.startsWith('/') ? story.hero : null;
-        cardEl.innerHTML = `
-          <div class="w-72 max-w-sm bg-white/95 backdrop-blur border border-neutral-300 shadow-xl rounded-xl p-4 pointer-events-none ${isDraft ? 'opacity-70' : ''}">
-            <div class="flex gap-4">
-              ${hero ? `<div class='flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden bg-neutral-200 ring-1 ring-neutral-300'><img src='${hero}' alt='' class='object-cover w-full h-full'/></div>` : ''}
-              <div class="min-w-0">
-                <div class="font-semibold text-[14px] leading-snug text-neutral-900 mb-1 line-clamp-2 tracking-tight">${(story.title || story.name || story.id)}</div>
-                ${excerpt ? `<div class='text-[12px] leading-snug text-neutral-600 line-clamp-4'>${excerpt}</div>` : ''}
+        
+        if (story) {
+          // Hide cluster popup when hovering single story
+          setClusterPopup(null);
+          
+          if (!hoverCardRef.current) return; // not mounted yet
+          
+          const isDraft = (story.status && story.status.toLowerCase() === 'draft') || story.draft === true;
+          const isUnderConstruction = !story.title || !story.name ||
+            story.contentHtml?.includes('This page is under construction') ||
+            story.contentHtml?.includes('This story is coming soon');
+          const suppressClick = isUnderConstruction || (isDraft && !draftMode);
+          mapRef.current.style.cursor = suppressClick ? 'not-allowed' : 'pointer';
+          hoverDataRef.current.story = story;
+          hoverDataRef.current.pixel = event.pixel;
+          // Position & populate (React fallback if we later switch to state)
+          const [x, y] = event.pixel;
+          const cardEl = hoverCardRef.current;
+          cardEl.style.display = 'block';
+          cardEl.style.left = `${x + 14}px`;
+          cardEl.style.top = `${y + 14}px`;
+          // Basic sanitization: escape angle brackets in excerpt (strip HTML tags for preview)
+          const excerpt = (story.excerpt || story.subtitle || '')
+            .replace(/<[^>]*>/g, '')
+            .slice(0, 140);
+          const hero = story.hero && story.hero.startsWith('/') ? story.hero : null;
+          cardEl.innerHTML = `
+            <div class="w-72 max-w-sm bg-white/95 backdrop-blur border border-neutral-300 shadow-xl rounded-xl p-4 pointer-events-none ${isDraft ? 'opacity-70' : ''}">
+              <div class="flex gap-4">
+                ${hero ? `<div class='flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden bg-neutral-200 ring-1 ring-neutral-300'><img src='${hero}' alt='' class='object-cover w-full h-full'/></div>` : ''}
+                <div class="min-w-0">
+                  <div class="font-semibold text-[14px] leading-snug text-neutral-900 mb-1 line-clamp-2 tracking-tight">${(story.title || story.name || story.id)}</div>
+                  ${excerpt ? `<div class='text-[12px] leading-snug text-neutral-600 line-clamp-4'>${excerpt}</div>` : ''}
+                </div>
               </div>
-            </div>
-          </div>`;
+            </div>`;
+        }
       } else {
+        // No feature - hide everything
         mapRef.current.style.cursor = '';
         hoverDataRef.current.story = null;
+        
+        // Hide single story card
         if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
-        // Delay hide slightly to reduce flicker between tightly spaced markers
         hoverTimeoutRef.current = setTimeout(() => {
           if (hoverCardRef.current) hoverCardRef.current.style.display = 'none';
         }, 80);
+        
+        // Hide cluster popup with slight delay
+        setTimeout(() => setClusterPopup(null), 100);
       }
     });
     initialMap.on('pointerout', () => {
       if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
       if (hoverCardRef.current) hoverCardRef.current.style.display = 'none';
+      // Don't auto-hide cluster popup on pointerout - let user interact with it
     });
 
     // Add keyboard shortcuts for faster navigation
@@ -217,7 +272,7 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
           event.preventDefault();
           view.animate({
             center: fromLonLat([-98.5795, 39.8283]),
-            zoom: 2.8,
+            zoom: 4.2,
             duration: 450,
             easing: easeOut
           });
@@ -259,7 +314,7 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
       }
     });
     
-    // Add new markers
+    // Add new markers using original coordinates
     const markers = stories
       .filter(story => Array.isArray(story.coordinates) && story.coordinates.length === 2 && story.coordinates.every(n => typeof n === 'number'))
       .map(story => {
@@ -278,9 +333,9 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
     
     const vectorSource = new VectorSource({ features: markers });
     
-    // Create clustered source
+    // Create clustered source with larger distance for better grouping at low zoom
     const clusterSource = new Cluster({
-      distance: 5, // Distance in pixels within which features will be clustered
+      distance: 35, // Reduced from 50 to prevent over-clustering nearby stories
       source: vectorSource,
     });
     
@@ -322,7 +377,7 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
               }),
             });
           }
-          // Published story pin (blue)
+          // Published story pin (gold)
           return new Style({
             image: new Icon({
               src: 'data:image/svg+xml;base64,' + btoa(`\n                <svg height="200px" width="200px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">\n                  <path style="fill:#F7CD6A;stroke:#ffffff;stroke-width:3;" d="M87.084,192c-0.456-5.272-0.688-10.6-0.688-16C86.404,78.8,162.34,0,256.004,0s169.6,78.8,169.6,176\n                  c0,5.392-0.232,10.728-0.688,16h0.688c0,96.184-169.6,320-169.6,320s-169.6-223.288-169.6-320H87.084z M256.004,224\n                  c36.392,1.024,66.744-27.608,67.84-64c-1.096-36.392-31.448-65.024-67.84-64c-36.392-1.024-66.744,27.608-67.84,64\n                  C189.26,196.392,219.612,225.024,256.004,224z"/>\n                </svg>\n              `),
@@ -332,31 +387,47 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
           });
         } else {
           // Multiple features - show as cluster with count
-          // Check if all stories in cluster are under construction or draft
+          // Analyze cluster composition for better visual hierarchy
           const clusterInfo = features.map(f => f.get('story'));
-          const allNonPublished = clusterInfo.every(story => {
+          const publishedCount = clusterInfo.filter(story => {
             const isUnderConstruction = !story.title || !story.name ||
               story.contentHtml?.includes('This page is under construction') ||
               story.contentHtml?.includes('This story is coming soon');
             const isDraft = (story.status && story.status.toLowerCase() === 'draft') || story.draft === true;
-            return isUnderConstruction || isDraft;
-          });
-          const anyDraft = clusterInfo.some(story => (story.status && story.status.toLowerCase() === 'draft') || story.draft === true);
-          const anyUnderConstruction = clusterInfo.some(story => !story.title || !story.name || story.contentHtml?.includes('This page is under construction') || story.contentHtml?.includes('This story is coming soon'));
-          let fillColor = '#F7CD6A'; // default published cluster color (brand accent - gold)
-          if (allNonPublished) fillColor = '#6B7280'; // all draft/under-construction
-          else if (anyDraft || anyUnderConstruction) fillColor = '#FE8E3D'; // mixed cluster (sunrise highlight)
+            return !isUnderConstruction && !isDraft;
+          }).length;
+          const draftCount = size - publishedCount;
+          
+          // Determine color based on cluster composition - simplified design
+          let fillColor, strokeColor, strokeWidth;
+          if (publishedCount === 0) {
+            // All drafts/unpublished
+            fillColor = '#6B7280'; // gray
+            strokeColor = '#ffffff';
+            strokeWidth = 2;
+          } else if (draftCount === 0) {
+            // All published
+            fillColor = '#F7CD6A'; // gold
+            strokeColor = '#ffffff';
+            strokeWidth = 2;
+          } else {
+            // Mixed cluster - use gradient effect with subtle double stroke
+            fillColor = '#F7CD6A'; // gold base (indicates published content present)
+            strokeColor = '#ffffff';
+            strokeWidth = 2;
+          }
 
           return new Style({
             image: new Circle({
-              radius: Math.min(size * 3 + 10, 25),
+              radius: Math.min(Math.max(size * 2 + 14, 18), 32), // Dynamic size based on count
               fill: new Fill({ color: fillColor }),
-              stroke: new Stroke({ color: '#ffffff', width: 2 }),
+              stroke: new Stroke({ color: strokeColor, width: strokeWidth }),
             }),
             text: new Text({
               text: size.toString(),
               fill: new Fill({ color: '#ffffff' }),
-              font: 'bold 14px Arial',
+              font: 'bold 13px system-ui, -apple-system, sans-serif',
+              stroke: new Stroke({ color: 'rgba(0,0,0,0.3)', width: 3 }),
             }),
           });
         }
@@ -386,7 +457,7 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
     if (!mapInstance.current) return;
     // Reset to initial center and zoom
     mapInstance.current.getView().setCenter(fromLonLat([-98.5795, 39.8283]));
-    mapInstance.current.getView().setZoom(2.8);
+    mapInstance.current.getView().setZoom(4.2);
   }, [resetSignal]);
 
   // One-time initial fit to show all markers (even if default zoom changed) after markers present
@@ -424,6 +495,85 @@ export default function MapComponent({ stories, onMarkerClick, selectedStory, zo
           display: 'none',
         }}
       />
+      
+      {/* Cluster popup - shows list of stories when hovering over a cluster */}
+      {clusterPopup && (
+        <div
+          ref={clusterPopupRef}
+          onMouseEnter={() => {
+            // Keep popup open when mouse enters
+            if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+          }}
+          onMouseLeave={() => {
+            // Close popup when mouse leaves
+            setClusterPopup(null);
+          }}
+          style={{
+            position: 'absolute',
+            left: `${clusterPopup.position.x}px`,
+            top: `${clusterPopup.position.y}px`,
+            transform: 'translate(-50%, calc(-100% - 20px))',
+            zIndex: 2000,
+            pointerEvents: 'auto', // Enable mouse interaction
+          }}
+          className="bg-white rounded-lg shadow-2xl border-2 border-neutral-300 overflow-hidden min-w-[280px] max-w-[340px]"
+        >
+          <div className="bg-neutral-50 px-4 py-2.5 border-b border-neutral-200 flex items-center justify-between">
+            <h3 className="text-sm font-semibold text-neutral-800">
+              {clusterPopup.stories[0]?.location || 'Stories at this location'}
+            </h3>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setClusterPopup(null);
+              }}
+              className="text-neutral-500 hover:text-neutral-700 p-1 -mr-1 rounded hover:bg-neutral-200 transition-colors"
+              aria-label="Close"
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M1 1L13 13M1 13L13 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <div className="max-h-[360px] overflow-y-auto">
+            {clusterPopup.stories.map((story, idx) => {
+              return (
+                <button
+                  key={story.id || idx}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setClusterPopup(null);
+                    onMarkerClick(story);
+                  }}
+                  className="w-full text-left px-4 py-3 border-b border-neutral-100 last:border-b-0 transition-colors hover:bg-amber-50 cursor-pointer active:bg-amber-100"
+                >
+                  <div className="flex items-center gap-3">
+                    {story.hero && story.hero.startsWith('/') && (
+                      <div className="flex-shrink-0 w-14 h-14 rounded overflow-hidden bg-neutral-200 ring-1 ring-neutral-300">
+                        <img 
+                          src={story.hero} 
+                          alt="" 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <div className="font-semibold text-sm text-neutral-900 mb-1">
+                        {story.title || story.name || story.id}
+                      </div>
+                      {story.excerpt && (
+                        <p className="text-xs text-neutral-600 line-clamp-2 leading-snug">
+                          {story.excerpt.replace(/<[^>]*>/g, '').slice(0, 120)}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 } 

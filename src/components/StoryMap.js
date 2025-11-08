@@ -151,12 +151,19 @@ const StoryMap = ({ stories, mdxMeta, embedded = false }, ref) => {
           aria-label="Close legend"
         >✕</button>
       </div>
-      <p className="text-[11px] text-neutral-600 leading-snug mb-1">Click a gold pin to open its story. Use [ / ] or arrow keys to cycle when a story is open.</p>
-      <div className="flex items-center gap-3 text-[11px] mb-3">
-        <div className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded-full" style={{ background:'#F7CD6A' }} /> <span className="text-neutral-700">Published</span></div>
-        <div className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded-full" style={{ background:'#6B7280' }} /> <span className="text-neutral-700">Draft</span></div>
+      <p className="text-[11px] text-neutral-600 leading-snug mb-2">Hover over a cluster to see published stories. Click to open a story or zoom in.</p>
+      <div className="space-y-2 mb-3">
+        <div className="flex items-center gap-2 text-[11px]">
+          <span className="inline-block w-3 h-3 rounded-full" style={{ background:'#F7CD6A' }} />
+          <span className="text-neutral-700">Published story or cluster</span>
+        </div>
+        <div className="flex items-center gap-2 text-[11px]">
+          <span className="inline-block w-3 h-3 rounded-full" style={{ background:'#6B7280' }} />
+          <span className="text-neutral-700">Draft story or cluster</span>
+        </div>
       </div>
-      <div className="mt-auto pt-1 flex justify-end border-t border-neutral-200">
+      <p className="text-[10px] text-neutral-500 leading-snug mb-2 italic">Numbers show total stories. Hover to see published ones only.</p>
+      <div className="mt-auto pt-2 flex justify-end border-t border-neutral-200">
         <button
           type="button"
           onClick={() => setLegendOpen(false)}

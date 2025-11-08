@@ -116,7 +116,7 @@ export default function Sidebar({ selectedStory, onClose, headingRef }) {
         <div className="mx-auto w-full max-w-[1250px] px-6 md:px-10 lg:px-14 xl:px-20 pb-20">
           <header className="mb-10 text-center">
             {/* Actual visible heading restored for visual hierarchy */}
-            <h1 ref={headingRef} tabIndex={-1} className="m-0 font-semibold tracking-tight text-3xl md:text-[2.15rem] leading-tight">
+            <h1 ref={headingRef} tabIndex={-1} className="m-0 font-semibold tracking-tight text-3xl md:text-[2.15rem] leading-tight focus:outline-none">
               {storyPayload?.frontmatter?.title || storyPayload?.frontmatter?.name || 'Story'}
             </h1>
             {(storyPayload?.frontmatter?.location || storyPayload?.frontmatter?.date) && (
