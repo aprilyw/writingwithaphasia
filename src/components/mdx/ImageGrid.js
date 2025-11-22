@@ -22,15 +22,18 @@ export default function ImageGrid({
   imageFit = 'cover',
   alignY = 'bottom', // 'bottom' | 'top' -> controls how images sit inside fixed aspect (when not natural)
   fullBleed = false, // if true stretch to container edges, else match prose width rhythm
+  spacing = 'my-12', // vertical margin spacing (e.g., 'my-4', 'my-6', 'my-12')
 }) {
   const colClass = columns === 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-2';
 
   const nodes = images.length > 0 ? images.map((img, i) => ({ ...img, key: i })) : React.Children.toArray(children);
 
-  const verticalClass = natural ? '' : (alignY === 'top' ? 'items-start' : 'items-end');
+  const verticalClass = natural 
+    ? (alignY === 'bottom' ? 'items-end' : 'items-start')
+    : (alignY === 'top' ? 'items-start' : 'items-end');
   const widthClamp = fullBleed ? '' : 'mx-auto max-w-[1100px] px-2 md:px-4';
   return (
-    <div className={`my-12 ${widthClamp} grid ${gap} ${colClass} ${verticalClass}` + (natural ? ' auto-rows-auto' : '')}>
+    <div className={`${spacing} ${widthClamp} grid ${gap} ${colClass} ${verticalClass}` + (natural ? ' auto-rows-auto' : '')}>
       {nodes.map((node, i) => {
         const isElement = React.isValidElement(node);
         const figureEl = isElement ? node : <Figure {...node} />;
@@ -39,13 +42,21 @@ export default function ImageGrid({
 
         // BELOW VARIANT (default) --------------------------------------------------
         if (variant === 'below') {
+          const imageContainerClass = natural 
+            ? (alignY === 'bottom' 
+              ? 'relative w-full overflow-hidden rounded-xl bg-white flex flex-col justify-end'
+              : 'relative w-full overflow-hidden rounded-xl bg-white')
+            : (alignY === 'top'
+              ? 'relative w-full overflow-hidden rounded-xl bg-white'
+              : 'relative w-full h-full overflow-hidden rounded-xl bg-white flex flex-col justify-end');
           return (
             <div key={id} className={`group flex flex-col ${natural ? '' : aspect}`}>
-              <div className="relative w-full overflow-hidden rounded-xl bg-white">
+              <div className={imageContainerClass}>
                 {React.cloneElement(figureEl, {
                   className: `${figureEl.props.className || ''} w-full m-0 rounded-xl shadow-sm transition-transform duration-300 group-hover:scale-[1.02]`,
                   noOuterSpacing: true,
                   fit: natural ? 'natural' : imageFit,
+                  position: (natural && alignY === 'bottom') || (!natural && alignY === 'bottom') ? 'bottom' : figureEl.props.position,
                 })}
               </div>
               {caption && (
