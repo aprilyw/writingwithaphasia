@@ -6,7 +6,6 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx'],
   reactStrictMode: true,
   experimental: {},
-  turbopack: {},
   webpack: (config, { defaultLoaders }) => {
     config.module.rules.push({
       test: /\.mdx?$/,
