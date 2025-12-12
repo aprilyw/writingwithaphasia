@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom prose tweaks */
+@layer components {
+  .prose-stories :where(img) {
+    @apply rounded-xl shadow-sm my-6 cursor-zoom-in mx-auto;
+    max-height: 500px;
+  }
+  .prose-stories :where(hr) {
+    @apply my-12 relative border-none text-center before:content-['*_*_*_*_*'] before:tracking-[0.3em] before:text-grayMid before:font-light before:inline-block before:text-lg;
+  }
+}
