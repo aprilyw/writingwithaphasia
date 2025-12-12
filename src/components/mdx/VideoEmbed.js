@@ -18,9 +18,22 @@ export default function VideoEmbed({ src, title = 'Video', aspect = '16/9', capt
   // Convert YouTube watch URLs to embed format
   let embedSrc = src;
   if (provider === 'youtube') {
-    const youtubeIdMatch = src.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/);
-    if (youtubeIdMatch && youtubeIdMatch[1]) {
-      embedSrc = `https://www.youtube.com/embed/${youtubeIdMatch[1]}`;
+    // Handle various YouTube URL formats
+    let videoId = null;
+    const watchMatch = src.match(/[?&]v=([^&\n?#]+)/);
+    const shortMatch = src.match(/youtu\.be\/([^&\n?#]+)/);
+    const embedMatch = src.match(/youtube\.com\/embed\/([^&\n?#]+)/);
+    
+    if (watchMatch && watchMatch[1]) {
+      videoId = watchMatch[1];
+    } else if (shortMatch && shortMatch[1]) {
+      videoId = shortMatch[1];
+    } else if (embedMatch && embedMatch[1]) {
+      videoId = embedMatch[1];
+    }
+    
+    if (videoId) {
+      embedSrc = `https://www.youtube.com/embed/${videoId}`;
     }
   }
   
