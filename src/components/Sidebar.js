@@ -12,16 +12,17 @@ class StoryContentErrorBoundary extends Component {
   componentDidCatch(error, info) {
     console.error('Story MDX render error:', error, info);
   }
+  reset = () => this.setState({ error: null });
   render() {
     if (this.state.error) {
+      const message = this.props.fallbackMessage || 'This story could not be displayed.';
       return (
-        <div className="rounded-md border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
-          <p className="font-medium mb-1">This story could not be displayed.</p>
-          <p className="mb-3">{this.state.error?.message || 'An error occurred while rendering.'}</p>
+        <div className="flex flex-col items-center justify-center min-h-[200px] p-6 text-center" style={{ fontFamily: 'var(--font-family, sans-serif)' }}>
+          <p className="text-neutral-700 mb-2">{message}</p>
           <button
             type="button"
-            onClick={() => this.setState({ error: null })}
-            className="text-primary underline font-medium"
+            onClick={this.reset}
+            className="px-4 py-2 rounded-md bg-[#3a2c2a] text-white font-medium hover:opacity-90"
           >
             Try again
           </button>
@@ -49,7 +50,14 @@ export default function Sidebar({ selectedStory, onClose, headingRef }) {
       try {
         const res = await fetch(`/api/story/${id}`);
         const json = await res.json();
-        if (!cancelled) { setStoryPayload(json); cacheRef.current.set(id, json); }
+        if (!cancelled) {
+          if (!res.ok || json.error) {
+            setStoryPayload({ error: true, message: json.error || 'Failed to load story.' });
+          } else {
+            setStoryPayload(json);
+            cacheRef.current.set(id, json);
+          }
+        }
         if (typeof document !== 'undefined') {
           const links = Array.from(document.querySelectorAll('a[href^="/?id="]'));
           const ids = links.map(l => decodeURIComponent(l.getAttribute('href').split('=')[1] || ''));
@@ -83,6 +91,7 @@ export default function Sidebar({ selectedStory, onClose, headingRef }) {
   const headingText = storyPayload?.frontmatter?.title || storyPayload?.frontmatter?.name || 'Story';
 
   return (
+    <StoryContentErrorBoundary key={selectedStory?.id} fallbackMessage="This story could not be displayed. Try again or choose another story.">
     <div className="relative flex h-full flex-col" style={{ fontFamily: fontVar }} role="region" aria-label="Story content">
       <div className="flex items-start justify-end pb-2">
         <button
@@ -164,10 +173,8 @@ export default function Sidebar({ selectedStory, onClose, headingRef }) {
             {!loading && storyPayload?.mode === 'legacy' && (
               <div dangerouslySetInnerHTML={{ __html: storyPayload.legacy.contentHtml }} />
             )}
-            {!loading && storyPayload?.mode === 'mdx' && storyPayload.mdxSource && (
-              <StoryContentErrorBoundary key={selectedStory?.id}>
-                <MDXRemote {...storyPayload.mdxSource} components={mdxComponents} scope={{ frontmatter: storyPayload.frontmatter }} />
-              </StoryContentErrorBoundary>
+            {!loading && storyPayload?.mode === 'mdx' && storyPayload.mdxSource && typeof storyPayload.mdxSource?.compiledSource === 'string' && (
+              <MDXRemote {...storyPayload.mdxSource} components={mdxComponents} scope={{ frontmatter: storyPayload.frontmatter ?? {} }} />
             )}
             {loading && (<p className="sr-only">Loading story content…</p>)}
           </article>
@@ -180,5 +187,6 @@ export default function Sidebar({ selectedStory, onClose, headingRef }) {
         onClose={() => { setIsModalOpen(false); setSelectedImage(null); }}
       />
     </div>
+    </StoryContentErrorBoundary>
   );
 }
