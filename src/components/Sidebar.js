@@ -1,8 +1,36 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Component } from 'react';
 import ImageModal from './ImageModal';
 import { getFontFamilyVar } from '../styles/fonts';
 import { MDXRemote } from 'next-mdx-remote';
 import { components as mdxComponents } from './mdx/MDXComponents';
+
+class StoryContentErrorBoundary extends Component {
+  state = { error: null };
+  static getDerivedStateFromError(error) {
+    return { error };
+  }
+  componentDidCatch(error, info) {
+    console.error('Story MDX render error:', error, info);
+  }
+  render() {
+    if (this.state.error) {
+      return (
+        <div className="rounded-md border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+          <p className="font-medium mb-1">This story could not be displayed.</p>
+          <p className="mb-3">{this.state.error?.message || 'An error occurred while rendering.'}</p>
+          <button
+            type="button"
+            onClick={() => this.setState({ error: null })}
+            className="text-primary underline font-medium"
+          >
+            Try again
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 export default function Sidebar({ selectedStory, onClose, headingRef }) {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -137,7 +165,9 @@ export default function Sidebar({ selectedStory, onClose, headingRef }) {
               <div dangerouslySetInnerHTML={{ __html: storyPayload.legacy.contentHtml }} />
             )}
             {!loading && storyPayload?.mode === 'mdx' && storyPayload.mdxSource && (
-              <MDXRemote {...storyPayload.mdxSource} components={mdxComponents} scope={{ frontmatter: storyPayload.frontmatter }} />
+              <StoryContentErrorBoundary key={selectedStory?.id}>
+                <MDXRemote {...storyPayload.mdxSource} components={mdxComponents} scope={{ frontmatter: storyPayload.frontmatter }} />
+              </StoryContentErrorBoundary>
             )}
             {loading && (<p className="sr-only">Loading story content…</p>)}
           </article>

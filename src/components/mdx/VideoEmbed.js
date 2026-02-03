@@ -24,10 +24,23 @@ export default function VideoEmbed({ src, title = 'Video', aspect = '16/9', capt
     }
   }
   
-  // Convert Facebook URLs to embed format
+  // Facebook embeds (reels, etc.) often fail in iframes (blocked/CSP). Use a link instead so the page doesn't crash.
   if (provider === 'facebook') {
-    const encodedUrl = encodeURIComponent(src);
-    embedSrc = `https://www.facebook.com/plugins/video.php?href=${encodedUrl}&show_text=false&width=500`;
+    return (
+      <figure className={`my-10 ${alignClass} ${className}`} style={{ maxWidth }}>
+        <div className="rounded-lg border border-neutral-200 bg-neutral-50 p-6 text-center">
+          <p className="text-neutral-600 mb-3">{caption || title}</p>
+          <a
+            href={src}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block rounded-md bg-[#1877f2] px-4 py-2 text-white font-medium hover:opacity-90"
+          >
+            Watch on Facebook
+          </a>
+        </div>
+      </figure>
+    );
   }
 
   if (provider === 'mp4') {
