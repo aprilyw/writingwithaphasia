@@ -9,7 +9,7 @@ function resolveProvider(src) {
   return 'other';
 }
 
-export default function VideoEmbed({ src, title = 'Video', aspect = '16/9', caption, className = '', maxWidth = '800px', align = 'center', controls = true }) {
+export default function VideoEmbed({ src, title = 'Video', aspect = '16/9', caption, className = '', maxWidth = '800px', align = 'center', controls = true, natural = false }) {
   const provider = resolveProvider(src);
   const [w, h] = aspect.split('/').map(Number);
   const padding = h && w ? (h / w) * 100 : (9 / 16) * 100;
@@ -44,9 +44,12 @@ export default function VideoEmbed({ src, title = 'Video', aspect = '16/9', capt
   }
 
   if (provider === 'mp4') {
+    const videoClass = natural 
+      ? 'rounded-lg shadow-md max-w-full h-auto' 
+      : 'w-full rounded-lg shadow-md';
     return (
-      <figure className={`my-10 ${alignClass} ${className}`} style={{ maxWidth }}>
-        <video className="w-full rounded-lg shadow-md" {...(controls ? { controls: true } : {})} playsInline>
+      <figure className={`my-10 ${alignClass} ${className}`} style={natural ? {} : { maxWidth }}>
+        <video className={videoClass} {...(controls ? { controls: true } : {})} playsInline preload="metadata" autoPlay={false}>
           <source src={src} type="video/mp4" />
         </video>
         {caption && (

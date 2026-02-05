@@ -17,7 +17,8 @@ export function StoryImage(props) {
   // fit: 'cover' (default legacy) | 'contain' (avoid cropping) | 'natural' (no enforced object-fit)
   const fitClass = fit === 'natural' ? '' : `object-${fit}`;
   // default center object position unless overridden
-  const posClass = position ? `object-[${position}]` : (fit !== 'natural' ? 'object-center' : '');
+  const positionValue = position ? position.replace(/\s+/g, '_') : null;
+  const posClass = positionValue ? `object-[${positionValue}]` : (fit !== 'natural' ? 'object-center' : '');
 
   // Remove hardcoded internal max-width so the parent Figure / grid governs width.
   // Use block + mx-auto to center even if width < container.
