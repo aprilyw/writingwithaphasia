@@ -53,10 +53,11 @@ export default function ImageGrid({
             <div key={id} className={`group flex flex-col ${natural ? '' : aspect}`}>
               <div className={imageContainerClass}>
                 {React.cloneElement(figureEl, {
-                  className: `${figureEl.props.className || ''} w-full m-0 rounded-xl shadow-sm transition-transform duration-300 group-hover:scale-[1.02]`,
+                  className: `${figureEl.props.className || ''} w-full m-0 rounded-xl shadow-sm transition-transform duration-300 group-hover:scale-[1.02]${!natural && alignY === 'bottom' ? ' h-full' : ''}`,
                   noOuterSpacing: true,
                   fit: natural ? 'natural' : imageFit,
                   position: (natural && alignY === 'bottom') || (!natural && alignY === 'bottom') ? 'bottom' : figureEl.props.position,
+                  fillContainer: !natural && alignY === 'bottom',
                 })}
               </div>
               {caption && (

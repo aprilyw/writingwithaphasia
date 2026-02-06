@@ -4,6 +4,7 @@ function resolveProvider(src) {
   if (!src) return 'other';
   if (/youtube\.com|youtu\.be/.test(src)) return 'youtube';
   if (/vimeo\.com/.test(src)) return 'vimeo';
+  if (/soundcloud\.com/.test(src)) return 'soundcloud';
   if (/facebook\.com/.test(src)) return 'facebook';
   if (/\.mp4($|\?)/.test(src)) return 'mp4';
   return 'other';
@@ -23,7 +24,17 @@ export default function VideoEmbed({ src, title = 'Video', aspect = '16/9', capt
       embedSrc = `https://www.youtube.com/embed/${youtubeIdMatch[1]}`;
     }
   }
-  
+  if (provider === 'vimeo') {
+    const vimeoIdMatch = src.match(/(?:vimeo\.com\/)(?:video\/)?(\d+)/);
+    if (vimeoIdMatch && vimeoIdMatch[1]) {
+      embedSrc = `https://player.vimeo.com/video/${vimeoIdMatch[1]}`;
+    }
+  }
+  if (provider === 'soundcloud') {
+    const trackUrl = src.split('?')[0];
+    embedSrc = `https://w.soundcloud.com/player/?url=${encodeURIComponent(trackUrl)}&color=ff5500`;
+  }
+
   // Facebook embeds (reels, etc.) often fail in iframes (blocked/CSP). Use a link instead so the page doesn't crash.
   if (provider === 'facebook') {
     return (
@@ -39,6 +50,26 @@ export default function VideoEmbed({ src, title = 'Video', aspect = '16/9', capt
             Watch on Facebook
           </a>
         </div>
+      </figure>
+    );
+  }
+
+  if (provider === 'soundcloud') {
+    const soundcloudPaddingPercent = 20;
+    return (
+      <figure className={`my-10 ${alignClass} ${className}`} style={{ maxWidth }}>
+        <div className="relative w-full overflow-hidden rounded-lg shadow-md" style={{ paddingTop: `${soundcloudPaddingPercent}%` }}>
+          <iframe
+            src={embedSrc}
+            title={title}
+            className="absolute inset-0 h-full w-full"
+            allow="autoplay"
+            loading="lazy"
+          />
+        </div>
+        {caption && (
+          <figcaption className="mt-3 text-center text-sm text-neutral-600 italic leading-snug px-2">{caption}</figcaption>
+        )}
       </figure>
     );
   }
