@@ -1,4 +1,39 @@
-import React from 'react';
+import React, { useRef, useLayoutEffect } from 'react';
+
+function MP4Video({ src, className, controls, caption }) {
+  const videoRef = useRef(null);
+  useLayoutEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    el.autoplay = false;
+    el.removeAttribute('autoplay');
+    el.pause();
+  }, [src]);
+
+  const handleLoadedData = () => {
+    const el = videoRef.current;
+    if (el && el.currentTime < 0.5) el.pause();
+  };
+
+  return (
+    <>
+      <video
+        ref={videoRef}
+        className={className}
+        {...(controls ? { controls: true } : {})}
+        playsInline
+        preload="metadata"
+        onLoadedData={handleLoadedData}
+        onCanPlay={handleLoadedData}
+      >
+        <source src={src} type="video/mp4" />
+      </video>
+      {caption && (
+        <figcaption className="mt-3 text-center text-sm text-neutral-600 italic leading-snug px-2">{caption}</figcaption>
+      )}
+    </>
+  );
+}
 
 function resolveProvider(src) {
   if (!src) return 'other';
@@ -80,12 +115,12 @@ export default function VideoEmbed({ src, title = 'Video', aspect = '16/9', capt
       : 'w-full rounded-lg shadow-md';
     return (
       <figure className={`my-10 ${alignClass} ${className}`} style={natural ? {} : { maxWidth }}>
-        <video className={videoClass} {...(controls ? { controls: true } : {})} playsInline preload="metadata" autoPlay={false}>
-          <source src={src} type="video/mp4" />
-        </video>
-        {caption && (
-          <figcaption className="mt-3 text-center text-sm text-neutral-600 italic leading-snug px-2">{caption}</figcaption>
-        )}
+        <MP4Video
+          src={src}
+          className={videoClass}
+          controls={controls}
+          caption={caption}
+        />
       </figure>
     );
   }
