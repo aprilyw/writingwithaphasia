@@ -62,7 +62,7 @@ export default function ImageGrid({
               </div>
               {caption && (
                 <div className="pt-3 px-1">
-                  <p className={`m-0 text-center text-[12px] leading-snug text-neutral-600 italic line-clamp-${captionClamp}`}>{caption}</p>
+                  <p className={`m-0 text-center text-[12px] leading-snug text-neutral-600 italic ${captionClamp > 0 ? (captionClamp <= 3 ? `line-clamp-${captionClamp}` : `line-clamp-[${captionClamp}]`) : ''}`}>{caption}</p>
                 </div>
               )}
             </div>
