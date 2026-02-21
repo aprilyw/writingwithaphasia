@@ -22,7 +22,7 @@
     "js-yaml": "^4.1.0",
     "gray-matter": "^4.0.3",
     "next": "^15.1.0",
-    "next-mdx-remote": "^5.0.0",
+    "next-mdx-remote": "^6.0.0",
     "ol": "^10.4.0",
     "react": "latest",
     "react-dom": "latest",
